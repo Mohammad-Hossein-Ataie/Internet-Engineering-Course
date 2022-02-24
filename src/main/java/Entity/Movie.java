@@ -23,6 +23,7 @@ public class Movie {
     private List<String> writers = new ArrayList<>();
     private List<String> genres = new ArrayList<>();
     private List<Integer> cast = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 
     public List<Integer> getCast() {
         return cast;
