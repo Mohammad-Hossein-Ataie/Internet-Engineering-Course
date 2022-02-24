@@ -21,4 +21,59 @@ class appInterface {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inStream));
         String line;
     }
+
+    private static void getCommandLine(String cmd, String jsonData) {
+        //gson
+        switch(cmd) {
+            //1
+            case "addActor": {
+                break;
+            }
+            //2
+            case "addMovie": {
+                break;
+            }
+            //3
+            case "addUser": {
+                break;
+            }
+            //4
+            case "addComment": {
+                break;
+            }
+            //5
+            case "rateMovie": {
+                break;
+            }
+            //6
+            case "voteComment": {
+                break;
+            }
+            //7
+            case "addToWatchList": {
+                break;
+            }
+            //8
+            case "removeFromWatchList": {
+                break;
+            }
+            //9
+            case "getMoviesList": {
+                break;
+            }
+            //10
+            case "getMovieById": {
+                break;
+            }
+            //11
+            case "getMoviesByGenre": {
+                break;
+            }
+            //12
+            case "getWatchList": {
+                break;
+            }
+
+        }
+    }
 }
