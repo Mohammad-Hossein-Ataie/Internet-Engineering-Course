@@ -5,8 +5,19 @@ import java.util.List;
 
 public class UserManager {
     private List<User> users = new ArrayList<>();
-    public void addUser(User user){
 
+    private boolean uniqueMail(User user) {
+        for (User userItem : users)
+            if (userItem.isSame(user))
+                return false;
+        return true;
+    }
+    public void addUser(User user) {
+        if (uniqueMail(user)) {
+            users.add(user);
+        } else {
+            //Call Exception in UserController
+        }
     }
 }
 
