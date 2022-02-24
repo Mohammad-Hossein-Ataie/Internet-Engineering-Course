@@ -20,9 +20,24 @@ class appInterface {
         // new class obj
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inStream));
         String line;
+        try {
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] in = line.split("", 1); // limit =2 ??
+                String cmd = in[0];
+                String jsonData = "";
+
+                //            if (input_parts.length == 2) {
+                //                jsonData = input_parts[1];
+                //            } ?????????????????
+                getCommandData(cmd, jsonData); //? chek input
+            }
+        }
+        catch (Exception e) {
+            //
+        }
     }
 
-    private static void getCommandLine(String cmd, String jsonData) {
+    private static void getCommandData(String cmd, String jsonData) {
         //gson
         switch(cmd) {
             //1
