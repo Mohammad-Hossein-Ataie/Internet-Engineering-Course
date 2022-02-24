@@ -1,14 +1,16 @@
 package Manager;
 
+import Entity.Actor;
 import Entity.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MovieManager {
-    private List<Movie> movies = new ArrayList<>();
+
+
     public void addMovie(Movie movie){
         /*if condition*/
-        movies.add(movie);
+        //movies.add(movie);
     }
 }

@@ -14,4 +14,14 @@ public class ActorDAO {
                 actors.set(i,actor);
         }
     }
+    public static Actor findByID(int id){
+        for (int i = 0; i < actors.size(); i++) {
+            if(actors.get(i).getId() == id)
+                return actors.get(i);
+        }
+        return null;
+    }
+    public static void add(Actor actor) {
+        actors.add(actor);
+    }
 }

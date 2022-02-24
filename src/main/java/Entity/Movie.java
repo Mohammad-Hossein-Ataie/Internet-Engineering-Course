@@ -15,4 +15,8 @@ public class Movie {
     private float imdbRate;
     private int duration;
     private int ageLimit;
+    public boolean isSame(Movie movie) {
+        return this.id.equals(movie.id);
+    }
+
 }
