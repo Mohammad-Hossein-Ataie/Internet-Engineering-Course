@@ -8,11 +8,12 @@ public class Comment {
     private String text;
     private int commentID;
     private LocalDateTime currentTime;
-    public Comment(String userEmail,int movieId,String text,int commentID,LocalDateTime currentTime){
+
+    public Comment(String userEmail, int movieId, String text, int commentID, LocalDateTime currentTime) {
         this.userEmail = userEmail;
-        this.text = text;
         this.movieId = movieId;
+        this.text = text;
         this.commentID = commentID;
-        //LocalDateTime
+        this.currentTime = currentTime;
     }
 }
