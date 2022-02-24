@@ -17,21 +17,21 @@ public class Movie {
     private String summary;
     private String releaseDate;
     private String director;
+    private float imdbRate;
+    private String duration;
+    private int ageLimit;
     private List<String> writers = new ArrayList<>();
     private List<String> genres = new ArrayList<>();
+    private List<Integer> cast = new ArrayList<>();
 
-    public List<Actor> getCast() {
+    public List<Integer> getCast() {
         return cast;
     }
 
-    public void setCast(List<Actor> cast) {
+    public void setCast(List<Integer> cast) {
         this.cast = cast;
     }
 
-    private List<Actor> cast = new ArrayList<>();
-    private float imdbRate;
-    private int duration;
-    private int ageLimit;
     public boolean isSame(Movie movie) {
         return this.id == movie.id;
     }
