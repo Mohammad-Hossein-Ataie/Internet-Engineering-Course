@@ -12,7 +12,7 @@ public class RateMovie {
 
     public RateMovie(String userEmail, Integer movieId, Integer score) {
         this.userEmail = userEmail;
-        this.movieId - movieId;
+        this.movieId = movieId;
         this.score = score;
     }
 
