@@ -19,7 +19,6 @@ public class Movie {
     private String director;
     private List<String> writers = new ArrayList<>();
     private List<String> genres = new ArrayList<>();
-
     public List<Actor> getCast() {
         return cast;
     }
@@ -35,5 +34,4 @@ public class Movie {
     public boolean isSame(Movie movie) {
         return this.id == movie.id;
     }
-
 }

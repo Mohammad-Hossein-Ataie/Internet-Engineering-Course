@@ -2,10 +2,6 @@ package Manager;
 
 import DAO.ActorDAO;
 import Entity.Actor;
-
-import java.util.List;
-import java.util.ArrayList;
-
 public class ActorManager {
 
 
