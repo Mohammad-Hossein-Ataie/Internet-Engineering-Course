@@ -1,6 +1,9 @@
+package Manager;
+
+import Entity.Actor;
+
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Comparator;
 
 public class ActorManager {
     private List<Actor> actors = new ArrayList<>();
