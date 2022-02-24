@@ -15,10 +15,4 @@ public class Actor {
     public boolean isSame(Actor actor) {
         return this.id.equals(actor.id);
     }
-    public void updateActor(Actor actor) {
-        this.name = name;
-        this.id = id;
-        this.birthDate = birthDate;
-        this.nationality = nationality;
-    }
 }

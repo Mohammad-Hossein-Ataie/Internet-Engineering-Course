@@ -1,5 +1,6 @@
 package Manager;
 
+import DAO.ActorDAO;
 import Entity.Actor;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class ActorManager {
 
     public void addActor(Actor actor){
         if (isUpdating(actor))
-            actor.updateActor(actor);
+            ActorDAO.update(actor);
         actors.add(actor);
     }
 }
