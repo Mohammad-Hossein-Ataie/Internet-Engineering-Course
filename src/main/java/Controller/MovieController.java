@@ -26,6 +26,10 @@ public class MovieController {
         return "movie added successfully";
     }
 
+    public static String getMoviesList() {
+        return MovieManager.getMoviesList(); //returns json string
+    }
+
     public static Movie getMovieById(Integer id) {
         return MovieManager.getMovieById(id);
     }
