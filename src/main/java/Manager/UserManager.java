@@ -1,15 +1,13 @@
 package Manager;
 import DAO.UserDAO;
 import Entity.User;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class UserManager {
-    private static List<User> users = new ArrayList<>();
-
+    
     public static boolean uniqueMail(User user) {
-        for (User userItem : users)
-            if (userItem.isSame(user))
+        for (String userItem : UserDAO.getMails())
+            if (user.isSame(userItem))
                 return false;
         return true;
     }

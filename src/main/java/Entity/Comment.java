@@ -5,8 +5,18 @@ import java.util.Date;
 
 public class Comment {
     private String userEmail;
+
+    public int getMovieId() {
+        return movieId;
+    }
+
     private int movieId;
     private String text;
+
+    public void setCommentID(int commentID) {
+        this.commentID = commentID;
+    }
+
     private int commentID;
     private Date currentTime;
 
