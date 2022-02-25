@@ -48,7 +48,7 @@ public class User{
     private String nickname;
     private String name;
     private Date birthDate;
-    public boolean isSame(User user) {
-        return this.email.equals(user.email);
+    public boolean isSame(String email) {
+        return this.email.equals(email);
     }
 }
