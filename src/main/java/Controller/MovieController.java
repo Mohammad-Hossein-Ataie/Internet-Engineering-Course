@@ -33,4 +33,8 @@ public class MovieController {
     public static Movie getMovieById(Integer id) {
         return MovieManager.getMovieById(id);
     }
+
+    public static List<Movie> getMoviesByGenre(String genre) {
+        return MovieManager.getMoviesByGenre(genre);
+    }
 }

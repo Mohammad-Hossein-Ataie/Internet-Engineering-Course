@@ -36,6 +36,10 @@ public class Movie {
         return id;
     }
 
+    public List<String> getGenre() {
+        return genres;
+    }
+
     public void setId(int id) {
         this.id = id;
     }

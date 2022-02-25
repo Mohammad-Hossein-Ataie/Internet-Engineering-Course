@@ -10,12 +10,10 @@ import java.util.List;
 
 public class MovieManager {
     private static boolean isUpdating(Movie movie) {
-        if (MovieDAO.findByID(movie.getId()) != null)
-        {
+        if (MovieDAO.findByID(movie.getId()) != null) {
             return true;
-        }
-        else {
-            return  false;
+        } else {
+            return false;
         }
     }
 
@@ -25,7 +23,7 @@ public class MovieManager {
         MovieDAO.add(movie);
     }
 
-    public  static String getMoviesList() {
+    public static String getMoviesList() {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd")
                 .create();
@@ -37,13 +35,27 @@ public class MovieManager {
         return (gson.toJson(moviesList));
     }
 
-    public static Movie getMovieById(Integer id){
+    public static Movie getMovieById(Integer id) {
         List<Movie> movies = MovieDAO.getMovies();
-        for( int i = 0; i < movies.size(); i++) {
-            if(movies.get(i).getId() == id) {
+        for (int i = 0; i < movies.size(); i++) {
+            if (movies.get(i).getId() == id) {
                 return movies.get(i);
             }
         }
         return null;
+    }
+
+    public static List<Movie> getMoviesByGenre(String genre) {
+        List<Movie> movies = MovieDAO.getMovies();
+        List<Movie> moviesList = new ArrayList<>();
+        for (int i = 0; i < movies.size(); i++) {
+            for (int j = 0; j < movies.get(i).getGenre().size(); j++) {
+                if (movies.get(i).getGenre().get(j) == genre) {
+                    moviesList.add(movies.get(i));
+                }
+            }
+            return moviesList;
+        }
+        return movies;
     }
 }

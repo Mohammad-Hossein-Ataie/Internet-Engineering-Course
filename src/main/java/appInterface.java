@@ -124,6 +124,12 @@ class appInterface {
             }
             //11
             case "getMoviesByGenre": {
+                Gson gson = new GsonBuilder()
+                        .setDateFormat("yyyy-MM-dd")
+                        .create();
+                Response response = new Response(true,MovieController.getMoviesByGenre("Action")); //cmd?
+                String jsonString = gson.toJson(response);
+                outStream.println(jsonString);
                 break;
             }
             //12
