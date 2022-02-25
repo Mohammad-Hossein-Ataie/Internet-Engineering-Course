@@ -1,5 +1,7 @@
 package Entity;
 
+import java.util.Date;
+
 public class User{
     public String getEmail() {
         return email;
@@ -33,11 +35,11 @@ public class User{
         this.name = name;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -45,7 +47,7 @@ public class User{
     private String password;
     private String nickname;
     private String name;
-    private String birthDate;
+    private Date birthDate;
     public boolean isSame(User user) {
         return this.email.equals(user.email);
     }

@@ -5,7 +5,7 @@ import Entity.Actor;
 public class ActorManager {
 
 
-    private boolean isUpdating(Actor actor) {
+    private static boolean isUpdating(Actor actor) {
         if (ActorDAO.findByID(actor.getId()) != null)
         {
             return true;
@@ -15,7 +15,7 @@ public class ActorManager {
         }
     }
 
-    public void addActor(Actor actor){
+    public static void addActor(Actor actor){
         if (isUpdating(actor))
             ActorDAO.update(actor);
         ActorDAO.add(actor);
