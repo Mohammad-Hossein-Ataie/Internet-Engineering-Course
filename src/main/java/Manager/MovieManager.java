@@ -36,4 +36,14 @@ public class MovieManager {
         }
         return (gson.toJson(moviesList));
     }
+
+    public static Movie getMovieById(Integer id){
+        List<Movie> movies = MovieDAO.getMovies();
+        for( int i = 0; i < movies.size(); i++) {
+            if(movies.get(i).getId() == id) {
+                return movies.get(i);
+            }
+        }
+        return null;
+    }
 }
