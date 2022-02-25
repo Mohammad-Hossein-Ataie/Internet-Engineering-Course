@@ -2,14 +2,11 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.nio.Buffer;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Properties;
-//Using reflection
 import Controller.ActorController;
+import Controller.MovieController;
 import Controller.UserController;
 import Entity.Actor;
+import Entity.Movie;
 import Entity.User;
 import Response.Response;
 import com.google.gson.Gson;
@@ -67,6 +64,13 @@ class appInterface {
             }
             //2
             case "addMovie": {
+                Gson gson = new GsonBuilder()
+                        .setDateFormat("yyyy-MM-dd")
+                        .create();
+                Movie movie = gson.fromJson(jsonData, Movie.class);
+                Response response = new Response(true, MovieController.addMovie(movie));
+                String jsonString = gson.toJson(response);
+                outStream.println(jsonString);
                 break;
             }
             //3
