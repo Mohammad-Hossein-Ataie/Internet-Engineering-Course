@@ -25,4 +25,8 @@ public class MovieController {
         MovieManager.addMovie(movie);
         return "movie added successfully";
     }
+
+    public static Movie getMovieById(Integer id) {
+        return MovieManager.getMovieById(id);
+    }
 }

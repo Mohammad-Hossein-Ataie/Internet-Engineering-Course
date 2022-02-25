@@ -112,6 +112,12 @@ class appInterface {
             }
             //10
             case "getMovieById": {
+                Gson gson = new GsonBuilder()
+                        .setDateFormat("yyyy-MM-dd")
+                        .create();
+                Response response = new Response(true,MovieController.getMovieById(1)); //cmd?
+                String jsonString = gson.toJson(response);
+                outStream.println(jsonString);
                 break;
             }
             //11
