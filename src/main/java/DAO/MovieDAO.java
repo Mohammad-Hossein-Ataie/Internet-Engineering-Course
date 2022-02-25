@@ -22,4 +22,8 @@ public class MovieDAO {
     public static void add(Movie movie) {
         movies.add(movie);
     }
+
+    public static List<Movie> getMovies() {
+        return movies;
+    }
 }
