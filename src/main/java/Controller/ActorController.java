@@ -7,6 +7,6 @@ import Manager.ActorManager;
 public class ActorController {
     public static String addActor(Actor actor){
         ActorManager.addActor(actor);
-        return "successfully added!";
+        return "actor added successfully";
     }
 }

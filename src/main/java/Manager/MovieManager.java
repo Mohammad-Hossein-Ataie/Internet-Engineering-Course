@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieManager {
-    private boolean isUpdating(Movie movie) {
+    private static boolean isUpdating(Movie movie) {
         if (MovieDAO.findByID(movie.getId()) != null)
         {
             return true;
@@ -19,7 +19,7 @@ public class MovieManager {
         }
     }
 
-    public void addActor(Movie movie) {
+    public static void addMovie(Movie movie) {
         if (isUpdating(movie))
             MovieDAO.update(movie);
         MovieDAO.add(movie);

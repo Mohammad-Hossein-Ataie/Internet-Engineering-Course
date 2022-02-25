@@ -8,7 +8,7 @@ public class UserController {
     public static String addUser(User user) throws UserAlreadyExist {
         if (UserManager.uniqueMail(user)) {
             UserManager.addUser(user);
-            return "User succesfully added!";
+            return "user added successfully";
         } else {
             throw new UserAlreadyExist();
         }
