@@ -108,6 +108,8 @@ class appInterface {
             //9
             case "getMoviesList": {
                 //Serilize object ouput
+                Response response = new Response(true,MovieController.getMoviesList()); //returns json string
+                outStream.println(response);
                 break;
             }
             //10
