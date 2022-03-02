@@ -32,6 +32,9 @@ public class Movie {
         this.ageLimit = ageLimit;
     }
 
+    public <E> Movie(int i, String film, String s, String s1, String john_star, ArrayList<E> john_son, ArrayList<E> action, int i1, double v, String s2) {
+    }
+
     public int getId() {
         return id;
     }
