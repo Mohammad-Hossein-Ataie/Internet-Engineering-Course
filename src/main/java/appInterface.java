@@ -60,6 +60,7 @@ class appInterface {
                 Response response = new Response(true, ActorController.addActor(actor));
                 String jsonString = gson.toJson(response);
                 outStream.println(jsonString);
+
                 break;
             }
             //2

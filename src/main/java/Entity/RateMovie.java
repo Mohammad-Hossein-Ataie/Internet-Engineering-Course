@@ -8,8 +8,18 @@ public class RateMovie {
 //    private List<User> users = new ArrayList<>();
     private String userEmail;
     private Integer movieId;
-    private Integer score;
 
+    public Integer getScore() {
+        return score;
+    }
+
+    private Integer score;
+    public int getMovieId() {
+        return movieId;
+    }
+    public String getUserEmail() {
+        return userEmail;
+    }
     public RateMovie(String userEmail, Integer movieId, Integer score) {
         this.userEmail = userEmail;
         this.movieId = movieId;
