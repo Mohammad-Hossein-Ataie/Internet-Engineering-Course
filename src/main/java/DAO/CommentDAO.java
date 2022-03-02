@@ -1,9 +1,8 @@
 package DAO;
 
 import Entity.Comment;
-import Entity.User;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,11 +16,20 @@ public class CommentDAO {
 
     // addComment 1
     private static Map<Integer, Comment> usersComments = new HashMap<>();
+
+    public static List<Integer> getComments() {
+        return comments;
+    }
+
+    private static List<Integer> comments = new ArrayList<>();
     public static void addComment(Comment comment){
+        setID(comment);
+        setTime(comment);
         usersComments.put(comment.getMovieId(),comment);
     }
     // set id with getCount
     public static void setID(Comment comment){
+        comments.add(getCount());
         comment.setCommentID(getCount());
     }
     // set time     //LocalDateTime.now()

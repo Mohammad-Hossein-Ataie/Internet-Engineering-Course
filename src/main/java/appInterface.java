@@ -2,12 +2,9 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import Controller.ActorController;
-import Controller.MovieController;
-import Controller.UserController;
-import Entity.Actor;
-import Entity.Movie;
-import Entity.User;
+
+import Controller.*;
+import Entity.*;
 import Response.Response;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -88,14 +85,35 @@ class appInterface {
             }
             //4
             case "addComment": {
+                Gson gson = new GsonBuilder()
+                        .create();
+
+                Comment comment = gson.fromJson(jsonData, Comment.class);
+                Response response = new Response(true, CommentController.addComment(comment));
+                String jsonString = gson.toJson(response);
+                outStream.println(jsonString);
                 break;
             }
             //5
             case "rateMovie": {
+                Gson gson = new GsonBuilder()
+                        .create();
+
+                RateMovie rateMovie = gson.fromJson(jsonData, RateMovie.class);
+                Response response = new Response(true, RateMovieController.rateMovie(rateMovie));
+                String jsonString = gson.toJson(response);
+                outStream.println(jsonString);
                 break;
             }
             //6
             case "voteComment": {
+                Gson gson = new GsonBuilder()
+                        .create();
+
+                VoteComment voteComment = gson.fromJson(jsonData, VoteComment.class);
+                Response response = new Response(true, VoteCommentController.voteComment(voteComment));
+                String jsonString = gson.toJson(response);
+                outStream.println(jsonString);
                 break;
             }
             //7
