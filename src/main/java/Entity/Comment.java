@@ -20,6 +20,10 @@ public class Comment {
     private int commentID;
     private Date currentTime;
 
+    public String getUserEmail() {
+        return userEmail;
+    }
+
     public Comment(String userEmail, int movieId, String text, int commentID, Date currentTime) {
         this.userEmail = userEmail;
         this.movieId = movieId;
