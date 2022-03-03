@@ -10,8 +10,8 @@ import java.util.Map;
 public class MovieDAO {
     private static Map<Integer, Movie> movieIds = new HashMap<>();
 
-    public static void setMovies(List<Movie> movies) {
-        movies.addAll(movies);
+    public static void setMovies(List<Movie> newmMovies) {
+        movies.addAll(newmMovies);
     }
 
     private static List<Movie> movies = new ArrayList<>();
