@@ -15,7 +15,7 @@ public class UserDAO {
 
     private static Map<String, User> usersMails = new HashMap<>();
     private static Map<String, Integer> watchListUser = new HashMap<>();
-
+    private static List<User> users = new ArrayList<>();
     public static List<Movie> getWatchList() {
         return watchList;
     }
@@ -41,5 +41,9 @@ public class UserDAO {
 
     public static void removeFromWatchList(String email, int id) {
         watchListUser.remove(email,id);
+    }
+
+    public static void setUsers(List<User> newUsers) {
+        users.addAll(newUsers);
     }
 }

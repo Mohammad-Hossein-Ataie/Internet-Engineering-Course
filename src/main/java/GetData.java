@@ -1,4 +1,10 @@
+import DAO.ActorDAO;
+import DAO.CommentDAO;
 import DAO.MovieDAO;
+import DAO.UserDAO;
+import Entity.Actor;
+import Entity.Comment;
+import Entity.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.http.HttpEntity;
@@ -16,12 +22,12 @@ import java.util.Arrays;
 import java.util.List;
 
 public class GetData {
-    public static void setData() throws IOException {
+    public static <T> T setListData(String url, Class<T> type) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
         try {
 
-            HttpGet request = new HttpGet("http://138.197.181.131:5000/api/movies");
+            HttpGet request = new HttpGet(url);
 
 
             CloseableHttpResponse response = httpClient.execute(request);
@@ -30,11 +36,10 @@ public class GetData {
                 HttpEntity entity = response.getEntity();
                 if (entity != null) {
                     // return it as a String
-                    String movieListSTR = EntityUtils.toString(entity);
+                    String objectListSTR = EntityUtils.toString(entity);
                     Gson gson = new GsonBuilder()
                             .create();
-                    Movie[] movieList = gson.fromJson(movieListSTR, Movie[].class);
-                    MovieDAO.setMovies(Arrays.asList(movieList));
+                    return (gson.fromJson(objectListSTR, type));
                 }
 
             } finally {
@@ -47,6 +52,22 @@ public class GetData {
         } finally {
             httpClient.close();
         }
+        return null;
     }
-
+    public static void getMovieList() throws IOException {
+        Movie[] objectList = setListData("http://138.197.181.131:5000/api/movies",Movie[].class);
+        MovieDAO.setMovies(Arrays.asList(objectList));
+    }
+    public static void setActorsListData() throws IOException {
+        Actor[] objectList = setListData("http://138.197.181.131:5000/api/actors",Actor[].class);
+        ActorDAO.setActores(Arrays.asList(objectList));
+    }
+    public static void setUsersListData() throws IOException {
+        User[] objectList = setListData("http://138.197.181.131:5000/api/users",User[].class);
+        UserDAO.setUsers(Arrays.asList(objectList));
+    }
+    public static void setCommentsListData() throws IOException {
+        Comment[] objectList = setListData("http://138.197.181.131:5000/api/comments", Comment[].class);
+        CommentDAO.setComments(Arrays.asList(objectList));
+    }
 }

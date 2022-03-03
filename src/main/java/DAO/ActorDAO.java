@@ -24,4 +24,8 @@ public class ActorDAO {
     public static void add(Actor actor) {
         actors.add(actor);
     }
+
+    public static void setActores(List<Actor> newActors) {
+        actors.addAll(newActors);
+    }
 }

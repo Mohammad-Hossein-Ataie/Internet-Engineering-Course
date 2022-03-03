@@ -11,7 +11,7 @@ public class MovieDAO {
     private static Map<Integer, Movie> movieIds = new HashMap<>();
 
     public static void setMovies(List<Movie> movies) {
-        MovieDAO.movies.addAll(movies);
+        movies.addAll(movies);
     }
 
     private static List<Movie> movies = new ArrayList<>();

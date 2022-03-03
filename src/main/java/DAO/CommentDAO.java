@@ -36,4 +36,12 @@ public class CommentDAO {
     public static void setTime(Comment comment){
         comment.setCommentID(getCount());
     }
+
+    public static void setComments(List<Comment> newComments) {
+        count = 0;
+        for (Comment comment : newComments) {
+            count += 1;
+            usersComments.put(count, comment);
+        }
+    }
 }
