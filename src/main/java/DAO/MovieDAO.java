@@ -9,6 +9,11 @@ import java.util.Map;
 
 public class MovieDAO {
     private static Map<Integer, Movie> movieIds = new HashMap<>();
+
+    public static void setMovies(List<Movie> movies) {
+        MovieDAO.movies.addAll(movies);
+    }
+
     private static List<Movie> movies = new ArrayList<>();
     public static void update(Movie movie) {
         for (int i = 0; i < movies.size(); i++) {

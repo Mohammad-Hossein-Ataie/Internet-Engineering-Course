@@ -124,7 +124,7 @@ class appInterface {
                 Gson gson = new GsonBuilder()
                         .setDateFormat("yyyy-MM-dd")
                         .create();
-                Map addToWatchListDTO = gson.fromJson(jsonData, (Type) User.class);
+                Map addToWatchListDTO = gson.fromJson(jsonData, Map.class);
                 Response response = new Response(true, UserController.addToWatchList(addToWatchListDTO.get("userEmail").toString(),(Integer)addToWatchListDTO.get("movieId")));
                 String jsonString = gson.toJson(response);
                 outStream.println(jsonString);
@@ -136,7 +136,7 @@ class appInterface {
                 Gson gson = new GsonBuilder()
                         .setDateFormat("yyyy-MM-dd")
                         .create();
-                Map addToWatchListDTO = gson.fromJson(jsonData, (Type) User.class);
+                Map addToWatchListDTO = gson.fromJson(jsonData, Map.class);
                 Response response = new Response(true, UserController.removeFromWatchList(addToWatchListDTO.get("userEmail").toString(),(Integer)addToWatchListDTO.get("movieId")));
                 String jsonString = gson.toJson(response);
                 outStream.println(jsonString);
