@@ -1,18 +1,14 @@
-import java.util.HashMap;
-import java.util.Map;
-
+import View.MovieView;
 import io.javalin.Javalin;
 
 public class HandleRequest {
 
 
-    public void main(String[] args) {
+    public static void main(String[] args) {
 
         Javalin app = Javalin.create().start(7777);
-        app.get("/movies", this::test );
+        app.get("/movies", ctx -> ctx.html(MovieView.returnVal()) );
 
     }
 
-    private void test(io.javalin.http.Context context) {
-    }
 }
