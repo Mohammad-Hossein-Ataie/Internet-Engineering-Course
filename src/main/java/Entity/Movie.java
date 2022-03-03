@@ -14,6 +14,11 @@ public class Movie {
     private List<Integer> cast = new ArrayList<>();
     private float imdbRate;
     private String duration;
+
+    public int getAgeLimit() {
+        return ageLimit;
+    }
+
     private int ageLimit;
     private List<String> writers = new ArrayList<>();
     private List<String> genres = new ArrayList<>();

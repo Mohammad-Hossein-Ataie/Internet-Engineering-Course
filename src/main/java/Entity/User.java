@@ -1,7 +1,6 @@
 package Entity;
 
 import java.util.Date;
-
 public class User{
     public String getEmail() {
         return email;

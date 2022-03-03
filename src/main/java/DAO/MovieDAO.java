@@ -1,10 +1,14 @@
 package DAO;
 import Entity.Movie;
+import Entity.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MovieDAO {
+    private static Map<Integer, Movie> movieIds = new HashMap<>();
     private static List<Movie> movies = new ArrayList<>();
     public static void update(Movie movie) {
         for (int i = 0; i < movies.size(); i++) {
@@ -20,10 +24,16 @@ public class MovieDAO {
         return null;
     }
     public static void add(Movie movie) {
+
         movies.add(movie);
+        movieIds.put(movie.getId(),movie);
     }
 
     public static List<Movie> getMovies() {
         return movies;
+    }
+
+    public static Movie getMovieByID(Integer movieId) {
+        return movieIds.get(movieId);
     }
 }

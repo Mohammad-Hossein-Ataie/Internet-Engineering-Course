@@ -1,7 +1,4 @@
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
 
 import Controller.*;
 import Entity.*;
@@ -9,21 +6,26 @@ import Response.Response;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import Error.ClientError;
+import Error.AgeLimitError;
+
+import java.lang.reflect.Type;
+import java.util.Map;
+
 class appInterface {
-    public static  void main(String[] args) {
+    public static  void main(String[] args) throws IOException {
         PrintStream outStream = System.out;
         InputStream inStream = System.in;
         start(inStream, outStream);
     }
 
-    public static void start(InputStream inStream, PrintStream outStream) {
+    public static void start(InputStream inStream, PrintStream outStream) throws IOException {
         System.setOut(outStream);
         // new class obj
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inStream));
         String line;
-        try {
             while ((line = bufferedReader.readLine()) != null) {
-                String[] in = line.split("", 1); // limit =2 ??
+                try {
+                String[] in = line.split(" ", 2); // limit =2 ??
                 String cmd = in[0];
                 String jsonData = "";
 
@@ -32,19 +34,17 @@ class appInterface {
                 }
                 getCommandData(cmd, jsonData,outStream); //? chek input
             }
+                catch (Exception | ClientError | AgeLimitError e) {
+                    Gson gson = new GsonBuilder()
+                            .create();
+                    Response response = new Response(false, e.getMessage());
+                    String jsonString = gson.toJson(response);
+                    outStream.println(jsonString);
+                }
+            }
         }
-        catch (Exception | ClientError e) {
-//            outStream.println(e.getMessage());
-            Gson gson = new GsonBuilder()
-                    .setPrettyPrinting()
-//                    .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
-                    .create();
 
-            String jsonString = gson.toJson(new Response(false, e.getMessage()));
-        }
-    }
-
-    private static void getCommandData(String cmd, String jsonData,PrintStream outStream) throws ClientError {
+    private static void getCommandData(String cmd, String jsonData,PrintStream outStream) throws ClientError, AgeLimitError {
         //gson
         switch(cmd) {
             //1
@@ -86,6 +86,7 @@ class appInterface {
             //4
             case "addComment": {
                 Gson gson = new GsonBuilder()
+                        .setDateFormat("yyyy-MM-dd")
                         .create();
 
                 Comment comment = gson.fromJson(jsonData, Comment.class);
@@ -97,6 +98,7 @@ class appInterface {
             //5
             case "rateMovie": {
                 Gson gson = new GsonBuilder()
+                        .setDateFormat("yyyy-MM-dd")
                         .create();
 
                 RateMovie rateMovie = gson.fromJson(jsonData, RateMovie.class);
@@ -108,6 +110,7 @@ class appInterface {
             //6
             case "voteComment": {
                 Gson gson = new GsonBuilder()
+                        .setDateFormat("yyyy-MM-dd")
                         .create();
 
                 VoteComment voteComment = gson.fromJson(jsonData, VoteComment.class);
@@ -118,17 +121,35 @@ class appInterface {
             }
             //7
             case "addToWatchList": {
+                Gson gson = new GsonBuilder()
+                        .setDateFormat("yyyy-MM-dd")
+                        .create();
+                Map addToWatchListDTO = gson.fromJson(jsonData, (Type) User.class);
+                Response response = new Response(true, UserController.addToWatchList(addToWatchListDTO.get("userEmail").toString(),(Integer)addToWatchListDTO.get("movieId")));
+                String jsonString = gson.toJson(response);
+                outStream.println(jsonString);
+
                 break;
             }
             //8
             case "removeFromWatchList": {
+                Gson gson = new GsonBuilder()
+                        .setDateFormat("yyyy-MM-dd")
+                        .create();
+                Map addToWatchListDTO = gson.fromJson(jsonData, (Type) User.class);
+                Response response = new Response(true, UserController.removeFromWatchList(addToWatchListDTO.get("userEmail").toString(),(Integer)addToWatchListDTO.get("movieId")));
+                String jsonString = gson.toJson(response);
+                outStream.println(jsonString);
                 break;
             }
             //9
             case "getMoviesList": {
                 //Serilize object ouput
-                Response response = new Response(true,MovieController.getMoviesList()); //returns json string
-                outStream.println(response);
+                Gson gson = new GsonBuilder()
+                        .create();
+                Response response = new Response(true,MovieController.getMoviesList());
+                String jsonString = gson.toJson(response);
+                outStream.println(jsonString);
                 break;
             }
             //10
@@ -153,6 +174,13 @@ class appInterface {
             }
             //12
             case "getWatchList": {
+                Gson gson = new GsonBuilder()
+                        .setDateFormat("yyyy-MM-dd")
+                        .create();
+                String mail = gson.fromJson(jsonData, (Type) User.class);
+                Response response = new Response(true, UserController.getWatchList(mail));
+                String jsonString = gson.toJson(response);
+                outStream.println(jsonString);
                 break;
             }
 
