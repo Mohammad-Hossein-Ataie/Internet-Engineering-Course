@@ -11,12 +11,61 @@ public class Movie {
     private String director;
     private int totalLikes;
     private int totalDislikes;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public String getDirector() {
+        return director;
+    }
+
+    public int getTotalLikes() {
+        return totalLikes;
+    }
+
+    public int getTotalDislikes() {
+        return totalDislikes;
+    }
+
+    public String getImdbRate() {
+        return Float.toString(imdbRate);
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public List<String> getWriters() {
+        return writers;
+    }
+    public String getWritersString() {
+        return String.join(",", writers);
+    }
+    public String getGenreString() {
+        return String.join(",", genres);
+    }
+    public String getCastString() {
+        return String.join(",", (CharSequence) cast);
+    }
+    public List<String> getGenres() {
+        return genres;
+    }
+
     private List<Integer> cast = new ArrayList<>();
     private float imdbRate;
     private String duration;
 
-    public int getAgeLimit() {
-        return ageLimit;
+    public String getAgeLimit() {
+        return Integer.toString(ageLimit);
     }
 
     private int ageLimit;
@@ -62,5 +111,8 @@ public class Movie {
     public boolean isSame(Movie movie) {
         return this.id == movie.id;
     }
-
+    //ToDo
+    public String getRating() {
+        return "Rating";
+    }
 }

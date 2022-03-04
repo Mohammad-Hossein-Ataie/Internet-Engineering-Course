@@ -12,7 +12,7 @@ public class HandleRequest {
         GetData.setUsersListData();
         GetData.setCommentsListData();
         Javalin app = Javalin.create().start(7777);
-        app.get("/movies", ctx -> ctx.html(MovieView.returnVal()) );
+        app.get("/movies", ctx -> ctx.html(MovieView.returnMovies()) );
 
     }
 
