@@ -47,7 +47,9 @@ public class MovieView {
             }
             Element th = doc.createElement("th");
             Element a = doc.createElement("th");
-            // a.attr(,/movies/+((Movie) movieObject).getId());
+            Element link = doc.select("a").first();
+            String relHref = link.attr("href"); // == "/"
+            String absHref = link.attr("abs:href"); //
             doc.getElementsByTag("tr").first().appendChild(th);
             doc.getElementsByTag("tr").first().appendChild(th);
         });
