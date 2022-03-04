@@ -5,7 +5,9 @@ import Entity.Movie;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -32,25 +34,33 @@ public class MovieView {
     }
     public static String returnMovies() throws IOException {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        InputStream is = classloader.getResourceAsStream("templates/movies.html");
-        Document doc = Jsoup.parse(is, "UTF-8", "test");
+//      InputStream is = classloader.getResourceAsStream("templates/movies.html");
+        File in = new File("src/main/resources/templates/movies.html");
+        Document doc = Jsoup.parse(in, "UTF-8");
+        Elements dom = doc.children();
         List movies = MovieDAO.getMovies();
+
         //Array string movie
-        movies.forEach(movieObject ->{
+        movies.forEach(movieObject -> {
             List<String> movietempList = assignFilds((Movie) movieObject);
             Element tr = doc.createElement("tr");
             doc.getElementsByTag("table").first().appendChild(tr);
-            for(int i =0;i < 10 ; i++) {
-                Element th = doc.createElement("th");
-                th.text(movietempList.get(i));
-                doc.getElementsByTag("tr").first().appendChild(th);
+            for(int i =0;i <= movietempList.size() ; i++) {
+                Element td = doc.createElement("td");
+                if(i==movietempList.size()){
+                    Element a = doc.createElement("a");
+                    a.attr("href","/movies/"+((Movie) movieObject).getId());
+                    a.text("Link");
+                    td.appendChild(a);
+                }
+                else {
+                    td.text(movietempList.get(i));
+                }
+                tr.appendChild(td);
             }
-            Element th = doc.createElement("th");
-            Element a = doc.createElement("th");
-            // a.attr(,/movies/+((Movie) movieObject).getId());
-            doc.getElementsByTag("tr").first().appendChild(th);
-            doc.getElementsByTag("tr").first().appendChild(th);
+            doc.getElementsByTag("table").first().appendChild(tr);
         });
+
         return doc.toString();
 
     }

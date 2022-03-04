@@ -60,6 +60,11 @@
             <artifactId>javalin</artifactId>
             <version>4.3.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>1.5.31</version>
+        </dependency>
     </dependencies>
 
 </project>
