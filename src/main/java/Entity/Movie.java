@@ -64,13 +64,17 @@ public class Movie {
     private float imdbRate;
     private String duration;
 
-    public String getAgeLimit() {
+    public String getAgeLimitString() {
         return Integer.toString(ageLimit);
     }
 
     private int ageLimit;
     private List<String> writers = new ArrayList<>();
     private List<String> genres = new ArrayList<>();
+
+    public int getAgeLimit() {
+        return ageLimit;
+    }
 
     public Movie(int id, String name, String summary, String releaseDate, String director, List<String> writers, List<String> genres, List<Integer> cast, float imdbRate, String duration, int ageLimit) {
         this.id = id;
