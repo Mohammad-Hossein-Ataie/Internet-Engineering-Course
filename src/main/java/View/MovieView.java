@@ -49,6 +49,7 @@ public class MovieView {
                 Element td = doc.createElement("td");
                 if(i==movietempList.size()){
                     Element a = doc.createElement("a");
+                    a.attr("target", "_blank");
                     a.attr("href","/movies/"+((Movie) movieObject).getId());
                     a.text("Link");
                     td.appendChild(a);
