@@ -29,6 +29,7 @@ public class MovieView {
             add(movie.getImdbRate());
             add(movie.getRating());
             add(movie.getDuration());
+            add(movie.getAgeLimitString());
         }};
         return movieList;
     }
