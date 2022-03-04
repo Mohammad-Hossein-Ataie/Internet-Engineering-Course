@@ -2,6 +2,7 @@ package Entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Movie {
     private int id;
@@ -54,7 +55,9 @@ public class Movie {
         return String.join(",", genres);
     }
     public String getCastString() {
-        return String.join(",", (CharSequence) cast);
+        List<String> strings = cast.stream().map(Object::toString)
+                .collect(Collectors.toList());
+        return String.join(",", strings);
     }
     public List<String> getGenres() {
         return genres;
@@ -64,8 +67,12 @@ public class Movie {
     private float imdbRate;
     private String duration;
 
-    public String getAgeLimit() {
+    public String getAgeLimitString() {
         return Integer.toString(ageLimit);
+    }
+
+    public int getAgeLimit() {
+        return ageLimit;
     }
 
     private int ageLimit;
@@ -107,7 +114,6 @@ public class Movie {
     public void setCast(List<Integer> cast) {
         this.cast = cast;
     }
-
     public boolean isSame(Movie movie) {
         return this.id == movie.id;
     }
