@@ -27,7 +27,8 @@ public class MovieView {
             add(movie.getImdbRate());
             add(movie.getRating());
             add(movie.getDuration());
-            add(movie.getAgeLimitString());
+            add(movie.getAgeLimit());
+            add("Links");
         }};
         return movieList;
     }
@@ -37,28 +38,17 @@ public class MovieView {
         Document doc = Jsoup.parse(is, "UTF-8", "test");
         List movies = MovieDAO.getMovies();
         //Array string movie
-        ()
-        /*
         movies.forEach(movieObject ->{
             List movietempList = assignFilds((Movie) movieObject);
             Element tr = doc.createElement("tr");
             doc.getElementsByTag("table").first().appendChild(tr);
             for(int i =0;i <11; i++) {
                 Element th = doc.createElement("th");
-                th.text((String) movietempList.get(i));
+                th.text(movietempList.get(i));
                 doc.getElementsByTag("tr").first().appendChild(th);
             }
-            Element th = doc.createElement("th");
-            // handle Link for each movie
-            doc.getElementsByTag("tr").first().appendChild(th);
-        });*/
+        });
         return doc.toString();
 
-    }
-    public static String returnMovie() throws IOException{
-        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        InputStream is = classloader.getResourceAsStream("templates/movie.html");
-        Document doc = Jsoup.parse(is, "UTF-8", "test");
-        return doc.toString();
     }
 }
