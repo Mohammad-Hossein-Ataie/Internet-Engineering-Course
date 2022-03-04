@@ -2,6 +2,7 @@ package Entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 public class Movie {
@@ -119,6 +120,8 @@ public class Movie {
     }
     //ToDo
     public String getRating() {
-        return "Rating";
+        Random rand = new Random();
+        int randomNum = rand.nextInt((10 - 6) + 6) + 1;
+        return Integer.toString(randomNum);
     }
 }
