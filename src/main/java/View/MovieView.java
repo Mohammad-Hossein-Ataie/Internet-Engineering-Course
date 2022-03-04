@@ -46,7 +46,9 @@ public class MovieView {
                 doc.getElementsByTag("tr").first().appendChild(th);
             }
             Element th = doc.createElement("th");
-            // handle Link for each movie
+            Element a = doc.createElement("th");
+            // a.attr(,/movies/+((Movie) movieObject).getId());
+            doc.getElementsByTag("tr").first().appendChild(th);
             doc.getElementsByTag("tr").first().appendChild(th);
         });
         return doc.toString();
