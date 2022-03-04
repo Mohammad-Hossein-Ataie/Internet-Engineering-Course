@@ -61,9 +61,7 @@ public class MovieView {
             }
             doc.getElementsByTag("table").first().appendChild(tr);
         });
-
         return doc.toString();
-
     }
     public static String returnMovie() throws IOException{
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
