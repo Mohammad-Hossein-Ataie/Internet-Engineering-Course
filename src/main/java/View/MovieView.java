@@ -38,7 +38,6 @@ public class MovieView {
 //      InputStream is = classloader.getResourceAsStream("templates/movies.html");
         File in = new File("src/main/resources/templates/movies.html");
         Document doc = Jsoup.parse(in, "UTF-8");
-        Elements dom = doc.children();
         List movies = MovieDAO.getMovies();
 
         //Array string movie
@@ -78,6 +77,45 @@ public class MovieView {
         doc.getElementById("duration").text(movie.getDuration());
         doc.getElementById("ageLimit").text(movie.getAgeLimitString());
 //
+        return doc.toString();
+    }
+
+    public static String returnMovieByGenre(String searchedGenre) throws IOException{
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        File in = new File("src/main/resources/templates/movies.html");
+        Document doc = Jsoup.parse(in, "UTF-8");
+        List movies = MovieDAO.getMovies();
+        List<Movie> serachedMovies = new ArrayList<>();
+
+        movies.forEach(movieObj -> {
+            List<String> genres = ((Movie) movieObj).getGenres();
+            if(genres.contains(searchedGenre)){
+                serachedMovies.add((Movie) movieObj);
+            }
+        });
+
+        if(serachedMovies != null){
+            serachedMovies.forEach(movie -> {
+                List<String> movietempList = assignFilds((Movie) movie);
+                Element tr = doc.createElement("tr");
+                doc.getElementsByTag("table").first().appendChild(tr);
+                for(int i =0;i <= movietempList.size() ; i++) {
+                    Element td = doc.createElement("td");
+                    if(i==movietempList.size()){
+                        Element a = doc.createElement("a");
+                        a.attr("target", "_blank");
+                        a.attr("href","/movies/"+((Movie) movie).getId());
+                        a.text("Link");
+                        td.appendChild(a);
+                    }
+                    else {
+                        td.text(movietempList.get(i));
+                    }
+                    tr.appendChild(td);
+                }
+                doc.getElementsByTag("table").first().appendChild(tr);
+            });
+        }
         return doc.toString();
     }
 }
