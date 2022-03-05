@@ -64,6 +64,7 @@ public class MovieView {
         });
         return doc.toString();
     }
+
     public static String returnMovie(String movieId) throws IOException{
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         File in = new File("src/main/resources/templates/movie.html");
@@ -73,7 +74,10 @@ public class MovieView {
         doc.getElementById("name").text(movie.getName());
         doc.getElementById("summary").text(movie.getSummary());
         doc.getElementById("releaseDate").text(movie.getReleaseDate());
-
+        doc.getElementById("director").text(movie.getDirector());
+        doc.getElementById("writers").text(movie.getWritersString());
+        doc.getElementById("genres").text(movie.getGenreString());
+        doc.getElementById("cast").text(movie.getCastString());
         doc.getElementById("rating").text(movie.getRating());
         doc.getElementById("duration").text(movie.getDuration());
         doc.getElementById("ageLimit").text(movie.getAgeLimitString());
