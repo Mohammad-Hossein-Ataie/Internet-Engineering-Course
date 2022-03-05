@@ -1,6 +1,7 @@
 package DAO;
 
 import Entity.Actor;
+import Entity.Movie;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,19 @@ public class ActorDAO {
     public static void add(Actor actor) {
         actors.add(actor);
     }
-
+    public static List<Movie> getMovieActed(Integer actorID){
+        List<Movie> actsList = new ArrayList<Movie>();
+        List<Movie> movies = MovieDAO.getMovies();
+        for (Movie result : movies) {
+            List<Integer> casts =  result.getCast();
+            for (int i = 0; i < casts.size(); i++) {
+                if(casts.get(i) == actorID) {
+                    actsList.add(result);
+                }
+            }
+        }
+        return actsList;
+    }
     public static void setActores(List<Actor> newActors) {
         actors.addAll(newActors);
     }
