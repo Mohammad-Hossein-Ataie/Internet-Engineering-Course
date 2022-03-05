@@ -13,7 +13,9 @@ public class HandleRequest {
         GetData.setCommentsListData();
         Javalin app = Javalin.create().start(7777);
         app.get("/movies", ctx -> ctx.html(MovieView.returnMovies()) );
-        app.get("/movie", ctx -> ctx.html(MovieView.returnMovie()) );
+        app.get("/movies/{movieId}", ctx -> ctx.html(MovieView.returnMovie( ctx.pathParam("movieId"))));
+
+//        app.get("/actores/{actorId}", ctx -> ctx.html(MovieView.returnMovie( ctx.pathParam("movieId"))));
 
     }
 
