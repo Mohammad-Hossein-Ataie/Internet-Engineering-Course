@@ -11,8 +11,7 @@ public class Movie {
     private String summary;
     private String releaseDate;
     private String director;
-    private int totalLikes;
-    private int totalDislikes;
+    private int rating;
 
     public String getName() {
         return name;
@@ -30,13 +29,6 @@ public class Movie {
         return director;
     }
 
-    public int getTotalLikes() {
-        return totalLikes;
-    }
-
-    public int getTotalDislikes() {
-        return totalDislikes;
-    }
 
     public String getImdbRate() {
         return Float.toString(imdbRate);
@@ -120,8 +112,6 @@ public class Movie {
     }
     //ToDo
     public String getRating() {
-        Random rand = new Random();
-        int randomNum = rand.nextInt((10 - 6) + 6) + 1;
-        return Integer.toString(randomNum);
+        return Integer.toString(rating);
     }
 }

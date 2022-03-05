@@ -47,7 +47,7 @@ public class UserDAO {
     public static void removeFromWatchList(String email, int id) {
         watchListUser.remove(email,id);
     }
-    public static void rateMovie(String userId,int rate,int movieId){
+    public static void setRateMovie(String userId,int rate,int movieId){
             userRateMovie.put(userId,new HashMap(){{put(rate,movieId);}});
     }
     public static void setUsers(List<User> newUsers) {
