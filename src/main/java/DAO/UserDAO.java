@@ -12,7 +12,7 @@ public class UserDAO {
     public static Map<String, User> getUsersMails() {
         return usersMails;
     }
-
+    public static Map<String,Map<Integer,Integer>> userRateMovie;
     private static Map<String, User> usersMails = new HashMap<>();
     private static Map<String, Integer> watchListUser = new HashMap<>();
     private static List<User> users = new ArrayList<>();
@@ -42,7 +42,9 @@ public class UserDAO {
     public static void removeFromWatchList(String email, int id) {
         watchListUser.remove(email,id);
     }
-
+    public static void rateMovie(String userId,int rate,int movieId){
+            userRateMovie.put(userId,new HashMap(){{put(rate,movieId);}});
+    }
     public static void setUsers(List<User> newUsers) {
         users.addAll(newUsers);
     }
