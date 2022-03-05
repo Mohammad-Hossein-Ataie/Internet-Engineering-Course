@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -116,6 +117,51 @@ public class MovieView {
                 doc.getElementsByTag("table").first().appendChild(tr);
             });
         }
+        return doc.toString();
+    }
+
+    public static String returnMovieByDateRange(String start, String end) throws IOException{
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        File in = new File("src/main/resources/templates/movies.html");
+        Document doc = Jsoup.parse(in, "UTF-8");
+        List movies = MovieDAO.getMovies();
+        List<Movie> serachedMovies = new ArrayList<>();
+
+
+        Integer start_date = Integer.valueOf(start);
+        Integer end_date = Integer.valueOf(end);
+
+        movies.forEach(movieObj -> {
+            List<String> date = Arrays.asList(((Movie) movieObj).getReleaseDate().split("-"));
+            Integer dateYear = Integer.valueOf(date.get(0));
+            if(dateYear >= start_date && dateYear <= end_date){
+                serachedMovies.add((Movie) movieObj);
+            }
+        });
+
+        if(serachedMovies != null){
+            serachedMovies.forEach(movie -> {
+                List<String> movietempList = assignFilds((Movie) movie);
+                Element tr = doc.createElement("tr");
+                doc.getElementsByTag("table").first().appendChild(tr);
+                for(int i =0;i <= movietempList.size() ; i++) {
+                    Element td = doc.createElement("td");
+                    if(i==movietempList.size()){
+                        Element a = doc.createElement("a");
+                        a.attr("target", "_blank");
+                        a.attr("href","/movies/"+((Movie) movie).getId());
+                        a.text("Link");
+                        td.appendChild(a);
+                    }
+                    else {
+                        td.text(movietempList.get(i));
+                    }
+                    tr.appendChild(td);
+                }
+                doc.getElementsByTag("table").first().appendChild(tr);
+            });
+        }
+//      System.out.println();
         return doc.toString();
     }
 }
