@@ -1,6 +1,11 @@
 package Entity;
 
+import DAO.MovieDAO;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 public class User{
     public String getEmail() {
         return email;
@@ -41,7 +46,10 @@ public class User{
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
-
+    public static List<Movie> getWatchList() {
+        return watchList;
+    }
+    private static List<Movie> watchList = new ArrayList<>();
     private String email;
     private String password;
     private String nickname;

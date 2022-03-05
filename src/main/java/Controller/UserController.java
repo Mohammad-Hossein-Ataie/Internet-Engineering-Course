@@ -35,9 +35,6 @@ public class UserController {
             }
         }
     }
-    public static List<Movie> getWatchList(String email){
-        return UserDAO.getWatchList();
-    }
     public static String removeFromWatchList(String email, Integer movieId) throws AgeLimitError, UserNotExist{
         User user = UserDAO.getUserBymail(email);
         Movie movie = MovieDAO.getMovieByID(movieId);

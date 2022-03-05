@@ -1,7 +1,11 @@
 package View;
 
+import DAO.CommentDAO;
 import DAO.MovieDAO;
+import DAO.UserDAO;
+import Entity.Comment;
 import Entity.Movie;
+import Entity.User;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -70,6 +74,14 @@ public class MovieView {
         File in = new File("src/main/resources/templates/movie.html");
         Document doc = Jsoup.parse(in, "UTF-8");
         Movie movie = MovieDAO.getMovieByID(Integer.valueOf(movieId));
+        List<Comment> movieComments = new ArrayList<>();
+
+        List<Comment> comments = CommentDAO.getComments();
+        comments.forEach(comment -> {
+            if (comment.getMovieId() == Integer.valueOf(movieId)){
+                movieComments.add(comment);
+            }
+        });
 
         doc.getElementById("name").text(movie.getName());
         doc.getElementById("summary").text(movie.getSummary());
@@ -81,7 +93,46 @@ public class MovieView {
         doc.getElementById("rating").text(movie.getRating());
         doc.getElementById("duration").text(movie.getDuration());
         doc.getElementById("ageLimit").text(movie.getAgeLimitString());
-//
+
+        movieComments.forEach(comment -> {
+            Element tr = doc.createElement("tr");
+            //nikName
+            User user = UserDAO.getUserBymail(comment.getUserEmail());
+            String nikName = user.getName();
+            Element nametd = doc.createElement("td");
+            nametd.text("@"+nikName);
+            tr.appendChild(nametd);
+            //comment
+            Element commenttd = doc.createElement("td");
+            commenttd.text(comment.getText());
+            tr.appendChild(commenttd);
+            //likes
+            Element likestd = doc.createElement("td");
+            Element likes = doc.createElement("span");
+            likes.text(String.valueOf(comment.getLikes()));
+            likestd.appendChild(likes);
+
+            Element likebtn = doc.createElement("button");
+            likebtn.text("like");
+            likebtn.attr("type", "submit");
+            likestd.appendChild(likebtn);
+            tr.appendChild(likestd);
+            //dislikes
+            Element dislikestd = doc.createElement("td");
+            Element dislikes = doc.createElement("span");
+            dislikes.text(String.valueOf(comment.getDislikes()));
+            dislikestd.appendChild(dislikes);
+
+            Element dislikebtn = doc.createElement("button");
+            dislikebtn.text("dislike");
+            dislikebtn.attr("type", "submit");
+            dislikestd.appendChild(dislikebtn);
+            tr.appendChild(dislikestd);
+
+            doc.getElementsByTag("table").first().appendChild(tr);
+
+        });
+
         return doc.toString();
     }
 

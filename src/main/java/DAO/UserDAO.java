@@ -22,11 +22,8 @@ public class UserDAO {
     }
 
     private static List<User> users = new ArrayList<>();
-    public static List<Movie> getWatchList() {
-        return watchList;
-    }
 
-    private static List<Movie> watchList = new ArrayList<>();
+
 
     public static List<String> getMails() {
         return mails;
@@ -65,5 +62,10 @@ public class UserDAO {
     }
     public static void setUsers(List<User> newUsers) {
         users.addAll(newUsers);
+        for(int i = 0; i<newUsers.size(); i++){
+            String temp = newUsers.get(i).getEmail();
+            usersMails.put(temp,newUsers.get(i));
+        }
+
     }
 }
