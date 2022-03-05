@@ -15,6 +15,11 @@ public class UserDAO {
     public static Map<String,Map<Integer,Integer>> userRateMovie;
     private static Map<String, User> usersMails = new HashMap<>();
     private static Map<String, Integer> watchListUser = new HashMap<>();
+
+    public static List<User> getUsers() {
+        return users;
+    }
+
     private static List<User> users = new ArrayList<>();
     public static List<Movie> getWatchList() {
         return watchList;
