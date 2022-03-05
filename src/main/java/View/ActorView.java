@@ -21,8 +21,6 @@ public class ActorView {
 
         Actor actor = ActorDAO.findByID(Integer.parseInt(id));
         List<Movie> movies = ActorDAO.getMovieActed(Integer.parseInt(id));
-        List<String> ActorsMovies = new ArrayList<>();
-        Integer tableCol = 4;
 
         doc.getElementById("name").text(actor.getName());
         doc.getElementById("birthDate").text(actor.getBirthDate());
