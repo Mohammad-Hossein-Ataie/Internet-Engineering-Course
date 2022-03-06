@@ -12,8 +12,7 @@ public class UserDAO {
     public static Map<String, User> getUsersMails() {
         return usersMails;
     }
-    private static Map<String,Map<Integer,Integer>> userRateMovie;
-    private static Map<Integer,Integer> scoreMovies;
+
     private static Map<String, User> usersMails = new HashMap<>();
     private static Map<String, Integer> watchListUser = new HashMap<>();
 
@@ -44,21 +43,6 @@ public class UserDAO {
 
     public static void removeFromWatchList(String email, int id) {
         watchListUser.remove(email,id);
-    }
-    public static void setRateMovie(String userId,int rate,int movieId){
-            userRateMovie.put(userId,new HashMap(){{put(rate,movieId);}});
-            scoreMovies.put(movieId,rate);
-    }
-    public static float getRateMovie(Integer movieId){
-        int score = 0;
-        int count = 0;
-        for (Map.Entry<Integer, Integer> entry : scoreMovies.entrySet()) {
-            if(movieId == entry.getKey()) {
-                count = count + 1;
-                score = score + entry.getValue();
-            }
-        }
-        return score/count;
     }
     public static void setUsers(List<User> newUsers) {
         users.addAll(newUsers);

@@ -132,7 +132,27 @@ public class MovieView {
             doc.getElementsByTag("table").first().appendChild(tr);
 
         });
+        //rate btn
+//        Element user_input = doc.getElementById("user_id");
+//        String user_id = user_input.attr("value");
+//
+//        Element movieRate = doc.getElementById("quantity");
+//        String movie_rating = movieRate.attr("value");
 
+        return doc.toString();
+    }
+
+    public static String rateMovie(String userId, String rating, String movieId)throws IOException{
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        File in = new File("src/main/resources/templates/movie.html");
+        Document doc = Jsoup.parse(in, "UTF-8");
+        System.out.println(userId);
+        System.out.println(rating);
+        System.out.println(movieId);
+        Movie movie = MovieDAO.getMovieByID(Integer.valueOf(movieId));
+        MovieDAO.setRateMovie(userId,Integer.valueOf(rating),Integer.valueOf(movieId));
+
+        doc.getElementById("rating").text(movie.getRating());
         return doc.toString();
     }
 

@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MovieManager {
     private static boolean isUpdating(Movie movie) {
@@ -22,7 +23,6 @@ public class MovieManager {
             MovieDAO.update(movie);
         MovieDAO.add(movie);
     }
-
     public static String getMoviesList() {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd")

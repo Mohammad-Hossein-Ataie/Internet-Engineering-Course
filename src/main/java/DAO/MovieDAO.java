@@ -10,6 +10,24 @@ import java.util.Map;
 public class MovieDAO {
     private static Map<Integer, Movie> movieIds = new HashMap<>();
 
+    private static Map<String,Map<Integer,Integer>> userRateMovie;
+    private static Map<Integer,Integer> scoreMovies;
+
+    public static void setRateMovie(String userId,int rate,int movieId){
+        userRateMovie.put(userId,new HashMap(){{put(rate,movieId);}});
+        scoreMovies.put(movieId,rate);
+    }
+    public static float getRateMovie(Integer movieId){
+        int score = 0;
+        int count = 0;
+        for (Map.Entry<Integer, Integer> entry : scoreMovies.entrySet()) {
+            if(movieId == entry.getKey()) {
+                count = count + 1;
+                score = score + entry.getValue();
+            }
+        }
+        return score/count;
+    }
     public static void setMovies(List<Movie> newMovies) {
         movies.addAll(newMovies);
     }

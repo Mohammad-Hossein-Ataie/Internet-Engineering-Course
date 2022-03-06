@@ -12,62 +12,9 @@ public class Movie {
     private String releaseDate;
     private String director;
     private int rating;
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSummary() {
-        return summary;
-    }
-
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    public String getDirector() {
-        return director;
-    }
-
-
-    public String getImdbRate() {
-        return Float.toString(imdbRate);
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public List<String> getWriters() {
-        return writers;
-    }
-    public String getWritersString() {
-        return String.join(",", writers);
-    }
-    public String getGenreString() {
-        return String.join(",", genres);
-    }
-    public String getCastString() {
-        List<String> strings = cast.stream().map(Object::toString)
-                .collect(Collectors.toList());
-        return String.join(",", strings);
-    }
-    public List<String> getGenres() {
-        return genres;
-    }
-
     private List<Integer> cast = new ArrayList<>();
     private float imdbRate;
     private String duration;
-
-    public String getAgeLimitString() {
-        return Integer.toString(ageLimit);
-    }
-
-    public int getAgeLimit() {
-        return ageLimit;
-    }
-
     private int ageLimit;
     private List<String> writers = new ArrayList<>();
     private List<String> genres = new ArrayList<>();
@@ -101,11 +48,65 @@ public class Movie {
         this.id = id;
     }
 
+    public String getAgeLimitString() {
+        return Integer.toString(ageLimit);
+    }
+
+    public int getAgeLimit() {
+        return ageLimit;
+    }
+
     public List<Integer> getCast() {
         return cast;
     }
+
     public void setCast(List<Integer> cast) {
         this.cast = cast;
+    }
+
+    public String getImdbRate() {
+        return Float.toString(imdbRate);
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public List<String> getWriters() {
+        return writers;
+    }
+
+    public String getWritersString() {
+        return String.join(",", writers);
+    }
+
+    public String getGenreString() {
+        return String.join(",", genres);
+    }
+
+    public String getCastString() {
+        List<String> strings = cast.stream().map(Object::toString)
+                .collect(Collectors.toList());
+        return String.join(",", strings);
+    }
+    public List<String> getGenres() {
+        return genres;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public String getDirector() {
+        return director;
     }
     public boolean isSame(Movie movie) {
         return this.id == movie.id;
@@ -113,5 +114,8 @@ public class Movie {
     //ToDo
     public String getRating() {
         return Integer.toString(rating);
+    }
+    public void addRating(int rating){
+        this.rating += rating;
     }
 }
