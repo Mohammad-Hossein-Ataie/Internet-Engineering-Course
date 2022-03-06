@@ -26,9 +26,14 @@ public class MovieDAO {
                 score = score + entry.getValue();
             }
         }
-        if (count == 0)
+        Movie newMovie = MovieDAO.findByID(movieId);
+        if (count == 0) {
+            newMovie.setRating(0);
             return 0;
-        return score/count;
+        }
+        float rating = score/count;
+        newMovie.setRating(rating);
+        return rating;
     }
     public static void setMovies(List<Movie> newMovies) {
         movies.addAll(newMovies);

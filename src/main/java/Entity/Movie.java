@@ -12,11 +12,11 @@ public class Movie {
     private String releaseDate;
     private String director;
 
-    public void setRating(int rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
-    private int rating;
+    private float rating;
     private List<Integer> cast = new ArrayList<>();
     private float imdbRate;
     private String duration;
@@ -118,7 +118,7 @@ public class Movie {
     }
     //ToDo
     public String getRating() {
-        return Integer.toString(rating);
+        return String.valueOf(rating);
     }
     public void addRating(int rating){
         this.rating += rating;
