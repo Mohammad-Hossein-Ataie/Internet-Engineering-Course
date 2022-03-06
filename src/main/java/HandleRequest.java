@@ -1,4 +1,5 @@
 import View.ActorView;
+import View.CommentView;
 import View.MovieView;
 import View.WatchListView;
 import io.javalin.Javalin;
@@ -30,6 +31,8 @@ public class HandleRequest {
         app.get("/actors/{actorId}", ctx -> ctx.html(ActorView.returnActor( ctx.pathParam("actorId"))));
         //user Watchlist
         app.get("/watchList/{userId}", ctx -> ctx.html(WatchListView.returnWatchList( ctx.pathParam("userId"))));
+        //comment
+        app.get("/voteComment/{user_id}/{comment_id}/{vote}", ctx -> ctx.html(CommentView.handleVoteComment( ctx.pathParam("user_id"), ctx.pathParam("comment_id"), ctx.pathParam("vote"))));
 
     }
 

@@ -14,6 +14,10 @@ public class CommentDAO {
 
     private static int count = 0;
 
+    public static Map<Integer, Comment> getUsersComments() {
+        return usersComments;
+    }
+
     // addComment 1
     private static Map<Integer, Comment> usersComments = new HashMap<>();
 
