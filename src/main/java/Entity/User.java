@@ -49,6 +49,11 @@ public class User{
     public static List<Movie> getWatchList() {
         return watchList;
     }
+
+    public static void setWatchList(Movie watchList) {
+        User.watchList.add(watchList);
+    }
+
     private static List<Movie> watchList = new ArrayList<>();
     private String email;
     private String password;

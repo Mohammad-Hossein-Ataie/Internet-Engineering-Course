@@ -14,6 +14,11 @@ public class UserDAO {
     }
 
     private static Map<String, User> usersMails = new HashMap<>();
+
+    public static Map<String, Integer> getWatchListUser() {
+        return watchListUser;
+    }
+
     private static Map<String, Integer> watchListUser = new HashMap<>();
 
     public static List<User> getUsers() {
@@ -34,6 +39,9 @@ public class UserDAO {
     }
 
     public static void addToWatchList(String email, int id) {
+        Movie movie = MovieDAO.getMovieByID(id);
+        User user = UserDAO.getUserBymail(email);
+        user.setWatchList(movie);
         watchListUser.put(email,id);
     }
 

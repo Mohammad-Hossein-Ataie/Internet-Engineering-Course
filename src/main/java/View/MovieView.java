@@ -33,6 +33,7 @@ public class MovieView {
             add(movie.getCastString());
             add(movie.getImdbRate());
             add(movie.getRating());
+//            add(String.valueOf(MovieDAO.getRateMovie(Integer.valueOf(movie.getId()))));
             add(movie.getDuration());
             add(movie.getAgeLimitString());
         }};
@@ -134,6 +135,15 @@ public class MovieView {
         });
 
         return doc.toString();
+    }
+
+    public static  String addMovieToWatchList(String userId, String movieId) throws IOException{
+        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        File in = new File("src/main/resources/templates/movie.html");
+        Document doc = Jsoup.parse(in, "UTF-8");
+
+        UserDAO.addToWatchList(userId, Integer.parseInt(movieId));
+        return returnMovie(movieId);
     }
 
     public static String rateMovie(String userId, String rating, String movieId)throws IOException{
