@@ -14,8 +14,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-public class watchListTest {
 
+public class RateMovieTest {
     public static void addTestMovies() {
         try {
             MovieDAO.add(new Movie(1,"Fight Club", "summary1", "1999-11-11", "David Fincher",new ArrayList<>(Arrays.asList("Chuck Palahniuk", "Jim Uhls")), new ArrayList<>(Arrays.asList("Drama")), new ArrayList<>(Arrays.asList(4,5)),  (float)8.8, "139",  16));
@@ -26,17 +26,19 @@ public class watchListTest {
             System.out.println(exception.getMessage());
         }
     }
-//    public static void addTestUsers() {
-//        try {
-//            UserDAO.addUser(new User("sara@ut.ac.ir","sara1234","Ali","sara","1924-04-03"));
-//            UserDAO.addUser(new User("sajjad@ut.ac.ir","sajjad1234","Sajjad","sajjad","2000-06-14"));
-//            UserDAO.addUser(new User("saman@ut.ac.ir","saman1234","Saman","saman","2014-01-01"));
-//
-//        } catch (Exception exception) {
-//            System.out.println(exception.getMessage());
-//        }
-//
-//    }
+    /*
+    public static void addTestUsers() {
+        try {
+            UserDAO.addUser(new User("sara@ut.ac.ir","sara1234","Ali","sara","1924-04-03"));
+            UserDAO.addUser(new User("sajjad@ut.ac.ir","sajjad1234","Sajjad","sajjad","2000-06-14"));
+            UserDAO.addUser(new User("saman@ut.ac.ir","saman1234","Saman","saman","2014-01-01"));
+
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+
+    }
+     */
     public static void addTestActors() {
         try {
             ActorDAO.add(new Actor( 1,"Ali","1924-04-03","American"));
@@ -56,7 +58,7 @@ public class watchListTest {
         HandleRequest interfaceServer = new HandleRequest();
         addTestActors();
         addTestMovies();
-//        addTestUsers();
+        //addTestUsers();
         try {
             interfaceServer.start(Movies_URI, 7777);
         } catch (Exception exception) {

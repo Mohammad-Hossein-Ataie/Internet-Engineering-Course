@@ -1,11 +1,18 @@
+import DAO.MovieDAO;
+import Entity.Movie;
 import View.ActorView;
 import View.CommentView;
 import View.MovieView;
 import View.WatchListView;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import io.javalin.Javalin;
 
 import java.io.IOException;
+import java.util.List;
 
+import HTTPRequestHandler.HTTPRequestHandler;
 public class HandleRequest {
 
 
@@ -34,6 +41,31 @@ public class HandleRequest {
         //comment
         app.get("/voteComment/{user_id}/{comment_id}/{vote}", ctx -> ctx.html(CommentView.handleVoteComment( ctx.pathParam("user_id"), ctx.pathParam("comment_id"), ctx.pathParam("vote"))));
 
+    }
+    public void start(final String RESTAURANTS_URI, final int port) {
+        try {
+            System.out.println("Importing Data...");
+            importMoviesFromWeb(RESTAURANTS_URI);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void importMoviesFromWeb(String uri) throws Exception {
+        String RestaurantsJsonString = HTTPRequestHandler.getRequest(uri);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        List<Movie> movies = gson.fromJson(RestaurantsJsonString, new TypeToken<List<Movie>>() {
+        }.getType());
+        int counter = 1;
+        for (Movie movie : movies) {
+            System.out.println(counter + "----------------");
+            counter++;
+            System.out.println("Movie " + counter + " added successfully."+"\n");
+            try {
+                MovieDAO.add(movie);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
 }
