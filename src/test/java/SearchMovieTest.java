@@ -1,6 +1,5 @@
 import DAO.ActorDAO;
 import DAO.MovieDAO;
-import DAO.UserDAO;
 import Entity.Actor;
 import Entity.Movie;
 import Entity.User;
@@ -14,8 +13,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-public class watchListTest {
 
+public class SearchMovieTest {
     public static void addTestMovies() {
         try {
             MovieDAO.add(new Movie(1,"Fight Club", "summary1", "1999-11-11", "David Fincher",new ArrayList<>(Arrays.asList("Chuck Palahniuk", "Jim Uhls")), new ArrayList<>(Arrays.asList("Drama")), new ArrayList<>(Arrays.asList(4,5)),  (float)8.8, "139",  16));
@@ -38,7 +37,7 @@ public class watchListTest {
         }
 
     }
-    */
+     */
     public static void addTestActors() {
         try {
             ActorDAO.add(new Actor( 1,"Ali","1924-04-03","American"));
@@ -53,7 +52,7 @@ public class watchListTest {
     }
 
     @BeforeClass
-    public static void beforeRateMovieTests() {
+    public static void beforeWatchListTests() {
         final String Movies_URI = "http://138.197.181.131:5000/api/movies";
         HandleRequest interfaceServer = new HandleRequest();
         addTestActors();
@@ -67,7 +66,7 @@ public class watchListTest {
     }
 
     @Test
-    public void successRateMovieTest() throws UnirestException {
+    public void successWatchListTest() throws UnirestException {
         try {
             User.getWatchList();
         } catch (Exception exception) {
@@ -75,12 +74,13 @@ public class watchListTest {
         }
     }
     @Test
-    public void ForbiddenRateMovieTest() {
-        String movieID = "100";
-        String url = "http://localhost:7777/movies/" + movieID;
+    public void ForbiddenSearchMovieTest() {
+        String startDate = "19837948";
+        String endDate = "3453778";
+        String url = "http://localhost:7777/movies/" + startDate + "/" + endDate;
         try {
             int statusCode = HTTPRequestHandler.getStatusCode(url);
-            Assert.assertEquals(statusCode, 404);
+            Assert.assertEquals(statusCode, 403);
         } catch (Exception e) {
             e.printStackTrace();
         }

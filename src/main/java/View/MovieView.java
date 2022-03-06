@@ -230,8 +230,12 @@ public class MovieView {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         File in = new File("src/main/resources/templates/movies.html");
         Document doc = Jsoup.parse(in, "UTF-8");
+
         File err404 = new File("src/main/resources/templates/404.html");
         Document doc404 = Jsoup.parse(err404, "UTF-8");
+
+        File err403 = new File("src/main/resources/templates/403.html");
+        Document doc403 = Jsoup.parse(err403, "UTF-8");
 
         List movies = MovieDAO.getMovies();
         List<Movie> serachedMovies = new ArrayList<>();
@@ -242,6 +246,9 @@ public class MovieView {
 
         if(movies == null){
             return doc404.toString();
+        }
+        else if ((start.length() < 4 || start.length() > 4) || (end.length() < 4 || end.length() > 4) ){
+            return doc403.toString();
         }
         else {
             movies.forEach(movieObj -> {
