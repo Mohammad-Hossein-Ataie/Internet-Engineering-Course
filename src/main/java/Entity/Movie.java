@@ -11,6 +11,11 @@ public class Movie {
     private String summary;
     private String releaseDate;
     private String director;
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
     private int rating;
     private List<Integer> cast = new ArrayList<>();
     private float imdbRate;
