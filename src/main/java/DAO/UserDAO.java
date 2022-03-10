@@ -9,6 +9,18 @@ import java.util.List;
 import java.util.Map;
 
 public class UserDAO {
+    public static String getEnrolledID() {
+        return enrolledID;
+    }
+
+    public static void setEnrolledID(String enrolledID) {
+        UserDAO.enrolledID = enrolledID;
+    }
+
+    private static String enrolledID;
+    public static void addEnrolled(String enrolled){
+        enrolled = getEnrolledID();
+    }
     public static Map<String, User> getUsersMails() {
         return usersMails;
     }
