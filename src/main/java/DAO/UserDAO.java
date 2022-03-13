@@ -17,7 +17,7 @@ public class UserDAO {
         UserDAO.enrolledID = enrolledID;
     }
 
-    private static String enrolledID;
+    private static String enrolledID = "";
     public static void addEnrolled(String enrolled){
         enrolled = getEnrolledID();
     }
