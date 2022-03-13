@@ -12,8 +12,8 @@ import java.io.IOException;
 
 @WebServlet(value = "/logout")
 public class LogoutServlet extends HttpServlet {
-    String enteredMail = "";
     public void doGet (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         UserDAO.setEnrolledID("");
+        response.sendRedirect("/login");
     }
 }
