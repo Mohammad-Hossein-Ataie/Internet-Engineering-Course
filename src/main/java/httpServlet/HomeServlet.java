@@ -16,8 +16,10 @@ public class HomeServlet extends HttpServlet {
         if(UserDAO.getEnrolledID() == ""){
             response.sendRedirect("/login");
         }
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/home.jsp");
-        requestDispatcher.forward(request,response);
+        else {
+            RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/home.jsp");
+            requestDispatcher.forward(request, response);
+        }
         //request.getRequestDispatcher("/home.jsp").forward(request,response);
     }
 }
