@@ -58,4 +58,15 @@ public class MovieManager {
         }
         return movies;
     }
+
+    public static int getMovieByName(String movieName) {
+        List<Movie> movies = MovieDAO.getMovies();
+        for (int i = 0; i < movies.size(); i++) {
+            if (movies.get(i).getName() == movieName) {
+                return movies.get(i).getId();
+            }
+        }
+        return -1;
+    }
+
 }

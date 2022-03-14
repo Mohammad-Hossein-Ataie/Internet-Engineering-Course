@@ -14,6 +14,7 @@ import java.io.IOException;
 public class HomeServlet extends HttpServlet {
     public void doGet (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         if(UserDAO.getEnrolledID() == ""){
+            //request.setAttribute("error", "Unknown user, please login first");
             response.sendRedirect("/login");
         }
         else {
