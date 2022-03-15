@@ -11,18 +11,30 @@
     </style>
 </head>
 <body>
-<%String email = UserDAO.getEnrolledID();%>
-<a href="/home.jsp">Home</a>
-<p id="email">email: <%= UserDAO.getEnrolledID()%></p>
-<%--<%--%>
-<%--    String[] mail = UserDAO.getEnrolledID().split("@");--%>
-<%--    String name = mail[1];--%>
-<%--%>--%>
-<%--<ul>--%>
-<%--    <li id="name">name: <%=name%></li>--%>
-<%--    <li id="nickname">nickname: @<%=name%></li>--%>
-<%--</ul>--%>
-<h2>Watch List</h2>
+    <%
+        String email = UserDAO.getEnrolledID();
+        String[] name = email.split("@");
+    %>
+    <a href="/home.jsp">Home</a>
+    <p id="email">email: <%= email%></p>
+    <ul>
+        <li id="name">name: <%=name[0]%></li>
+        <li id="nickname">nickname: @<%=name[0]%></li>
+    </ul>
+    <h2>Watch List</h2>
+    <table>
+        <tr>
+            <th>Movie</th>
+            <th>releaseDate</th>
+            <th>director</th>
+            <th>genres</th>
+            <th>imdb Rate</th>
+            <th>rating</th>
+            <th>duration</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </table>
 <%--<table>--%>
 <%--    <tr>--%>
 <%--        <th>Movie</th>--%>
