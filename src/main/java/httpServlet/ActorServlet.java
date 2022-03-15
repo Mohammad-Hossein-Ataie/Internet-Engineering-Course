@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "movie", urlPatterns = "/movies/*")
-public class MovieServlet extends HttpServlet{
+@WebServlet(name = "actor", urlPatterns = "/actors/*")
+public class ActorServlet extends HttpServlet {
     public void doGet (HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
         if(UserDAO.getEnrolledID() == ""){
             response.sendRedirect("/login");
@@ -22,23 +22,10 @@ public class MovieServlet extends HttpServlet{
         else {
             String pathInf = request.getPathInfo();
             String[] path = pathInf.split("/");
-            String movieId = path[1];
+            String actorId = path[1];
 
-            MovieDAO.setUserSearchedMovies(MovieDAO.getMovies());
-            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/movie.jsp");
+            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/actor.jsp");
             requestDispatcher.forward(request, response);
         }
-    }
-
-    public void doPost(HttpServletRequest request,HttpServletResponse response)throws IOException,ServletException{
-        String rate = request.getParameter("quantity");
-        String comment = request.getParameter("comment");
-        if(rate != null){
-            System.out.println(rate);
-        }
-        if(comment != null){
-            System.out.println(comment);
-        }
-
     }
 }
