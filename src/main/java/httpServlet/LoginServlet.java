@@ -18,15 +18,9 @@ public class LoginServlet extends HttpServlet {
     }
     public void doPost(HttpServletRequest request,HttpServletResponse response)throws IOException,ServletException{
         String enteredMail = request.getParameter("email");
-        System.out.println(enteredMail);
         UserDAO.addEnrolled(enteredMail);
         RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
         requestDispatcher.forward(request,response);
-//        GetData.setActorsListData();
-//        GetData.setMovieList();
-//        GetData.setUsersListData();
-//        GetData.setCommentsListData();
     }
-    //Done
-    //Add enteredMail to a list of mails in order to how is in
+
 }
