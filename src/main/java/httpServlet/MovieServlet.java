@@ -21,12 +21,9 @@ public class MovieServlet extends HttpServlet{
         }
         else {
             String pathInf = request.getPathInfo();
-//            String[] path = pathInf.split("/");
-//            String movieId = pathInf.split("/")[0];
-//
-//            System.out.println(movieId);
-//            System.out.println(pathInf);
-//            System.out.println(path);
+            String[] path = pathInf.split("/");
+            String movieId = path[1];
+
             MovieDAO.setUserSearchedMovies(MovieDAO.getMovies());
             RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/movie.jsp");
             requestDispatcher.forward(request, response);
