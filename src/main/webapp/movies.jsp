@@ -1,7 +1,7 @@
 <%@ page import="java.util.List" %>
-<%@ page import="Entity.Movie" %>
-<%@ page import="DAO.MovieDAO" %>
-<%@ page import="DAO.UserDAO" %><%--
+<%@ page import="org.example.CA1.Entity.Movie" %>
+<%@ page import="org.example.CA1.DAO.MovieDAO" %>
+<%@ page import="org.example.CA1.DAO.UserDAO" %><%--
   Created by IntelliJ IDEA.
   User: MHAT
   Date: 3/14/2022
@@ -64,7 +64,6 @@
                 <td><%= movies.get(i).getAgeLimitString()%></td>
                 <td><a href="/movies/"+<%= String.valueOf(movies.get(i).getId())%>>Link</a></td>
             </tr>
-
         <%}}%>
 
 <%--    <table>--%>

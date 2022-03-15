@@ -1,13 +1,13 @@
-<%@ page import="DAO.UserDAO" %>
-<%@ page import="Entity.Movie" %>
-<%@ page import="DAO.MovieDAO" %>
-<%@ page import="Entity.Actor" %>
-<%@ page import="DAO.ActorDAO" %>
-<%@ page import="Entity.Comment" %>
+<%@ page import="org.example.CA1.DAO.UserDAO" %>
+<%@ page import="org.example.CA1.Entity.Movie" %>
+<%@ page import="org.example.CA1.DAO.MovieDAO" %>
+<%@ page import="org.example.CA1.Entity.Actor" %>
+<%@ page import="org.example.CA1.DAO.ActorDAO" %>
+<%@ page import="org.example.CA1.Entity.Comment" %>
 <%@ page import="java.util.List" %>
-<%@ page import="DAO.CommentDAO" %>
+<%@ page import="org.example.CA1.DAO.CommentDAO" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="Entity.User" %>
+<%@ page import="org.example.CA1.Entity.User" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>

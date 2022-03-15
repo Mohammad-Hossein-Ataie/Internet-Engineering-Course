@@ -1,4 +1,4 @@
-<%--<%@ page import="DAO.UserDAO" %>--%>
+<%--<%@ page import="org.example.CA1.DAO.UserDAO" %>--%>
 <%--<!DOCTYPE html>--%>
 <%--<html lang="en">--%>
 <%--<head>--%>

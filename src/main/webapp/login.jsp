@@ -1,4 +1,4 @@
-<%@ page import="httpServlet.GetData" %><%--
+<%@ page import="org.example.CA1.httpServlet.GetData" %><%--
   Created by IntelliJ IDEA.
   User: MHAT
   Date: 3/13/2022

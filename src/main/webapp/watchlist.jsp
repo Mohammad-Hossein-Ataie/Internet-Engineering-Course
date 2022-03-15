@@ -1,4 +1,7 @@
-<%@ page import="DAO.UserDAO" %>
+<%@ page import="org.example.CA1.DAO.UserDAO" %>
+<%@ page import="org.example.CA1.Entity.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="org.example.CA1.Entity.Movie" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +24,11 @@
         <li id="name">name: <%=name[0]%></li>
         <li id="nickname">nickname: @<%=name[0]%></li>
     </ul>
+
+    <%
+        User user = UserDAO.getUserBymail(UserDAO.getEnrolledID());
+        List<Movie> movies = user.getWatchList();
+    %>
     <h2>Watch List</h2>
     <table>
         <tr>
@@ -34,91 +42,36 @@
             <th></th>
             <th></th>
         </tr>
-    </table>
-<%--<table>--%>
-<%--    <tr>--%>
-<%--        <th>Movie</th>--%>
-<%--        <th>releaseDate</th>--%>
-<%--        <th>director</th>--%>
-<%--        <th>genres</th>--%>
-<%--        <th>imdb Rate</th>--%>
-<%--        <th>rating</th>--%>
-<%--        <th>duration</th>--%>
-<%--        <th></th>--%>
-<%--        <th></th>--%>
-<%--    </tr>--%>
-<%--    <tr>--%>
-<%--        <th>Fight Club</th>--%>
-<%--        <th>1999-11-11</th>--%>
-<%--        <th>David Fincher</th>--%>
-<%--        <th>Drama</th>--%>
-<%--        <th>8.8</th>--%>
-<%--        <th>8.8</th>--%>
-<%--        <th>139</th>--%>
-<%--        <td><a href="/movies/01">Link</a></td>--%>
-<%--        <td>--%>
-<%--            <form action="" method="POST" >--%>
-<%--                <input id="form_movie_id" type="hidden" name="movie_id" value="01">--%>
-<%--                <button type="submit">Remove</button>--%>
-<%--            </form>--%>
-<%--        </td>--%>
-<%--    </tr>--%>
-<%--    <tr>--%>
-<%--        <th>Catch Me If You Can</th>--%>
-<%--        <th>2002-12-25</th>--%>
-<%--        <th>Steven Spielberg</th>--%>
-<%--        <th>Drama, Crime, Biography</th>--%>
-<%--        <th>8.1</th>--%>
-<%--        <th>8</th>--%>
-<%--        <th>141</th>--%>
-<%--        <td><a href="/movies/02">Link</a></td>--%>
-<%--        <td>--%>
-<%--            <form action="" method="POST" >--%>
-<%--                <input id="form_movie_id" type="hidden" name="movie_id" value="02">--%>
-<%--                <button type="submit">Remove</button>--%>
-<%--            </form>--%>
-<%--        </td>--%>
+        <%if(movies.size() != 0){
+            for(int i = 0; i< movies.size(); i++) {
 
-<%--    </tr>--%>
-<%--    <tr>--%>
-<%--        <th>War for the Planet of the Apes</th>--%>
-<%--        <th>2017-07-14</th>--%>
-<%--        <th>Matt Reeves</th>--%>
-<%--        <th>Drama, Action, Adventure</th>--%>
-<%--        <th>7.4</th>--%>
-<%--        <th>8</th>--%>
-<%--        <th>140</th>--%>
-<%--        <td><a href="/movies/03">Link</a></td>--%>
-<%--        <td>--%>
-<%--            <form action="" method="POST" >--%>
-<%--                <input id="form_movie_id" type="hidden" name="movie_id" value="03">--%>
-<%--                <button type="submit">Remove</button>--%>
-<%--            </form>--%>
-<%--        </td>--%>
-<%--    </tr>--%>
-<%--</table>--%>
-<%--<h2>Recommendation List</h2>--%>
-<%--<table>--%>
-<%--    <tr>--%>
-<%--        <th>Movie</th>--%>
-<%--        <th>imdb Rate</th>--%>
-<%--        <th></th>--%>
-<%--    </tr>--%>
-<%--    <tr>--%>
-<%--        <th>The Pianist</th>--%>
-<%--        <th>8.5</th>--%>
-<%--        <td><a href="/movies/01">Link</a></td>--%>
-<%--    </tr>--%>
-<%--    <tr>--%>
-<%--        <th>Incendies</th>--%>
-<%--        <th>8.3</th>--%>
-<%--        <td><a href="/movies/02">Link</a></td>--%>
-<%--    </tr>--%>
-<%--    <tr>--%>
-<%--        <th>Toy Story 3</th>--%>
-<%--        <th>8.2</th>--%>
-<%--        <td><a href="/movies/03">Link</a></td>--%>
-<%--    </tr>--%>
-<%--</table>--%>
+        %>
+            <tr>
+                <td><%=movies.get(i).getName()%></td>
+                <td><%=movies.get(i).getReleaseDate()%></td>
+                <td><%=movies.get(i).getDirector()%></td>
+                <td><%=movies.get(i).getGenreString()%></td>
+                <td><%=movies.get(i).getImdbRate()%></td>
+                <td><%=movies.get(i).getRating()%></td>
+                <td><%=movies.get(i).getDuration()%></td>
+                <td><a href="/movies/"+<%= String.valueOf(movies.get(i).getId())%>>Link</a></td>
+                <td>
+                    <form action="" method="POST" >
+                        <input id="form_movie_id" type="hidden" name="remove-movie" value=<%=movies.get(i).getId()%>>
+                        <button type="submit">Remove</button>
+                    </form>
+                </td>
+            </tr>
+        <%}}%>
+    </table>
+
+    <h2>Recommendation List</h2>
+    <table>
+        <tr>
+            <th>Movie</th>
+            <th>imdb Rate</th>
+            <th></th>
+        </tr>
+    </table>
 </body>
 </html>
