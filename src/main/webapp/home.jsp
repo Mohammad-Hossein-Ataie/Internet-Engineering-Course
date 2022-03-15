@@ -1,17 +1,22 @@
-
-<%--
-  Created by IntelliJ IDEA.
-  User: MHAT
-  Date: 3/13/2022
-  Time: 7:02 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ page import="DAO.UserDAO" %>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Home</title>
 </head>
 <body>
-    <h3>hello</h3>
+<ul>
+    <li id="email">email: <%= UserDAO.getEnrolledID()%></li>
+    <li>
+        <a href="/movies.jsp">Movies</a>
+    </li>
+    <li>
+        <a href="/watchlist.jsp">Watch List</a>
+    </li>
+    <li>
+        <a href="/logout.jsp">Log Out</a>
+    </li>
+</ul>
 </body>
 </html>

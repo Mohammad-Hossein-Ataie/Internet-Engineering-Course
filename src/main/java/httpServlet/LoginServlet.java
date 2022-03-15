@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
     public void doPost(HttpServletRequest request,HttpServletResponse response)throws IOException,ServletException{
         String enteredMail = request.getParameter("email");
         UserDAO.addEnrolled(enteredMail);
-        RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
+        RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/home.jsp");
         requestDispatcher.forward(request,response);
     }
 
