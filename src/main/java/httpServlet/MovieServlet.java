@@ -33,11 +33,16 @@ public class MovieServlet extends HttpServlet{
     public void doPost(HttpServletRequest request,HttpServletResponse response)throws IOException,ServletException{
         String rate = request.getParameter("quantity");
         String comment = request.getParameter("comment");
+        String addWatchList = request.getParameter("watchlist");
         if(rate != null){
             System.out.println(rate);
         }
         if(comment != null){
             System.out.println(comment);
+        }
+        if(addWatchList != null){
+            System.out.println(addWatchList);
+            // add user to watchlist
         }
 
     }

@@ -13,6 +13,15 @@ public class MovieDAO {
     private static Map<Integer,Integer> scoreMovies =new HashMap<>();
     private static List<Movie> movies = new ArrayList<>();
     private static List<Movie> UserSearchedMovies = new ArrayList<>();
+    private static int selectedMovie;
+
+    public static int getSelectedMovie() {
+        return selectedMovie;
+    }
+
+    public static void setSelectedMovie(int selectedMovie) {
+        selectedMovie = selectedMovie;
+    }
 
     public static List<Movie> getUserSearchedMovies() {
         return UserSearchedMovies;
