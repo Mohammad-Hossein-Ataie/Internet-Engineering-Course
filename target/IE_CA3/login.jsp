@@ -1,4 +1,4 @@
-<%@ page import="DAO.GetData" %><%--
+<%@ page import="httpServlet.GetData" %><%--
   Created by IntelliJ IDEA.
   User: MHAT
   Date: 3/13/2022

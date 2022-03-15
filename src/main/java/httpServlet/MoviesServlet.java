@@ -43,11 +43,21 @@ public class MoviesServlet extends HttpServlet {
 
         if(act != null){
             if(act.equals("search")){
+                System.out.println("search");
                 List<Movie> movies = MovieDAO.getMovieByName(nameSeach);
                 MovieDAO.setUserSearchedMovies(movies);
             }
             else if(act.equals("clear")){
+                System.out.println("clear");
                 MovieDAO.setUserSearchedMovies(MovieDAO.getMovies());
+            }
+            else if(act.equals("sort_by_imdb")){
+                System.out.println("sort_by_imdb");
+//                MovieDAO.setUserSearchedMovies(MovieDAO.getMovies()); sort by imbd
+            }
+            else if(act.equals("sort_by_date")){
+                System.out.println("sort_by_date");
+//                MovieDAO.setUserSearchedMovies(MovieDAO.getMovies()); sort by imbd
             }
         }
         else {

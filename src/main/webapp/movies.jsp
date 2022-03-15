@@ -25,6 +25,12 @@
         <button type="submit" name="action" value="search">Search</button>
         <button type="submit" name="action" value="clear">Clear Search</button>
     </form>
+    <br><br>
+    <form action="movies" method="POST">
+        <label>Sort By:</label>
+        <button type="submit" name="action" value="sort_by_imdb">imdb Rate</button>
+        <button type="submit" name="action" value="sort_by_date">releaseDate</button>
+    </form>
     <br>
     <table>
         <tr>
