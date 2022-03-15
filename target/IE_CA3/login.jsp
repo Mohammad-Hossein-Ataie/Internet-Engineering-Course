@@ -12,7 +12,7 @@
     <title>Login</title>
 </head>
 <body>
-    <form action="index.jsp" method="POST">
+    <form action="login" method="POST">
         <label>Email:</label>
         <input type="text" name="email" value="">
         <button type="submit">Login</button>

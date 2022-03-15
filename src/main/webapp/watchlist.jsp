@@ -13,7 +13,7 @@
 <body>
 <%String email = UserDAO.getEnrolledID();%>
 <a href="/home.jsp">Home</a>
-<p id="email">email: <%= email%></p>
+<p id="email">email: <%= UserDAO.getEnrolledID()%></p>
 <%--<%--%>
 <%--    String[] mail = UserDAO.getEnrolledID().split("@");--%>
 <%--    String name = mail[1];--%>

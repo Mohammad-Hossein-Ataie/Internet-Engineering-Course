@@ -23,8 +23,7 @@ public class HomeServlet extends HttpServlet {
         }
         //request.getRequestDispatcher("/home.jsp").forward(request,response);
     }
-    public void doPost(HttpServletRequest request,HttpServletResponse response)throws IOException,ServletException{
-        String enteredMail = request.getParameter("email");
-        UserDAO.addEnrolled(enteredMail);
-    }
+//    public void doPost(HttpServletRequest request,HttpServletResponse response)throws IOException,ServletException{
+//
+//    }
 }
