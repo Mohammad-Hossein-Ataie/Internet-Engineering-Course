@@ -9,13 +9,13 @@
 <ul>
     <li id="email">email: <%= UserDAO.getEnrolledID()%></li>
     <li>
-        <a href="/movies.jsp">Movies</a>
+        <a href="/movies">Movies</a>
     </li>
     <li>
-        <a href="/watchlist.jsp">Watch List</a>
+        <a href="/watchlist">Watch List</a>
     </li>
     <li>
-        <a href="/logout.jsp">Log Out</a>
+        <a href="/logout">Log Out</a>
     </li>
 </ul>
 </body>

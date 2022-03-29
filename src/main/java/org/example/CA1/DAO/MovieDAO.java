@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class MovieDAO {
     private static Map<Integer, Movie> movieIds = new HashMap<>();
@@ -29,7 +30,15 @@ public class MovieDAO {
     public static void setUserSearchedMovies(List<Movie> userMovies) {
         UserSearchedMovies = userMovies;
     }
-
+//    public boolean getMovieByName(String myString, List<String> keywords){
+//
+//        for(String keyword : keywords){
+//            if(myString.contains(keyword)){
+//                results.add(keyword);
+//            }
+//        }
+//        return false; // Never found match.
+//    }
     public static void setRateMovie(String userId,int rate,int movieId){
         userRateMovie.put(userId,new HashMap(){{put(rate,movieId);}});
         scoreMovies.put(movieId,rate);
@@ -93,7 +102,7 @@ public class MovieDAO {
         List<Movie> movies = MovieDAO.getMovies();
         List<Movie> searcheMovie = new ArrayList<>();
         for (int i = 0; i < movies.size(); i++) {
-            if((movies.get(i).getName()).contains(movieName)){
+            if(Pattern.compile(Pattern.quote(movieName), Pattern.CASE_INSENSITIVE).matcher(movies.get(i).getName()).find()){
                 searcheMovie.add(movies.get(i));
             }
         }

@@ -14,7 +14,7 @@
 <a href="/home.jsp">Home</a>
 <p id="email">email: <%= UserDAO.getEnrolledID()%></p>
 <ul>
-    <li id="name">name:   </li>
+    <li id="name">name: </li>
     <li id="birthDate">birthDate: </li>
     <li id="nationality">nationality: </li>
     <li id="tma">Total movies acted in: </li>
