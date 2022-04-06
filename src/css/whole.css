@@ -1,0 +1,17 @@
+@import "../../assets/fonts/font/flaticon.css";
+@import "../../assets/fonts/vazir-fonts/fonts.css";
+
+* {
+    font-family: "Vazir" !important;
+}
+.navbar {
+    background-color: #B12025 !important;
+}
+body {
+    background-color: #292929 !important;
+}
+img {
+    max-width: 10%;
+    max-height: 10%;
+    display: block;
+}
