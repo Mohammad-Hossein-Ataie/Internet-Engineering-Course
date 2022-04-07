@@ -12,6 +12,12 @@
 .search-icon {
     position: absolute;
 }
-.search-container {
-    
+
+.movie-img {
+    width: 15rem !important;
+    height: 15rem !important;
+}
+
+.img-container:hover {
+    color:#0000ff;
 }
