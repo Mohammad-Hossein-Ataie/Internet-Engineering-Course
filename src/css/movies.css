@@ -12,6 +12,22 @@
 .search-icon {
     position: absolute;
 }
+.sort-box {
+    text-align: center;
+    color: white !important;
+    background-color: #292929 !important;
+    font-size: 20px;
+    padding: 0px 10px 0px 10px;
+}
+
+.sort-box-body {
+    background-color: rgba(177, 37, 32, 0.8) !important;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 .movie-img {
     width: 15rem !important;
@@ -19,5 +35,6 @@
 }
 
 .img-container:hover {
-    color:#0000ff;
+    /* filter: grayscale(50%); */
+    /* filter: invert(21%) sepa(90%) saturate(3213%) hue-rotate(345deg) brightness(71%) contrast(95%) opacity(40%); */
 }
