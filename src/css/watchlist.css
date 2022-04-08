@@ -1,0 +1,41 @@
+@import "../../assets/fonts/font/flaticon.css";
+@import "../../assets/fonts/vazir-fonts/fonts.css";
+@import "../css/whole.css";
+
+
+.movie-img {
+    width: 25rem !important;
+    height: auto !important;
+    object-fit: cover;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+    margin-right: auto;
+}
+.list-container{
+    width: 60% !important;
+    height: auto !important;
+    display: flex;
+    justify-content:baseline;
+    align-self: center;
+    border-radius: 20px;
+    background: #4E4E50;
+    margin: auto;
+    box-shadow: 3px 3px #222;
+}
+.list-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 20px;
+    padding-top: 10px;
+}
+
+.description {
+    font-weight: lighter;
+}
+
+.remove-btn {
+    text-decoration: none;
+    background: none;
+    border: none;
+}
