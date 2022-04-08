@@ -12,7 +12,7 @@
     margin-right: auto;
 }
 .list-container{
-    width: 60% !important;
+    width: 50% !important;
     height: auto !important;
     display: flex;
     justify-content:baseline;
@@ -38,4 +38,30 @@
     text-decoration: none;
     background: none;
     border: none;
+}
+
+.recommanded-movies {
+    width: 50% !important;
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    background: #4E4E50;
+    margin: auto;
+    box-shadow: 3px 3px #222;
+}
+
+.movie-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.card-img {
+    object-fit: cover;
+    width: 400px !important;
+    height: 5rem !important;
 }
