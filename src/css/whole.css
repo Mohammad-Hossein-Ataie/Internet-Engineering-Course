@@ -1,5 +1,6 @@
 @import "../../assets/fonts/font/flaticon.css";
 @import "../../assets/fonts/vazir-fonts/fonts.css";
+@import "../css/navbar.css";
 
 * {
     font-family: "Vazir" !important;
@@ -7,16 +8,6 @@
 
 body {
     background-color: #292929 !important;
-}
-
-.navbar {
-    background-color: #B12025 !important;
-}
-
-.nav-brand {
-    width: 3rem;
-    height: 3rem;
-    margin-left: 3px;
 }
 
 img {

@@ -1,0 +1,23 @@
+.navbar {
+    background-color: #B12025 !important;
+}
+
+.nav-brand {
+    width: 3rem;
+    height: 3rem;
+    margin-left: 3px;
+}
+
+.dropdown-menu{
+    right: 0 !important;
+    left: auto !important;
+    background-color: rgba(177, 37, 32, 0.8) !important;
+}
+
+.dropdown-item {
+    color: #fff !important;
+}
+
+.dropdown-item:hover {
+    color: #292929 !important;
+}
