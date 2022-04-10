@@ -81,3 +81,34 @@
     border-radius: 50%;
     margin: 5px 5px;
 }
+
+/* comments */
+
+.comment-container {
+    width: 80%;
+    height: auto;
+    background-color: #fff;
+    color: #000 !important;
+    border-radius: 15px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.comment-title {
+    font-weight: 500;
+    font-size:14px;
+}
+
+.add-ccomment-btn {
+    float: left;
+    width: 100px !important;
+    background-color: #20e856 !important;
+    color: white !important;
+    margin: 20px 0 5px 5px;
+}
+
+.comment-text {
+    font-size:12px;
+    font-weight:500;
+    margin-right: 5px;
+}
