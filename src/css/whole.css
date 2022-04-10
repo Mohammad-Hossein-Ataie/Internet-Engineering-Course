@@ -68,3 +68,9 @@ img {
     min-height: 80%;
     margin: 15px 20px 0 0;
 }
+
+.background-img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+}
