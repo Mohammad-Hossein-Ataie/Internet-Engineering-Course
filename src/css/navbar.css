@@ -21,3 +21,7 @@
 .dropdown-item:hover {
     color: #292929 !important;
 }
+
+.nav-sort-search-bar {
+    margin: auto;
+}

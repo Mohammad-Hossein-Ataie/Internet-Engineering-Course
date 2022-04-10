@@ -12,15 +12,30 @@
 <body>
     
     <nav class="navbar navbar-expand-lg static-top d-flex justify-content-between">
-        <div class="nav-item dropdown">
+        <div class="dropdown">
             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="iconify" data-icon="bxs:user-circle" style="color: #292929;" data-width="40" data-height="40"></span>
             </a>
             <!-- logged in  -->
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">salehi@gmail.com</a></li>
-                <li><a class="dropdown-item" href="#">watchlist</a></li>
-              </ul>
+                <li><a class="dropdown-item text-center" href="#">salehi@gmail.com</a></li>
+                <li><a class="dropdown-item text-center" href="#">watchlist</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-sort-search-bar">
+            <div class="dropdown">
+                <button class="btn btn-light" id="filter" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="iconify" data-icon="fe:drop-down" style="color: #b12025;" data-width="25" data-height="25"></span>
+                    <span>جست و جو بر اساس:</span>
+                </button>
+
+                <ul class="dropdown-menu" aria-labelledby="filter">
+                    <li><a class="dropdown-item text-center" href="#">نام</a></li>
+                    <li><a class="dropdown-item text-center" href="#">ژانر</a></li>
+                    <li><a class="dropdown-item text-center" href="#">تاریخ</a></li>
+                  </ul>
+            </div>
         </div>
         
         <img class="nav-brand" src="../../assets/images/logo.png" alt="">
