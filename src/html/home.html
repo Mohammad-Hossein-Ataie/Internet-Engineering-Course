@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/whole.css">
+    <link rel="stylesheet" href="../css/movies.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>movies</title>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg static-top d-flex justify-content-between">
+        <div class="dropdown">
+            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="iconify" data-icon="bxs:user-circle" style="color: #292929;" data-width="40" data-height="40"></span>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item text-center" href="#">ورود</a></li>
+                <li><a class="dropdown-item text-center" href="#">ثبت نام</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-sort-search-bar">
+            <div class="nav-search-bar">
+                <span class="iconify" data-icon="ant-design:search-outlined" style="color: #b12025;" data-width="25" data-height="25"></span>
+                <form class="d-flex">
+                    <input class="form-control" type="search" aria-label="Search">
+                  </form>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-light" id="filter" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="iconify" data-icon="fe:drop-down" style="color: #b12025;" data-width="25" data-height="25"></span>
+                    <span>جست و جو بر اساس:</span>
+                </button>
+
+                <ul class="dropdown-menu" aria-labelledby="filter">
+                    <li><a class="dropdown-item text-center" href="#">نام</a></li>
+                    <li><a class="dropdown-item text-center" href="#">ژانر</a></li>
+                    <li><a class="dropdown-item text-center" href="#">تاریخ</a></li>
+                  </ul>
+            </div>
+        </div>
+        
+        <img class="nav-brand" src="../../assets/images/logo.png" alt="">
+    </nav>
+
+    <main>
+        <div class="container mt-5">
+            
+            <div class="row text-center d-flex justify-content-start align-items-center">
+                <div class="col-lg-2 col-12">
+                    <div class="card sort-box">
+                        <div class="card-title">رتبه بندی بر اساس:</div>
+                        <div class="card-body sort-box-body">
+                            <p class="card-text">تاریخ</p>
+                            <p class="card-text">امتیاز imdb</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-10 col-12">
+                    <div class="row m-5">
+
+                        <div class="col-md-4 col-lg-3 col-12 mt-4">
+                            <div class="row no-gutters align-items-center">
+                                <img class="movie-img" src="../../assets/images/movies/batman.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-lg-3 col-12 mt-4">
+                            <div class="row no-gutters align-items-center">
+                                <img class="movie-img" src="../../assets/images/movies/salseman.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-lg-3 col-12 mt-4">
+                            <div class="row no-gutters align-items-center">
+                                <img class="movie-img" src="../../assets/images/movies/spiderman.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-lg-3 col-12 mt-4">
+                            <div class="row no-gutters align-items-center">
+                                <img class="movie-img" src="../../assets/images/movies/inception.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-lg-3 col-12 mt-4">
+                            <div class="row no-gutters align-items-center">
+                                <img class="movie-img" src="../../assets/images/movies/tom.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-lg-3 col-12 mt-4">
+                            <div class="row no-gutters align-items-center">
+                                <img class="movie-img" src="../../assets/images/movies/conjuring.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-lg-3 col-12 mt-4">
+                            <div class="row no-gutters align-items-center">
+                                <img class="movie-img" src="../../assets/images/movies/toystory.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-lg-3 col-12 mt-4">
+                            <div class="row no-gutters align-items-center">
+                                <img class="movie-img" src="../../assets/images/movies/godfuther.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-lg-3 col-12 mt-4">
+                            <div class="row no-gutters align-items-center">
+                                <img class="movie-img" src="../../assets/images/movies/fightclucb.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-lg-3 col-12 mt-4">
+                            <div class="row no-gutters align-items-center">
+                                <img class="movie-img" src="../../assets/images/movies/after.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-lg-3 col-12 mt-4">
+                            <div class="row no-gutters align-items-center">
+                                <img class="movie-img" src="../../assets/images/movies/avengers.jpg" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-lg-3 col-12 mt-4">
+                            <div class="row no-gutters align-items-center">
+                                <img class="movie-img" src="../../assets/images/movies/titanic.jpg" alt="">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+        
+
+        <!-- <div class="container mt-5">
+            
+            <div class="container row justify-content-between mb-3">
+                <div class="col-2 col-sm-3 col-md-4 h-25 w-25 mt-5 ">
+                    <img class="card-img-top img-fluid" src="../../assets/images/movies/batman.jpg" alt="movie">
+                </div>
+                <div class="col-2 col-sm-3 col-md-4 h-25 w-25 mt-5 ">
+                    <img class="card-img-top img-fluid" src="../../assets/images/movies/salseman.jpg" alt="movie">
+                </div>
+                <div class="col-2 col-sm-3 col-md-4 h-25 w-25 mt-5 ">
+                    <img class="card-img-top img-fluid" src="../../assets/images/movies/spiderman.jpg" alt="movie">
+                </div>
+                <div class="col-2 col-sm-3 col-md-4 h-25 w-25 mt-5 ">
+                    <img class="card-img-top img-fluid" src="../../assets/images/movies/inception.jpg" alt="movie">
+                </div>
+                <div class="col-2 col-sm-3 col-md-4 h-25 w-25 mt-5 ">
+                    <img class="card-img-top img-fluid" src="../../assets/images/movies/spiderman.jpg" alt="movie">
+                </div>
+                <div class="col-2 col-sm-3 col-md-4 h-25 w-25 mt-5 ">
+                    <img class="card-img-top img-fluid" src="../../assets/images/movies/spiderman.jpg" alt="movie">
+                </div>
+                <div class="col-2 col-sm-3 col-md-4 h-25 w-25 mt-5 ">
+                    <img class="card-img-top img-fluid" src="../../assets/images/movies/spiderman.jpg" alt="movie">
+                </div>
+                <div class="col-2 col-sm-3 col-md-4 h-25 w-25 mt-5 ">
+                    <img class="card-img-top img-fluid" src="../../assets/images/movies/spiderman.jpg" alt="movie">
+                </div>
+                <div class="col-2 col-sm-3 col-md-4 h-25 w-25 mt-5 ">
+                    <img class="card-img-top img-fluid" src="../../assets/images/movies/spiderman.jpg" alt="movie">
+                </div>
+                <div class="col-2 col-sm-3 col-md-4 h-25 w-25 mt-5 ">
+                    <img class="card-img-top img-fluid" src="../../assets/images/movies/spiderman.jpg" alt="movie">
+                </div>
+                <div class="col-2 col-sm-3 col-md-4 h-25 w-25 mt-5 ">
+                    <img class="card-img-top img-fluid" src="../../assets/images/movies/spiderman.jpg" alt="movie">
+                </div>
+                <div class="col-2 col-sm-3 col-md-4 h-25 w-25 mt-5 ">
+                    <img class="card-img-top img-fluid" src="../../assets/images/movies/spiderman.jpg" alt="movie">
+                </div>
+            </div>
+        </div> -->
+
+</body>
+<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</html>
