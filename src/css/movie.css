@@ -29,9 +29,38 @@
 
 .movie-description {
     position: relative;
-    width: 50%;
+    width: 60%;
     margin: auto;
     top: -10rem;
     height: 20rem;
-    background-color: red;
+    background-color: transparent;
+}
+
+.movie-inf {
+    width: 60%;
+    height: 100%;
+    margin: auto;
+    color: white;
+    font-size: 14px;
+    background-color: transparent;
+    backdrop-filter: blur(2px);
+    backdrop-filter: brightness(95%);
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-title {
+    display: flex;
+    justify-content: end;
+}
+
+.movie-date {
+    display: flex;
+    justify-content: end;
+    margin: 75px 30px 10px 30px;
+}
+.movie-img {
+    float: left;
+   height: 20rem;
 }
