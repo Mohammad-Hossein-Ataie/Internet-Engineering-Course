@@ -24,4 +24,18 @@
 
 .nav-sort-search-bar {
     margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.nav-search-bar {
+    background-color: #fff;
+    border-radius: 5px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.form-control {
+    border: none !important;
 }
