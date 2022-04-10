@@ -1,5 +1,7 @@
 .navbar {
     background-color: #B12025 !important;
+    /* position: fixed !important;
+    z-index: 100000000000 !important; */
 }
 
 .nav-brand {
@@ -38,4 +40,8 @@
 
 .form-control {
     border: none !important;
+}
+
+.form-control:focus {
+    box-shadow: none !important;
 }
