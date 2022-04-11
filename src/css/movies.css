@@ -29,9 +29,19 @@
     align-items: center;
 }
 
+.rating-link {
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.rating-link:hover {
+    color: #292929;
+}
 .movie-img {
     width: 15rem !important;
     height: 15rem !important;
+    cursor: pointer;
 }
 
 .img-container:hover {
