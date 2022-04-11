@@ -4,12 +4,8 @@
 
 
 .movie-img {
-    width: 25rem !important;
-    height: auto !important;
-    object-fit: cover;
     border-bottom-left-radius: 20px;
     border-top-left-radius: 20px;
-    margin-right: auto;
 }
 .list-container{
     width: 50% !important;
