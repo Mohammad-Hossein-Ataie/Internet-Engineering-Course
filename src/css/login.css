@@ -20,4 +20,40 @@
     float: left;
     margin-left: 100px;
     margin-top: -40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-btn {
+    background-color: #B12025 !important;
+    color: #fff !important;
+}
+
+.login-btn:hover {
+    background-color: #fff !important;
+    color: #B12025 !important;
+}
+
+.form-check-input:checked {
+    background-color: #B12025 !important;
+}
+
+.form-check-label {
+    font-size: x-small !important;
+}
+
+.register-cover {
+    background-color: rgba(78, 78, 80, 0.8);
+    color: #fff;
+    width: 30%;
+    height: 100px;
+    position: fixed;
+    top: 50%;
+    transform: translate(0, -50%);
+    float: right !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
 }
