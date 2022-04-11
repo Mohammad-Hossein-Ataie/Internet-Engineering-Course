@@ -10,6 +10,10 @@ body {
     background-color: #292929 !important;
 }
 
+.main-container {
+    margin-top: 4.2rem !important;
+}
+
 img {
     max-width: 10%;
     max-height: 10%;
