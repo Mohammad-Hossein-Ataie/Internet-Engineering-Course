@@ -1,0 +1,18 @@
+@import "../../assets/fonts/font/flaticon.css";
+@import "../../assets/fonts/vazir-fonts/fonts.css";
+@import "../css/login.css";
+
+
+.cover-container {
+    width: 70%;
+    height: auto;
+    background-color: rgba(177, 37, 32, 0.8) !important;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-control{
+    border: 1px solid rgba(78, 78, 80, 0.8) !important;
+}
