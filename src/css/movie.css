@@ -33,13 +33,10 @@
     top: -10rem;
     height: 20rem;
     background-color: transparent;
+    color: #fff;
 }
 
 .movie-inf {
-    width: 60%;
-    height: 100%;
-    margin: auto;
-    color: white;
     font-size: 14px;
     background-color: transparent;
     backdrop-filter: blur(2px);
@@ -47,6 +44,34 @@
     padding: 5px;
     display: flex;
     flex-direction: column;
+}
+
+.imdb {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.user-rating {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.rating-box {
+    background-color: rgba(158, 21, 17, 0.8);
+}
+
+.star-box {
+    display: flex;
+    border-radius: 10px;
+    margin-left: -130px;
+    margin-right: 120px;
+    background-color: rgba(158, 21, 17, 0.8);
 }
 
 .movie-title {
