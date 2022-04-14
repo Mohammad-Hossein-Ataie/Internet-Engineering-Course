@@ -1,5 +1,6 @@
 package org.example.CA1.httpServlet;
 
+import org.example.CA1.DAO.MovieDAO;
 import org.example.CA1.DAO.UserDAO;
 
 import javax.servlet.RequestDispatcher;
@@ -17,10 +18,12 @@ public class LoginServlet extends HttpServlet {
         requestDispatcher.forward(request,response);
     }
     public void doPost(HttpServletRequest request,HttpServletResponse response)throws IOException,ServletException{
-        GetData.setMovieList();
-        GetData.setActorsListData();
-        GetData.setCommentsListData();
-        GetData.setUsersListData();
+        if(MovieDAO.getMovies().isEmpty()) {
+            GetData.setMovieList();
+            GetData.setActorsListData();
+            GetData.setCommentsListData();
+            GetData.setUsersListData();
+        }
         String enteredMail = request.getParameter("email");
         UserDAO.addEnrolled(enteredMail);
         RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/home.jsp");

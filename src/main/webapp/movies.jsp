@@ -48,7 +48,9 @@
             <th>Links</th>
         </tr>
         <%if(movies.size() != 0) {
-            for (int i = 0; i < movies.size(); i++){%>
+            for (int i = 0; i < movies.size(); i++){
+            String id = String.valueOf(movies.get(i).getId());
+            String href = "/movies/"+id;%>
             <tr>
 <%--                <%=%>--%>
                 <td><%= movies.get(i).getName()%></td>
@@ -62,7 +64,7 @@
                 <td><%= movies.get(i).getRating()%></td>
                 <td><%= movies.get(i).getDuration()%></td>
                 <td><%= movies.get(i).getAgeLimitString()%></td>
-                <td><a href="/movies/"+<%= String.valueOf(movies.get(i).getId())%>>Link</a></td>
+                <td><a href=<%=href%>>Link</a></td>
             </tr>
         <%}}%>
 

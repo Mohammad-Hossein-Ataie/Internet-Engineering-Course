@@ -1,15 +1,13 @@
 package org.example.CA1.DAO;
+import com.sun.jdi.IntegerValue;
 import org.example.CA1.Entity.Movie;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class MovieDAO {
     private static Map<Integer, Movie> movieIds = new HashMap<>();
-    private static Map<String,Map<Integer,Integer>> userRateMovie = new HashMap<>();
+//    private static Map<String,Map<Integer,Integer>> userRateMovie = new HashMap<>();
     private static Map<Integer,Integer> scoreMovies =new HashMap<>();
     private static List<Movie> movies = new ArrayList<>();
     private static List<Movie> UserSearchedMovies = new ArrayList<>();
@@ -19,8 +17,8 @@ public class MovieDAO {
         return selectedMovie;
     }
 
-    public static void setSelectedMovie(int selectedMovie) {
-        selectedMovie = selectedMovie;
+    public static void setSelectedMovie(int id) {
+        selectedMovie = id;
     }
 
     public static List<Movie> getUserSearchedMovies() {
@@ -30,41 +28,48 @@ public class MovieDAO {
     public static void setUserSearchedMovies(List<Movie> userMovies) {
         UserSearchedMovies = userMovies;
     }
-//    public boolean getMovieByName(String myString, List<String> keywords){
-//
-//        for(String keyword : keywords){
-//            if(myString.contains(keyword)){
-//                results.add(keyword);
-//            }
-//        }
-//        return false; // Never found match.
-//    }
-    public static void setRateMovie(String userId,int rate,int movieId){
-        userRateMovie.put(userId,new HashMap(){{put(rate,movieId);}});
-        scoreMovies.put(movieId,rate);
+    public static List<Movie> sortMovies(int mode){
+        List<Movie> searchMovie = getUserSearchedMovies();
+        if(searchMovie.isEmpty()){
+            searchMovie = MovieDAO.getMovies();
+        }
+
+        if (mode == 1){
+            //sort by imdb
+            Collections.sort(searchMovie, Comparator.comparing(Movie::getImdbRate).reversed());
+        }
+        else{
+            //sort by date
+            Collections.sort(searchMovie, Comparator.comparing(Movie::getReleaseDate).reversed());
+        }
+        return searchMovie;
     }
+//    public static void setRateMovie(String userId,int rate,int movieId){
+//        userRateMovie.put(userId,new HashMap(){{put(rate,movieId);}});
+//        scoreMovies.put(movieId,rate);
+//    }
     public static void setMovies(List<Movie> newMovies) {
         movies.addAll(newMovies);
     }
 
-    public static float getRateMovie(Integer movieId){
-        int score = 0;
-        int count = 0;
-        for (Map.Entry<Integer, Integer> entry : scoreMovies.entrySet()) {
-            if(movieId == entry.getKey()) {
-                count = count + 1;
-                score = score + entry.getValue();
-            }
-        }
-        Movie newMovie = MovieDAO.findByID(movieId);
-        if (count == 0) {
-            newMovie.setRating(0);
-            return 0;
-        }
-        float rating = score/count;
-        newMovie.setRating(rating);
-        return rating;
-    }
+//    public static float getRateMovie(Integer movieId){
+//        int score = 0;
+//        int count = 0;
+//        for (Map.Entry<Integer, Integer> entry : scoreMovies.entrySet()) {
+//            if(movieId == entry.getKey()) {
+//                count = count + 1;
+//                score = score + entry.getValue();
+//            }
+//        }
+//        Movie newMovie = MovieDAO.findByID(movieId);
+//        if (count == 0) {
+//            newMovie.setRating(0);
+//            return 0;
+//        }
+//        float rating = score/count;
+//        newMovie.setRating(rating);
+//        return rating;
+//    }
 
     public static void update(Movie movie) {
         for (int i = 0; i < movies.size(); i++) {
@@ -108,4 +113,12 @@ public class MovieDAO {
         }
         return searcheMovie;
     }
+
+//    public static void updateRating(String enrolledID, String movieId, String rate) {
+//        Movie movie = MovieDAO.getMovieByID(Integer.valueOf(movieId));
+//
+//        float currentRating = Float.parseFloat(movie.getRating());
+//        currentRating = Float.parseFloat((currentRating + rate))/2;
+//        movie.setRating(currentRating);
+//    }
 }

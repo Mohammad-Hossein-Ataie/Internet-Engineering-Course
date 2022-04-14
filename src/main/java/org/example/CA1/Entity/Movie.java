@@ -1,8 +1,6 @@
 package org.example.CA1.Entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Movie {
@@ -11,11 +9,6 @@ public class Movie {
     private String summary;
     private String releaseDate;
     private String director;
-
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
-
     private float rating;
     private List<Integer> cast = new ArrayList<>();
     private float imdbRate;
@@ -23,6 +16,13 @@ public class Movie {
     private int ageLimit;
     private List<String> writers = new ArrayList<>();
     private List<String> genres = new ArrayList<>();
+    public HashMap<String, Float> ratingMap = new HashMap<String, Float>();
+
+    public void setRating(String email, float rating) {
+        ratingMap.put(email, rating);
+        this.rating += rating;
+    }
+
 
     public Movie(int id, String name, String summary, String releaseDate, String director, List<String> writers, List<String> genres, List<Integer> cast, float imdbRate, String duration, int ageLimit) {
         this.id = id;
@@ -120,7 +120,5 @@ public class Movie {
     public String getRating() {
         return String.valueOf(rating);
     }
-    public void addRating(int rating){
-        this.rating += rating;
-    }
+
 }

@@ -1,5 +1,6 @@
 package org.example.CA1.httpServlet;
 
+import org.example.CA1.DAO.ActorDAO;
 import org.example.CA1.DAO.UserDAO;
 
 import javax.servlet.RequestDispatcher;
@@ -21,6 +22,8 @@ public class ActorServlet extends HttpServlet {
             String pathInf = request.getPathInfo();
             String[] path = pathInf.split("/");
             String actorId = path[1];
+            ActorDAO.setSeaechedActor(Integer.parseInt(actorId));
+//            System.out.println(ActorDAO.getMovieActed(Integer.valueOf(actorId)));
 
             RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/actor.jsp");
             requestDispatcher.forward(request, response);

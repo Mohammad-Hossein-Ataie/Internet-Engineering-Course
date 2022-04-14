@@ -22,6 +22,7 @@
 <body>
     <%
         Movie movie = MovieDAO.getMovieByID(MovieDAO.getSelectedMovie());
+        List<Actor> actors = new ArrayList<>();
     %>
 
     <a href="/home.jsp">Home</a>
@@ -41,8 +42,6 @@
         <li id="ageLimit">ageLimit: <%=movie.getAgeLimitString()%></li>
     </ul>
 
-    <%--    <%=%>  --%>
-
     <h3>Cast</h3>
     <table>
         <tr>
@@ -52,17 +51,22 @@
         </tr>
         <%
             if(movie != null){
-            for(int i = 0; i < movie.getCast().size(); i++){
-                Actor actor = ActorDAO.findByID(movie.getCast().get(i));
+            for(int i = 0; i < movie.getCast().size(); i++) {
+                actors.add(ActorDAO.findByID(movie.getCast().get(i)));
+            }}
         %>
-            <tr> <%= actor.getName()%> </tr>
-            <tr> <%= actor.getBirthDate()%> </tr>
-        <td><a href="/actors/"+<%= String.valueOf(actor.getId())%>>Link</a></td>
+        <%if (actors != null){
+            for (int i = 0; i < actors.size(); i++){%>
+            <tr>
+                <td> <%= actors.get(i).getName()%> </td>
+                <td> <%= actors.get(i).getBirthDate()%> </td>
+                <td><a href="/actors/"+<%= String.valueOf(actors.get(i).getId())%>>Link</a></td>
+            </tr>
         <%
             }}
         %>
     </table>
-
+    <br>
     <form action="" method="POST">
         <label>Rate(between 1 and 10):</label>
         <input type="number" id="quantity" name="quantity" min="1" max="10">

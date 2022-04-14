@@ -9,6 +9,16 @@ import java.util.List;
 public class ActorDAO {
     private static List<Actor> actors = new ArrayList<>();
 
+    public static int seaechedActor;
+    public static int getSeaechedActor() {
+        return seaechedActor;
+    }
+
+    public static void setSeaechedActor(int seaechedActor) {
+        ActorDAO.seaechedActor = seaechedActor;
+    }
+
+
     public static void update(Actor actor) {
         for (int i = 0; i < actors.size(); i++) {
             if(actors.get(i).isSame(actor))
