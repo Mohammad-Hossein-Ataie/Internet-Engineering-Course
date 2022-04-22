@@ -5,6 +5,11 @@ public class Actor {
     private String name;
     private String birthDate;
     private String nationality;
+
+    public String getActorImage() {
+        return actorImage;
+    }
+
     private String actorImage;
 
 

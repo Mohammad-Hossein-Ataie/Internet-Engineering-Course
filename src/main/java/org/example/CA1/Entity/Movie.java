@@ -17,14 +17,24 @@ public class Movie {
     private List<String> writers = new ArrayList<>();
     private List<String> genres = new ArrayList<>();
     public HashMap<String, Float> ratingMap = new HashMap<String, Float>();
-
+    private String movieImage;
+    private String movieCoverImage;
     public void setRating(String email, float rating) {
         ratingMap.put(email, rating);
         this.rating += rating;
     }
 
 
-    public Movie(int id, String name, String summary, String releaseDate, String director, List<String> writers, List<String> genres, List<Integer> cast, float imdbRate, String duration, int ageLimit) {
+    public String getMovieImage() {
+        return movieImage;
+    }
+
+    public String getMovieCoverImage() {
+        return movieCoverImage;
+    }
+
+    public Movie(int id, String name, String summary, String releaseDate, String director, List<String> writers, List<String> genres, List<Integer> cast,
+                 float imdbRate, String duration, int ageLimit, String movieImage, String movieCoverImage) {
         this.id = id;
         this.name = name;
         this.summary = summary;
@@ -36,6 +46,8 @@ public class Movie {
         this.imdbRate = imdbRate;
         this.duration = duration;
         this.ageLimit = ageLimit;
+        this.movieImage = movieImage;
+        this.movieCoverImage = movieCoverImage;
     }
 
     public <E> Movie(int i, String film, String s, String s1, String john_star, ArrayList<E> john_son, ArrayList<E> action, int i1, double v, String s2) {
