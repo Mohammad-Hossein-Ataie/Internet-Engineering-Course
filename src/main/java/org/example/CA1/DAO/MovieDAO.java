@@ -6,8 +6,17 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class MovieDAO {
-    private static Map<Integer, Movie> movieIds = new HashMap<>();
-//    private static Map<String,Map<Integer,Integer>> userRateMovie = new HashMap<>();
+    private static Map<Integer, Movie>  movieIds = new HashMap<>();
+
+    public static List<String> getUserID() {
+        return userID;
+    }
+
+    public static void setUserID(List<String> userID) {
+        MovieDAO.userID = userID;
+    }
+
+    private static List<String> userID = new ArrayList<>();
     private static Map<Integer,Integer> scoreMovies =new HashMap<>();
     private static List<Movie> movies = new ArrayList<>();
     private static List<Movie> UserSearchedMovies = new ArrayList<>();
@@ -44,8 +53,11 @@ public class MovieDAO {
         }
         return searchMovie;
     }
-//    public static void setRateMovie(String userId,int rate,int movieId){
-//        userRateMovie.put(userId,new HashMap(){{put(rate,movieId);}});
+//    public static void setRateMovie(String userID,int rate,int movieId){
+//        ArrayList userIDList = (ArrayList) getUserID();
+//        if (userIDList.contains(userID)){
+//
+//        }
 //        scoreMovies.put(movieId,rate);
 //    }
     public static void setMovies(List<Movie> newMovies) {
@@ -113,12 +125,14 @@ public class MovieDAO {
         }
         return searcheMovie;
     }
-
-//    public static void updateRating(String enrolledID, String movieId, String rate) {
-//        Movie movie = MovieDAO.getMovieByID(Integer.valueOf(movieId));
-//
-//        float currentRating = Float.parseFloat(movie.getRating());
-//        currentRating = Float.parseFloat((currentRating + rate))/2;
-//        movie.setRating(currentRating);
-//    }
+    //Todo front-end
+    public static void updateRating(String enrolledID, String movieId, String rate) {
+        Movie movie = MovieDAO.getMovieByID(Integer.valueOf(movieId));
+        userID.add(enrolledID);
+        int usersize = userID.size();
+        float frate = Float.parseFloat(rate);
+        float currentRating = Float.parseFloat(movie.getRating());
+        currentRating = ((currentRating + (frate)*usersize))/usersize;
+        movie.setRating(enrolledID,currentRating);
+    }
 }
