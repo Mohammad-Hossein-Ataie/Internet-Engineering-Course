@@ -56,11 +56,11 @@ public class GetData {
         return null;
     }
     public static void setMovieList() throws IOException {
-        Movie[] objectList = setListData("http://138.197.181.131:5000/api/movies",Movie[].class);
+        Movie[] objectList = setListData("http://138.197.181.131:5000/api/v2/movies",Movie[].class);
         MovieDAO.setMovies(Arrays.asList(objectList));
     }
     public static void setActorsListData() throws IOException {
-        Actor[] objectList = setListData("http://138.197.181.131:5000/api/actors",Actor[].class);
+        Actor[] objectList = setListData("http://138.197.181.131:5000/api/v2/actors",Actor[].class);
         ActorDAO.setActores(Arrays.asList(objectList));
     }
     public static void setUsersListData() throws IOException {

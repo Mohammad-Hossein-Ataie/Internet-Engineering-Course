@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="IE_CA3" />
+        <module name="CA1" />
       </profile>
     </annotationProcessing>
   </component>

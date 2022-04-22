@@ -5,12 +5,15 @@ public class Actor {
     private String name;
     private String birthDate;
     private String nationality;
+    private String actorImage;
 
-    public Actor(int id, String name, String birthDate, String nationality) {
+
+    public Actor(int id, String name, String birthDate, String nationality, String actorImage) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
         this.nationality = nationality;
+        this.actorImage = actorImage;
     }
 
     public int getId() {
