@@ -48,3 +48,8 @@
 .form-control:focus {
     box-shadow: none !important;
 }
+
+.app-bar-header {
+    z-index: 999 !important;
+    position: fixed !important;
+}
