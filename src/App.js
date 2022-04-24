@@ -1,8 +1,14 @@
+import {BrowserRouter ,Route, Routes } from 'react-router-dom';
+import './styles/style.scss';
 import './App.css';
-import 'styles/style.scss';
+import Movies from './components/home/Movies.jsx';
 function App() {
   return (
-    <div></div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Movies/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

@@ -1,0 +1,83 @@
+// @import "./../../assets/fonts/font/flaticon.css";
+// @import "./../../assets/vazir-fonts/fonts.css";
+
+body {
+    background-color: #292929 !important;
+    direction: rtl;
+    // font-family: "Vazir", serif !important;
+}
+
+.main-container {
+    margin-top: 4.2rem !important;
+}
+
+img {
+    max-width: 10%;
+    max-height: 10%;
+    display: block;
+}
+
+.remove-icon {
+    color: #ff2b1c !important;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.container-title{
+    font-size: smaller;
+    margin-top: 5px;
+    font-weight: lighter;
+}
+
+.gray-container {
+    margin: auto;
+    background-color: #4E4E50;
+    color: white;
+    border-radius: 15px;
+    width: 50%;
+    max-width: 600px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.divider {
+    color: #4E4E50;
+}
+
+.box-title {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.movie-box {
+    background-color: #4E4E50;
+    color: #fff;
+    border-radius: 15px;
+    margin: 10px 30px 0 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: auto;
+}
+
+.movie-box-img {
+    flex-shrink: 0;
+    min-width: 80%;
+    min-height: 80%;
+    margin: 15px 20px 0 0;
+}
+
+.background-img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+}
+
+.hidden {
+    display: none;
+}

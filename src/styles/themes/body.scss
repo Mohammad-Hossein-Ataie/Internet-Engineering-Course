@@ -1,7 +1,11 @@
 html[lang="fa"] {
     direction: rtl;
+    *{
+        background-color: #292929 !important;
+
+    }
     body {
         direction: rtl;
-        background-color: #292929;
+        background-color: #292929 !important;
     }
 }
