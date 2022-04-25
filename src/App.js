@@ -1,7 +1,7 @@
 import {BrowserRouter ,Route, Routes } from 'react-router-dom';
 import './styles/style.scss';
 import './App.css';
-import Movies from './components/home/Movies.jsx';
+import Movies from './components/home/Movies';
 import Navbar from './components/navbar/Navbar';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
