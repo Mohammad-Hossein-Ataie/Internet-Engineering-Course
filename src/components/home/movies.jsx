@@ -6,7 +6,7 @@ class Movies extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading : true,
+            isLoading : true,
             movies : [],
         }
         this.getMovies = this.getMovies.bind(this);
@@ -22,7 +22,7 @@ class Movies extends Component {
         const data = await response.json();
         this.setState({
             movies: data,
-            loading: false
+            isLoading: false
         })
         console.log("🚀 ~ file: Movies.jsx ~ line 15 ~ Movies ~ getMovies ~ data", data)
     }
@@ -47,7 +47,7 @@ class Movies extends Component {
                     <div className="col-lg-10 col-12">
                         <div className="row m-5">
 
-                            {!this.state.loading && this.state.movies.map((movie) => {
+                            {!this.state.isLoading && this.state.movies.map((movie) => {
                                 return(
                                     <div key={movie.id} className="col-md-4 col-lg-3 col-12 mt-4">
                                         <div className="row no-gutters align-items-center">

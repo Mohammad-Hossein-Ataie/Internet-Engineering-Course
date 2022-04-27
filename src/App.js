@@ -6,6 +6,8 @@ import Navbar from './components/navbar/Navbar';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
 import Movie from './components/movie/Movie';
+import Watchlist from './components/watchlist/Watchlist';
+import Actors from './components/actors/Actors';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/movie' element={<Movie/>}/>
+          <Route path='/watchlist' element={<Watchlist/>}/>
+          <Route path='/actor' element={<Actors/>}/>
         </Routes>
       </BrowserRouter>
     </>
