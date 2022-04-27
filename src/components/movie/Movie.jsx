@@ -134,6 +134,10 @@ class Movie extends Component {
     handleRateChange = (value) => {
         console.log("🚀", value)
     }
+
+    addToWatchlist = () => {
+        console.log("🚀",)
+    }
     render() { 
         return (
             <>
@@ -215,8 +219,11 @@ class Movie extends Component {
                 
                         </div>
                     </div>
-                    <div className="col-3">
+                    <div className="col-3" style={{display: 'flex', flexDirection: 'column'}}>
                         <img className="background-img" src={this.state.movie.image} alt=""/>
+                        <button className='btn btn-add-watchlist' onClick={this.addToWatchlist}>
+                            افزودن به لیست
+                        </button>
                     </div>
                     </div>
                 </div>
