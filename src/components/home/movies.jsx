@@ -78,6 +78,7 @@ class Movies extends Component {
     }
 
     componentDidMount = () => {
+        document.title = "Home";
         this.getMovies();
     }
 

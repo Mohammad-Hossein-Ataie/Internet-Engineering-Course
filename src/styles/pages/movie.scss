@@ -59,11 +59,18 @@
     margin-top: 20px;
 }
 
+.star-box :hover {
+    .user-rating {
+        display: none;
+    }
+}
+
 .rating-box {
     background-color: rgba(158, 21, 17, 0.8);
 }
 
 .star-box {
+    direction: ltr;
     display: flex;
     border-radius: 10px;
     margin-left: -130px;

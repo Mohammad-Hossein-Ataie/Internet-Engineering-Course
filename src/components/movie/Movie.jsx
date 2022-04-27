@@ -1,3 +1,5 @@
+import {Box, Rating } from '@mui/material';
+import StarIcon from '@mui/icons-material/Star';
 import React, { Component } from 'react';
 import { FaChevronCircleUp, FaChevronCircleDown } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -25,7 +27,7 @@ const movie = {
         74
     ],
     imdbRate: 8.4,
-    rate: 0,
+    rate: 4.5,
     totalRate: 0,
     duration: 105,
     ageLimit: 18,
@@ -79,21 +81,17 @@ class Movie extends Component {
             actors: actors,
             newComment: "",
             comments: [],
-            commentId : 1
+            commentId : 1,
         }
     }
  
     componentDidMount = () => {
+        document.title = "Movie";
         this.getMovie();
     }
 
     getMovie = async () => {
-        const response = await fetch('http://138.197.181.131:5000/api/v2/movies');
-        const data = await response.json();
-        this.setState({
-            movie: data,
-            loading: false
-        })
+        
     }
 
     addComment = () => {
@@ -151,18 +149,17 @@ class Movie extends Component {
                                     {this.state.movie.imdbRate}
                                 </div>
 
-                                {/* <div className="star-box">
-                                    <span role="button" className="iconify" data-icon="el:star" style="color: gray;" data-width="30" data-height="30"></span>
-                                    <span role="button" className="iconify" data-icon="el:star" style="color: gray;" data-width="30" data-height="30"></span>
-                                    <span role="button" className="iconify" data-icon="el:star" style="color: gray;" data-width="30" data-height="30"></span>
-                                    <span role="button" className="iconify" data-icon="el:star" style="color: gray;" data-width="30" data-height="30"></span>
-                                    <span role="button" className="iconify" data-icon="el:star" style="color: yellow;" data-width="30" data-height="30"></span>
-                                    <span role="button" className="iconify" data-icon="el:star" style="color: yellow;" data-width="30" data-height="30"></span>
-                                    <span role="button" className="iconify" data-icon="el:star" style="color: yellow;" data-width="30" data-height="30"></span>
-                                    <span role="button" className="iconify" data-icon="el:star" style="color: yellow;" data-width="30" data-height="30"></span>
-                                    <span role="button" className="iconify" data-icon="el:star" style="color: yellow;" data-width="30" data-height="30"></span>
-                                    <span role="button" className="iconify" data-icon="el:star" style="color: yellow;" data-width="30" data-height="30"></span>
-                                </div> */}
+                                <div className="star-box">
+                                    <Box>
+                                        <Rating
+                                            value={this.state.movie.rate}
+                                            
+                                            precision={0.5}
+                                            emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit"/>}
+                                            max={10}
+                                        />
+                                    </Box>
+                                </div>
 
                                 <div className="user-rating">
                                     <div className="d-flex flex-column text-center">
