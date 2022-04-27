@@ -5,6 +5,7 @@ import Movies from './components/home/Movies';
 import Navbar from './components/navbar/Navbar';
 import Login from './components/login/Login';
 import Register from './components/register/Register';
+import Movie from './components/movie/Movie';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/' element={<Movies/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
+          <Route path='/movie' element={<Movie/>}/>
         </Routes>
       </BrowserRouter>
     </>
