@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from '../navbar/Navbar';
-
+import {Link} from 'react-router-dom';
 
     const actor = {
         id: 45,
@@ -11,9 +11,28 @@ import Navbar from '../navbar/Navbar';
         image: "http://cdn.6nightmovie.click/upload/people/edc26282ecf19e509a540e81f0ed5cf2.jpg"
     }
 
+    const movies = [
+        {
+            id: 1,
+            name: '1',
+            image: "http://cdn.6nightmovie.click/upload/280/tZk8L7twLD-OAW0EU0aQGN40BD6T.jpg"
+        },
+        {
+            id: 2,
+            name: '1',
+            image: "http://cdn.6nightmovie.click/upload/280/VOyJcP6nivTxTMd4DOibbERBdSJe.jpg"
+        },
+        {
+            id: 3,
+            name: '1',
+            image: "http://cdn.6nightmovie.click/upload/280/eYb12gj0khYlhRYRZrIW6ugcZUP6.jpg"
+        }
+    ]
+
 class Actors extends Component {
     state = { 
-        actor : actor
+        actor : actor,
+        movies: movies
     } 
 
     componentDidMount = () => {
@@ -21,59 +40,51 @@ class Actors extends Component {
     }
     
     render() { 
-    console.log("🚀 ~ file: Actors.jsx ~ line 24 ~ Actors ~ render ~ render", this.state)
-
         return (
         <>
             <Navbar/>
 
-            <div class="row text-white main-container">
-                <div class="col-9">
-                    <span class="box-title">مشخصات بازیگر</span>
-                    <div class="actor-inf">
+            <div className="row text-white main-container">
+                <div className="col-9">
+                    <span className="box-title">مشخصات بازیگر</span>
+                    <div className="actor-inf">
                         <div>
-                            <span>نام:</span>
+                            <span> نام: </span>
                             <span>{this.state.actor.name}</span>
                         </div>
                         <div>
-                            <span>تاریخ تولد:</span>
+                            <span> تاریخ تولد: </span>
                             <span>{this.state.actor.birthDate}</span>
                         </div>
                         <div>
-                            <span>ملیت:</span>
+                            <span> ملیت: </span>
                             <span>{this.state.actor.nationality}</span>
                         </div>
                         <div>
-                            <span>تعداد فیلم ها:</span>
+                            <span> تعداد فیلم ها: </span>
                             <span>{this.state.actor.totalMovies}</span>
                         </div>
                     </div>
-                    <span class="box-title"> فیلم ها</span>
-                    {/* <div class="movie-box">
-                        <div class="row">
+                    <span className="box-title"> فیلم ها</span>
+                    <div className="movie-box">
+                        <div className="row">
 
-                            <div class="col-md-4 col-12">
-                                <a href="#">
-                                    <img class="movie-box-img" src="../../assets/images/movies/spiderman.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="col-md-4 col-12">
-                                <a href="#">
-                                    <img class="movie-box-img" src="../../assets/images/movies/spiderman.jpg" alt="">
-                                </a>
-                            </div>
-                            <div class="col-md-4 col-12">
-                                <a href="#">
-                                    <img class="movie-box-img" src="../../assets/images/movies/spiderman.jpg" alt="">
-                                </a>
-                            </div>
-                            
+                            {this.state.movies != null && this.state.movies.map(movie => {
+                                return(
+                                    <div key={movie.id} className="col-md-4 col-12">
+                                        <Link to={`/movie`} target="_blank">
+                                            <img className="movie-box-img" src={movie.image} alt={movie.name}/>
+                                        </Link>
+                                    </div>
+                                )
+                            })}  
+                                                      
                         </div>
-                    </div> */}
+                    </div>
                 </div>
 
-                <div class="col-3">
-                    <img class="background-img" src={this.state.actor.image} alt=""/>
+                <div className="col-3">
+                    <img className="background-img" src={this.state.actor.image} alt=""/>
                 </div>
             </div>
         </>
