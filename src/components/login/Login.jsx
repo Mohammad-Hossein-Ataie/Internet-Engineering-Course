@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
-
+import UserService from '../../services/User/UserService';
+import {BrowserRouter,Routes, Route, Navigate } from 'react-router-dom';
 class Login extends Component {
     state = { 
         email: '',
         password: null
     } 
+
+    async componentDidMount() {
+        const response = await fetch("https://jsonplaceholder.typicode.com/users");
+        const data = await response.json();
+        console.log("🚀 ~ file: UserService.js ~ line 7 ~ UserService ~ data", data);
+    }
+    
 
     handleLoginClick = () => {
         sessionStorage.setItem("userMail", this.state.email);
@@ -53,7 +61,7 @@ class Login extends Component {
 
                 <div className="register-cover">
                     <p className="h6">هنوز ثبت نام نکرده اید؟</p>
-                    <a className="text-white" href="signup.html">ثبت نام</a>
+                    <a className="text-white" href="/register">ثبت نام</a>
                 </div>
             </div>
         );
