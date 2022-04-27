@@ -36,7 +36,7 @@ class Actors extends Component {
     } 
 
     componentDidMount = () => {
-      document.title = "Actor"
+      document.title = "Actor";
     }
     
     render() { 
