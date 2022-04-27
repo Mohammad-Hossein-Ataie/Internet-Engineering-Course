@@ -43,6 +43,11 @@ class Watchlist extends Component {
         document.title = "Watchlist";
       
     }
+
+    handleDeleteMovie = (id) => {
+        let watchlists = this.state.watchlists.filter(item => item.id != id);
+        this.setState({watchlists});
+    }
     
     render() { 
         return (
@@ -58,7 +63,7 @@ class Watchlist extends Component {
                                     <div className="col-9">
                                             <div className="list-title">
                                                 <button className="remove-btn">
-                                                    <RiDeleteBin6Fill className="iconify remove-icon"/>
+                                                    <RiDeleteBin6Fill className="iconify remove-icon" onClick={() => this.handleDeleteMovie(item.id)}/>
                                                 </button>
                                                 <p className="text-white movie-title">
                                                     {item.name}
@@ -75,7 +80,7 @@ class Watchlist extends Component {
                                                 <div className="col-6">
                                                     <span className="h6">ژانر: </span>
                                                     {item.genres.map(genre => {
-                                                        return(<span className="description m-1">{genre}</span>)
+                                                        return(<span className="description m-1">{genre},</span>)
                                                     })}
                                                     
                                                 </div>
