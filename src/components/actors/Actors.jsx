@@ -72,7 +72,7 @@ class Actors extends Component {
                             {this.state.movies != null && this.state.movies.map(movie => {
                                 return(
                                     <div key={movie.id} className="col-md-4 col-12">
-                                        <Link to={`/movie`} target="_blank">
+                                        <Link to={`/movies/${movie.id}`} target="_blank">
                                             <img className="movie-box-img" src={movie.image} alt={movie.name}/>
                                         </Link>
                                     </div>

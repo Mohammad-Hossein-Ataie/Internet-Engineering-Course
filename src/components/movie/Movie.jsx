@@ -105,11 +105,13 @@ class Movie extends Component {
             dislikes: 0
         }
 
-        this.setState({
-            comments: [...this.state.comments, comment],
-            newComment: '',
-            commentId: this.state.commentId+1
-        })
+        if(this.state.newComment != ""){
+            this.setState({
+                comments: [...this.state.comments, comment],
+                newComment: '',
+                commentId: this.state.commentId+1
+            })
+        }
     }
 
     handleOnchangeComment = (e) => {
@@ -124,7 +126,7 @@ class Movie extends Component {
                     comments[i].likes += 1;
                 }
                 else {
-                    comments[i].dislikes -= 1;
+                    comments[i].dislikes += 1;
                 }
             }
         })
@@ -224,7 +226,7 @@ class Movie extends Component {
                     <div className="actor-container w-100">
                         {this.state.actors != null && this.state.actors.map(actor => {
                             return(
-                                <Link className="actor-item" key={actor.id} to={`/actors`} target="_blank">
+                                <Link className="actor-item" key={actor.id} to={`/actors/${actor.id}`} target="_blank">
                                     <img className="background-img img-avatar" src={actor.image} alt={actor.name}/>
                                 </Link>
                             )

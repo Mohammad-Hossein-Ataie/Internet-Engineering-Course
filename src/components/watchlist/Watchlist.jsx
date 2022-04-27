@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Navbar from '../navbar/Navbar';
 import { RiDeleteBin6Fill } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
 
 const watchlists = [
@@ -34,9 +35,28 @@ const watchlists = [
 
         }
 ]
+
+const movies = [
+    {
+        id: 10,
+        name: "1",
+        image: "http://cdn.6nightmovie.click/upload/280/OTenZDM6XJ0ZddTcl3DFFWqttgz9.jpg",
+    },
+    {
+        id: 11,
+        name: "1",
+        image: "http://cdn.6nightmovie.click/upload/280/Nt2At-X0bzO5w5cuD0GScFoGlg4c.jpg",
+    },
+    {
+        id: 12,
+        name: "1",
+        image: "http://cdn.6nightmovie.click/upload/280/vtUc_4VMHuFYagBaj6ur17nj4Rpw.jpg",
+    }
+]
 class Watchlist extends Component {
     state = { 
-        watchlists : watchlists
+        watchlists : watchlists,
+        movies : movies
      } 
 
     componentDidMount = () => {
@@ -113,27 +133,22 @@ class Watchlist extends Component {
                     })}           
                 </div>
 
-                {/* <div className="movie-box w-50 m-auto p-4 d-flex flex-column mb-5">
+                <div className="movie-box w-50 m-auto p-4 d-flex flex-column mb-5">
                     <span className="h6">فیلم های پیشنهادی</span>
                     <div className="row">
-                        <div className="col-md-4 col-12">
-                            <a href="#">
-                                <img className="movie-box-img" src="../../assets/images/movies/conjuring.jpg" alt="">
-                            </a>
-                        </div>
-                        <div className="col-md-4 col-12">
-                            <a href="#">
-                                <img className="movie-box-img" src="../../assets/images/movies/conjuring.jpg" alt="">
-                            </a>
-                        </div>
-                        <div className="col-md-4 col-12">
-                            <a href="#">
-                                <img className="movie-box-img" src="../../assets/images/movies/inception.jpg" alt="">
-                            </a>
-                        </div>
                         
+                        {this.state.movies != null && this.state.movies.map(movie => {
+                            return(
+                                <div className="col-md-4 col-12">
+                                    <Link to={`/movies/${movie.id}`} target="_blank">
+                                        <img className="movie-box-img" src={movie.image} alt={movie.name}/>
+                                    </Link>
+                                </div>
+                            )
+                        })}
+            
                     </div>
-                </div> */}
+                </div>
         </div>
         </>);
     }

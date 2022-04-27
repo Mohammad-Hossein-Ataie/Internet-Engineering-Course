@@ -61,7 +61,7 @@ class Login extends Component {
 
                 <div className="register-cover">
                     <p className="h6">هنوز ثبت نام نکرده اید؟</p>
-                    <a className="text-white" href="/register">ثبت نام</a>
+                    <a className="text-white" href="/signup">ثبت نام</a>
                 </div>
             </div>
         );

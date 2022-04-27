@@ -1,20 +1,22 @@
 import React, { Component } from 'react'
+import {FaUserCircle} from 'react-icons/fa';
 
 class NavbarHome extends Component {
     state = {  } 
     render() { 
-        return (<>
+        console.log("🚀 ~ file: NavbarHome.jsx ~ line 7 ~ NavbarHome ~ render ~ render")
+        return (
         <div className="app-bar-header">
-                <nav className="navbar navbar-expand-lg static-top d-flex justify-content-between">
-                    <div className="dropdown">
+                <nav className="navbar navbar-expand-lg static-top d-flex justify-content-between app-bar-header">
+                    {/* <div className="dropdown">
                         <a className="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <span className="iconify" role="button" data-icon="bxs:user-circle" style="color: #292929;" data-width="40" data-height="40"></span>
+                            <FaUserCircle style={{color: '#292929', width: '40px', height: '40px'}}/>
                         </a>
                         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a className="dropdown-item text-center" href="#">ورود</a></li>
                             <li><a className="dropdown-item text-center" href="#">ثبت نام</a></li>
                         </ul>
-                    </div>
+                    </div> */}
 
                     <div className="nav-sort-search-bar">
                         <div className="nav-search-bar">
@@ -40,7 +42,7 @@ class NavbarHome extends Component {
                      <img class="nav-brand" src="./../../assets/images/logo.png" alt=""/>
                 </nav>
         </div>
-        </>);
+        );
     }
 }
  

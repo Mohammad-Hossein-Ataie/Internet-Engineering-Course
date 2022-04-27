@@ -17,10 +17,10 @@ function App() {
         <Routes>
           <Route path='/' element={<Movies/>}/>
           <Route path='/login' element={<Login/>}/>
-          <Route path='/register' element={<Register/>}/>
-          <Route path='/movie' element={<Movie/>}/>
+          <Route path='/signup' element={<Register/>}/>
+          <Route path='/movies/:id' element={<Movie/>}/>
           <Route path='/watchlist' element={<Watchlist/>}/>
-          <Route path='/actors' element={<Actors/>}/>
+          <Route path='/actors/:id' element={<Actors/>}/>
         </Routes>
       </BrowserRouter>
     </>
