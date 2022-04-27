@@ -131,6 +131,9 @@ class Movie extends Component {
         this.setState({comments})
     }
 
+    handleRateChange = (value) => {
+        console.log("🚀", value)
+    }
     render() { 
         return (
             <>
@@ -152,11 +155,11 @@ class Movie extends Component {
                                 <div className="star-box">
                                     <Box>
                                         <Rating
-                                            value={this.state.movie.rate}
-                                            
-                                            precision={0.5}
+                                            precision={0.1}
                                             emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit"/>}
+                                            min={1}
                                             max={10}
+                                            onChange={e => this.handleRateChange(e.target.value)}
                                         />
                                     </Box>
                                 </div>
