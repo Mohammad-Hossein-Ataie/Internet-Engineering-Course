@@ -1,4 +1,4 @@
-import {BrowserRouter ,Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './styles/style.scss';
 import './App.css';
 import Movies from './components/home/Movies';
@@ -8,6 +8,7 @@ import Register from './components/register/Register';
 import Movie from './components/movie/Movie';
 import Watchlist from './components/watchlist/Watchlist';
 import Actors from './components/actors/Actors';
+import { Logout } from '@mui/icons-material';
 
 function App() {
   return (
@@ -15,12 +16,12 @@ function App() {
       {/* <Navbar/> */}
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<Movies/>}/>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/signup' element={<Register/>}/>
-          <Route path='/movies/:id' element={<Movie/>}/>
-          <Route path='/watchlist' element={<Watchlist/>}/>
-          <Route path='/actors/:id' element={<Actors/>}/>
+          <Route exact path='/' element={<Movies />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Register />} />
+          <Route path='/movies/:id' element={<Movie />} />
+          <Route path='/watchlist' element={<Watchlist />} />
+          <Route path='/actors/:id' element={<Actors />} />
         </Routes>
       </BrowserRouter>
     </>

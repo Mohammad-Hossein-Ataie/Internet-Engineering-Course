@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../navbar/Navbar';
 import NavbarHome from '../navbar/NavbarHome';
-import config from './../../config/config';
+import { DOMAIN } from '../../config/config';
 
 
 const movies = [
@@ -71,67 +71,107 @@ class Movies extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoading : true,
-            movies : movies,
+            isLoading: true,
+            movies: [],
         }
         this.getMovies = this.getMovies.bind(this);
     }
 
     componentDidMount = () => {
         document.title = "Home";
-        this.getMovies();
+        this.getMovies(DOMAIN + "/movies");
     }
 
-    async getMovies(){
-        // const response = await fetch(config.MOVIES_URL);
-        const response = await fetch('http://138.197.181.131:5000/api/v2/movies');
-        const data = await response.json();
-        this.setState({
-            movies: data,
-            isLoading: false
-        })
-        console.log("🚀 ~ file: Movies.jsx ~ line 15 ~ Movies ~ getMovies ~ data", data)
+    getMovies(url) {
+        console.log(" url....", url)
+
+        fetch(url, {
+            method: 'get',
+            headers: { 'Content-Type': 'application/json' },
+        }).then(res => {
+            return (res.json())
+        }).then(data => {
+            console.log("data", data)
+            this.setState({
+                movies: data.map(movie => ({
+                    id: movie.id,
+                    name: movie.name,
+                    image: movie.movieImage
+                })),
+                isLoading: false
+            })
+        });
     }
-    
-    render() { 
+
+    handleSearchMovie = (e) => {
+        const url = DOMAIN + `/movies/${e.key}/${e.val}`;
+        // console.log(" url....", url)
+        this.getMovies(url);
+    }
+
+    handleSortMovie = (sortBy) => {
+        const url = DOMAIN + `/movies/${sortBy}`;
+        fetch(url, {
+            method: 'get',
+            headers: { 'Content-Type': 'application/json' },
+        }).then(res => {
+            return (res.json())
+        }).then(data => {
+            console.log("data", data)
+            this.setState({
+                movies: data[0].map(movie => ({
+                    id: movie.id,
+                    name: movie.name,
+                    image: movie.movieImage
+                })),
+                isLoading: false
+            })
+        });
+
+    }
+
+    render() {
+        if (this.state.isLoading) {
+            return (<h1>loading</h1>)
+        }
         return (
             <>
-                {/* <NavbarHome/> */}
-                <div className="container mt-5">              
+                <NavbarHome getSearchPar={e => this.handleSearchMovie(e)} />
+                <div className="container mt-5">
                     <div className="row text-center d-flex justify-content-start align-items-center">
                         <div className="col-lg-2 col-12">
                             <div className="card sort-box">
                                 <div className="card-title">رتبه بندی بر اساس:</div>
                                 <div className="card-body sort-box-body">
-                                <p className="card-text">تاریخ</p>
-                                <p className="card-text">امتیاز imdb</p>
+                                    <p className="card-text" style={{ cursor: 'pointer' }} onClick={() => this.handleSortMovie("date")}>تاریخ</p>
+                                    <p className="card-text" style={{ cursor: 'pointer' }} onClick={() => this.handleSortMovie("imdb")}>امتیاز imdb</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col-lg-10 col-12">
+                            <div className="row m-5">
+
+                                {this.state.movies != null && this.state.movies.map((movie) => {
+                                    return (
+                                        <div key={movie.id} className="col-md-4 col-lg-3 col-12 mt-4">
+                                            <Link className="row no-gutters align-items-center"
+                                                to={`/movies/${movie.id}`}
+                                                target="_blank">
+                                                <img className="movie-img" src={movie.image} alt={movie.name} />
+                                            </Link>
+                                        </div>
+                                    )
+                                })}
                             </div>
                         </div>
                     </div>
 
-                    <div className="col-lg-10 col-12">
-                        <div className="row m-5">
-
-                            {this.state.movies != null && this.state.movies.map((movie) => {
-                                return(
-                                    <div key={movie.id} className="col-md-4 col-lg-3 col-12 mt-4">
-                                        <Link className="row no-gutters align-items-center" 
-                                              to={`/movies/${movie.id}`} 
-                                              target="_blank">
-                                            <img className="movie-img" src={movie.image} alt="poster"/>
-                                        </Link>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
-                </div>
-
                 </div>
             </>
-            
+
         );
     }
 }
- 
+
 export default Movies;

@@ -13,7 +13,7 @@
     margin-left: 3px;
 }
 
-.dropdown-menu{
+.dropdown-menu {
     right: 0 !important;
     left: auto !important;
     background-color: rgba(177, 37, 32, 0.8) !important;
@@ -52,4 +52,13 @@
 .app-bar-header {
     z-index: 999 !important;
     position: fixed !important;
+}
+
+.nav-toggle {
+    background: transparent !important;
+    border: none !important;
+}
+
+.nav-toggle :focus {
+    border: none !important;
 }

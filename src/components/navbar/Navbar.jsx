@@ -1,26 +1,39 @@
-import { width } from '@mui/system';
 import React, { Component } from 'react';
-import {FaUserCircle} from 'react-icons/fa';
-
+import { FaUserCircle } from 'react-icons/fa';
+import Dropdown from 'react-bootstrap/Dropdown';
+import { DOMAIN } from '../../config/config';
 class Navbar extends Component {
-    state = {  } 
-    render() { 
+    state = {
+    }
+
+    handlLogoutClick = () => {
+        localStorage.setItem("user", "");
+        console.log("user2", localStorage.getItem("user"));
+        const url = DOMAIN + '/logout';
+        fetch(url);
+    }
+
+    render() {
         return (
             <nav className="navbar navbar-expand-lg static-top d-flex justify-content-between">
-                <div className="dropdown">
-                    <a className="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <FaUserCircle style={{color: '#292929', width: '40px', height: '40px'}}/>
-                    </a>
-                    <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a className="dropdown-item text-center" href="#">salehi@gmail.com</a></li>
-                        <li><a className="dropdown-item text-center" href="#">خروج</a></li>
-                    </ul>
-                </div>
 
-                <img className="nav-brand" src="./../../assets/images/logo.png" alt="logo"/>
+                <Dropdown>
+                    <Dropdown.Toggle className='nav-toggle'>
+                        <FaUserCircle style={{ color: '#292929', width: '40px', height: '40px' }} />
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                        <Dropdown.Item href="/">{localStorage.getItem("user")}</Dropdown.Item>
+                        <Dropdown.Item href="/watchlist" target="_blank">لیست مشاهده</Dropdown.Item>
+                        <Dropdown.Item href="/" onClick={() => this.handlLogoutClick()}>خروج</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+
+                <img className="nav-brand" src="./../../assets/images/logo.png" alt="logo" />
             </nav>
         );
     }
+
 }
- 
+
 export default Navbar;
