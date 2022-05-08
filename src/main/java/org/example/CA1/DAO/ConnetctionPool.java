@@ -8,7 +8,7 @@ import java.sql.Statement;
 
 public class ConnetctionPool {
     private static final BasicDataSource ds = new BasicDataSource();
-    private static final String dbURL = "jdbc:mysql://localhost:3306/IEMDB";
+    private static final String dbURL = "jdbc:mysql://localhost:3306/IEMDB?autoReconnect=true&useSSL=false";
     private static final String dbUsername = "IEMDB";
     private static final String dbPassword = "1234";
     static {

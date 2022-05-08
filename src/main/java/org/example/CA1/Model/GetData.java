@@ -55,19 +55,19 @@ public class GetData {
         }
         return null;
     }
-    public static void setMovieList() throws IOException {
+    public static void setMovieList() throws IOException, SQLException{
         Movie[] objectList = setListData("http://138.197.181.131:5000/api/v2/movies",Movie[].class);
         MovieDAO.setMovies(Arrays.asList(objectList));
     }
-    public static void setActorsListData() throws IOException {
+    public static void setActorsListData() throws IOException, SQLException {
         Actor[] objectList = setListData("http://138.197.181.131:5000/api/v2/actors",Actor[].class);
-        ActorDAO.setActores(Arrays.asList(objectList));
+        ActorDAO.setActors(Arrays.asList(objectList));
     }
     public static void setUsersListData() throws IOException, SQLException {
         User[] objectList = setListData("http://138.197.181.131:5000/api/users",User[].class);
         UserDAO.setUsers(Arrays.asList(objectList));
     }
-    public static void setCommentsListData() throws IOException {
+    public static void setCommentsListData() throws IOException, SQLException {
         Comment[] objectList = setListData("http://138.197.181.131:5000/api/comments", Comment[].class);
         CommentDAO.setComments(Arrays.asList(objectList));
     }

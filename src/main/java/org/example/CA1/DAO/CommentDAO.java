@@ -1,8 +1,10 @@
 package org.example.CA1.DAO;
 
+import org.example.CA1.Entity.Actor;
 import org.example.CA1.Entity.Comment;
 import org.example.CA1.Entity.Movie;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,14 +40,41 @@ public class CommentDAO {
         comment.setCommentID(getCount());
     }
 
-    public static void setComments(List<Comment> newComments) {
-        count = 0;
-        for (Comment comment : newComments) {
-            count += 1;
-            usersComments.put(count, comment);
-            comments.add(comment);
+//    public static void setComments(List<Comment> newComments) {
+//        count = 0;
+//        for (Comment comment : newComments) {
+//            count += 1;
+//            usersComments.put(count, comment);
+//            comments.add(comment);
+//        }
+//    }
+public static void setComments(List<Comment> newComment) throws SQLException {
+    Statement statement;
+    try {
+        Connection connection = ConnetctionPool.getConnection();
+        statement = connection.createStatement();
+        for(Comment comment:newComment) {
+            String query = "SELECT * FROM Comment WHERE id=?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setInt(1,comment.getCommentID());
+            ResultSet result = preparedStmt.executeQuery();
+            if(result.next()){
+                continue;
+            }
+            statement.close();
+            query = " INSERT INTO Comment (userEmail, movieId, text)"
+                    + " values (?, ?, ?)";
+            preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setString(1, comment.getUserEmail());
+            preparedStmt.setInt(2,comment.getMovieId());
+            preparedStmt.setString(3,comment.getText());
+            preparedStmt.executeUpdate();
         }
+        connection.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
     }
+}
 
     public static Comment getCommentByID(Integer id) {
         for(int i = 0; i <comments.size();i++){

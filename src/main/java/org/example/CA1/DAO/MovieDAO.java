@@ -1,6 +1,9 @@
 package org.example.CA1.DAO;
 import org.example.CA1.Entity.Movie;
+import org.example.CA1.Entity.User;
 
+import java.sql.*;
+import java.sql.Date;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -59,9 +62,45 @@ public class MovieDAO {
 //        }
 //        scoreMovies.put(movieId,rate);
 //    }
-    public static void setMovies(List<Movie> newMovies) {
-        movies.addAll(newMovies);
+//    public static void setMovies(List<Movie> newMovies) {
+//        movies.addAll(newMovies);
+//    }
+    public static void setMovies(List<Movie> newMovies){
+        Statement statement;
+        try {
+        Connection connection = ConnetctionPool.getConnection();
+        statement = connection.createStatement();
+        for(Movie movie:newMovies) {
+            String query = "SELECT * FROM movie WHERE id=?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setInt(1,movie.getId());
+            ResultSet result = preparedStmt.executeQuery();
+            if(result.next()){
+                continue;
+            }
+            statement.close();
+            query = " INSERT INTO movie (id, movie_name, summary, releaseDate, director,imdbRate,duration,ageLimit,image,coverImage,rating)"
+                    + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setInt(1,movie.getId());
+            preparedStmt.setString(2, movie.getName());
+            preparedStmt.setString(3, movie.getSummary());
+            preparedStmt.setString(4, movie.getReleaseDate());
+            preparedStmt.setString(5, movie.getDirector());
+            preparedStmt.setString(6,  movie.getImdbRate());
+            preparedStmt.setString(7,movie.getDuration());
+            preparedStmt.setInt(8,movie.getAgeLimit());
+            preparedStmt.setString(9,movie.getMovieImage());
+            preparedStmt.setString(10,movie.getMovieCoverImage());
+            preparedStmt.setString(11,movie.getRating());
+            preparedStmt.executeUpdate();
+        }
+            connection.close();
+        } catch (
+    SQLException e) {
+        e.printStackTrace();
     }
+}
 
 //    public static float getRateMovie(Integer movieId){
 //        int score = 0;

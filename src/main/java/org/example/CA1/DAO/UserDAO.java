@@ -103,8 +103,8 @@ public class UserDAO {
                 preparedStmt.setString(4, user.getName());
                 preparedStmt.setDate(5,  new Date(user.getBirthDate().getTime()));
                 preparedStmt.executeUpdate();
-                connection.close();
             }
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
