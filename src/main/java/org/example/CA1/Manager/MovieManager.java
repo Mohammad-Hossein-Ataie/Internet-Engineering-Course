@@ -11,15 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieManager {
-    private static boolean isUpdating(Movie movie) {
-        if (MovieDAO.findByID(movie.getId()) != null) {
+    private static boolean isUpdating(Movie movie) throws SQLException {
+        Connection connection = ConnetctionPool.getConnection();
+        Statement statement;
+        statement = connection.createStatement();
+        String query = "SELECT * FROM movie WHERE movie.id=?";
+        PreparedStatement preparedStmt = connection.prepareStatement(query);
+        preparedStmt.setInt(1, movie.getId());
+        ResultSet res = preparedStmt.executeQuery();
+        if (res.getString(1) != null) {
             return true;
         } else {
             return false;
         }
     }
 
-    public static void addMovie(Movie movie) {
+    public static void addMovie(Movie movie) throws SQLException {
         if (isUpdating(movie))
             MovieDAO.update(movie);
         MovieDAO.add(movie);
@@ -30,11 +37,29 @@ public class MovieManager {
     }
 
     public static Movie getMovieById(Integer id) {
-        List<Movie> movies = MovieDAO.getMovies();
-        for (int i = 0; i < movies.size(); i++) {
-            if (movies.get(i).getId() == id) {
-                return movies.get(i);
-            }
+        try {
+            List<Movie> movies = new ArrayList<>();
+            Connection connection = ConnetctionPool.getConnection();
+            Statement statement;
+            statement = connection.createStatement();
+            String query = "SELECT * FROM movie WHERE movie.id=?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            ResultSet res = preparedStmt.executeQuery();
+            Movie movie = new Movie();
+            movie.setId(res.getInt(1));
+            movie.setName(res.getString(2));
+            movie.setSummary(res.getString(3));
+            movie.setReleaseDate(res.getString(4));
+            movie.setDirector(res.getString(5));
+            movie.setImdbRate(res.getFloat(6));
+            movie.setDuration(res.getString(7));
+            movie.setAgeLimit(res.getInt(8));
+            movie.setImage(res.getString(9));
+            movie.setCoverImage(res.getString(10));
+            movie.setRating(res.getFloat(11));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }
@@ -82,24 +107,64 @@ public class MovieManager {
         return null;
     }
         public static List<Movie> getMovieByName(String movieName) {
-        List<Movie> movies = MovieDAO.getMovies();
-        List<Movie> temp = new ArrayList<>();
-        for (int i = 0; i < movies.size(); i++) {
-            if (movies.get(i).getName().contains(movieName)) {
-                temp.add(movies.get(i));
+            try {
+                List<Movie> movies = new ArrayList<>();
+                Connection connection = ConnetctionPool.getConnection();
+                Statement statement = connection.createStatement();
+                String query = "SELECT * FROM movie WHERE movie.movie_name LIKE ?";
+                PreparedStatement preparedStmt = connection.prepareStatement(query);
+                preparedStmt.setString(1, movieName);
+                ResultSet res = preparedStmt.executeQuery();
+                while (res.next()) {
+                    Movie movie = new Movie();
+                    movie.setId(res.getInt(1));
+                    movie.setName(res.getString(2));
+                    movie.setSummary(res.getString(3));
+                    movie.setReleaseDate(res.getString(4));
+                    movie.setDirector(res.getString(5));
+                    movie.setImdbRate(res.getFloat(6));
+                    movie.setDuration(res.getString(7));
+                    movie.setAgeLimit(res.getInt(8));
+                    movie.setImage(res.getString(9));
+                    movie.setCoverImage(res.getString(10));
+                    movie.setRating(res.getFloat(11));
+                    movies.add(movie);
+                }
+                return movies;
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        }
-        return temp;
+            return null;
     }
 
     public static List<Movie> getMovieByDate(String date) {
-        List<Movie> movies = MovieDAO.getMovies();
-        List<Movie> temp = new ArrayList<>();
-        for (int i = 0; i < movies.size(); i++) {
-            if (movies.get(i).getReleaseDate().contains(date)) {
-                temp.add(movies.get(i));
+        try {
+            List<Movie> movies = new ArrayList<>();
+            Connection connection = ConnetctionPool.getConnection();
+            Statement statement = connection.createStatement();
+            String query = "SELECT * FROM movie WHERE movie.releaseDate=?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setString(1, date);
+            ResultSet res = preparedStmt.executeQuery();
+            while (res.next()) {
+                Movie movie = new Movie();
+                movie.setId(res.getInt(1));
+                movie.setName(res.getString(2));
+                movie.setSummary(res.getString(3));
+                movie.setReleaseDate(res.getString(4));
+                movie.setDirector(res.getString(5));
+                movie.setImdbRate(res.getFloat(6));
+                movie.setDuration(res.getString(7));
+                movie.setAgeLimit(res.getInt(8));
+                movie.setImage(res.getString(9));
+                movie.setCoverImage(res.getString(10));
+                movie.setRating(res.getFloat(11));
+                movies.add(movie);
             }
+            return movies;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return temp;
+        return null;
     }
 }

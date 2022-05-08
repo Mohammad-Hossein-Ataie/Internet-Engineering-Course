@@ -6,6 +6,10 @@ public class Actor {
     private String birthDate;
     private String nationality;
 
+    public Actor() {
+
+    }
+
     public String getActorImage() {
         return image;
     }
@@ -18,7 +22,7 @@ public class Actor {
         this.name = name;
         this.birthDate = birthDate;
         this.nationality = nationality;
-        this.image = image;
+        this.image = actorImage;
     }
 
     public int getId() {
@@ -55,5 +59,9 @@ public class Actor {
 
     public boolean isSame(Actor actor) {
         return this.id == actor.id;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

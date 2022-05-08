@@ -1,5 +1,6 @@
 package org.example.CA1.Controller;
 import org.example.CA1.DAO.ActorDAO;
+import org.example.CA1.DAO.ConnetctionPool;
 import org.example.CA1.DAO.MovieDAO;
 import org.example.CA1.Entity.Actor;
 import org.example.CA1.Entity.Comment;
@@ -11,6 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 @RestController
@@ -25,7 +30,7 @@ public class MovieController {
             }
         }
     }
-    public static void addMovie(Movie movie) {
+    public static void addMovie(Movie movie) throws SQLException {
         MovieManager.addMovie(movie);
 //        return "movie added successfully";
     }
@@ -50,12 +55,27 @@ public class MovieController {
         return new Object[]{res};
     }
     @GetMapping("/movies/{id}")
-    public Object[] getMovieById(@PathVariable Integer id) {
+    public Object[] getMovieById(@PathVariable Integer id) throws SQLException {
         Movie temp = MovieManager.getMovieById(id);
         List <Integer> actorsID = temp.getCast();
         List <Actor> actors = new ArrayList<>();
-        for(int i = 0; i < actorsID.size(); i ++){
-            actors.add(ActorDAO.getActorByID(actorsID.get(i)));
+        Connection connection = ConnetctionPool.getConnection();
+        String query = "SELECT * FROM casts WHERE movieId=?";
+        PreparedStatement statement = connection.prepareStatement(query);
+        statement.setInt(1, id);
+        ResultSet rs = statement.executeQuery();
+        while(rs.next()) {
+            Actor actor = new Actor();
+            int actorId = rs.getInt("actorId");
+            query = "SELECT * FROM actor WHERE id=?";
+            statement = connection.prepareStatement(query);
+            statement.setInt(1, actorId);
+            ResultSet result = statement.executeQuery();
+            actor.setId(result.getInt(1));
+            actor.setName(result.getString(2));
+            actor.setBirthDate(result.getString(3));
+            actor.setNationality(result.getString(4));
+            actor.setImage(result.getString(5));
         }
         List <Comment> comments = CommentManager.getByID(id);
         return new Object[]{temp, actors, comments};
