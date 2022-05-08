@@ -12,9 +12,9 @@ public class UserDAO {
     public static String getEnrolledID() {
         return enrolledID;
     }
-
     public static void setEnrolledID(String enrolledID) {
         UserDAO.enrolledID = enrolledID;
+        User.enrolledUsers.add(UserDAO.getUserBymail(enrolledID));
     }
 
     private static String enrolledID = "";
@@ -60,8 +60,14 @@ public class UserDAO {
     public static User getUserBymail(String mail) {
         return usersMails.get(mail);
     }
-    public static boolean IsInMails(String mail){
-         return usersMails.containsValue(mail);
+    public static boolean IsInMails(String mail) {
+        for (int i = 0; i < UserDAO.getUsers().size(); i++) {
+            System.out.println(UserDAO.getUsers().get(i).getEmail());
+            if (UserDAO.getUsers().get(i).getEmail().equals(mail)) {
+                return true;
+            }
+        }
+        return false;
     }
     public static void removeFromWatchList(String email, int id) {
         User user = UserDAO.getUserBymail(email);

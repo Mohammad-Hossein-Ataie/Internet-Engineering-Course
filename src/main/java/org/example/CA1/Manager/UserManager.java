@@ -1,5 +1,6 @@
 package org.example.CA1.Manager;
 import org.example.CA1.DAO.UserDAO;
+import org.example.CA1.Entity.Logedin;
 import org.example.CA1.Entity.User;
 
 import java.util.Date;
@@ -31,8 +32,14 @@ public class UserManager {
         UserDAO.removeFromWatchList(email,id);
     }
 
-    public static boolean checkPassword(String password) {
-        return true;
+    public static boolean checkPassword(User user) {
+        for(int i =0;i<UserDAO.getUsers().size();i++){
+            if(UserDAO.getUsers().get(i).getEmail().equals(user.getEmail())&&
+                    UserDAO.getUsers().get(i).getPassword().equals(user.getPassword())){
+                return true;
+            }
+        }
+        return false;
     }
 }
 

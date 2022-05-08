@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class User{
+
     public String getEmail() {
         return email;
     }
@@ -50,6 +51,7 @@ public class User{
     public static void setWatchList(Movie watchList) {
         User.watchList.add(watchList);
     }
+    public static List<User> enrolledUsers = new ArrayList<>();
     public User(String email, String password, String nickname, String name, Date birthDate) {
         this.email = email;
         this.password = password;

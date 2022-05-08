@@ -70,4 +70,9 @@ public class GetData {
         Comment[] objectList = setListData("http://138.197.181.131:5000/api/comments", Comment[].class);
         CommentDAO.setComments(Arrays.asList(objectList));
     }
+    public static void setCommentIDS(){
+        for(int i = 0 ; i < CommentDAO.getComments().size(); i++){
+            CommentDAO.getComments().get(i).setCommentID(i);
+        }
+    }
 }
