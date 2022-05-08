@@ -3,6 +3,7 @@ package org.example.CA1.DAO;
 import org.example.CA1.Entity.Movie;
 import org.example.CA1.Entity.User;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -79,12 +80,41 @@ public class UserDAO {
         }
         watchListUser.remove(email,id);
     }
-    public static void setUsers(List<User> newUsers) {
-        users.addAll(newUsers);
-        for(int i = 0; i<newUsers.size(); i++){
-            String temp = newUsers.get(i).getEmail();
-            usersMails.put(temp,newUsers.get(i));
+    public static void setUsers(List<User> newUsers) throws SQLException {
+        Statement statement;
+        try {
+            Connection connection = ConnetctionPool.getConnection();
+            statement = connection.createStatement();
+            for(User user:newUsers) {
+                String query = "SELECT * FROM user WHERE email=?";
+                PreparedStatement preparedStmt = connection.prepareStatement(query);
+                preparedStmt.setString(1,user.getEmail());
+                ResultSet result = preparedStmt.executeQuery();
+                if(result.next()){
+                    continue;
+                }
+                statement.close();
+                query = " INSERT INTO user (email, password, nickname, name, birthDate)"
+                        + " values (?, ?, ?, ?, ?)";
+                preparedStmt = connection.prepareStatement(query);
+                preparedStmt.setString(1, user.getEmail());
+                preparedStmt.setString(2, user.getPassword());
+                preparedStmt.setString(3, user.getNickname());
+                preparedStmt.setString(4, user.getName());
+                preparedStmt.setDate(5,  new Date(user.getBirthDate().getTime()));
+                preparedStmt.executeUpdate();
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
     }
+//    public static void setUsers(List<User> newUsers) {
+//        users.addAll(newUsers);
+//        for(int i = 0; i<newUsers.size(); i++){
+//            String temp = newUsers.get(i).getEmail();
+//            usersMails.put(temp,newUsers.get(i));
+//        }
+//
+//    }
 }

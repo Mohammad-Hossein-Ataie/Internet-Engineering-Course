@@ -4,6 +4,7 @@ import org.example.CA1.DAO.UserDAO;
 import org.example.CA1.Entity.User;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @RestController
 public class SignUpController {
         @PostMapping("/signup")
-    public void signup(@RequestBody User user) {
+    public void signup(@RequestBody User user) throws SQLException {
         UserDAO.addEnrolled(user.getEmail());
         UserDAO.addUser(user);
         List <User> users = new ArrayList<>();

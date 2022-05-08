@@ -19,6 +19,7 @@ import org.example.CA1.Entity.Movie;
 import org.example.CA1.Entity.User;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Arrays;
 
 public class GetData {
@@ -62,7 +63,7 @@ public class GetData {
         Actor[] objectList = setListData("http://138.197.181.131:5000/api/v2/actors",Actor[].class);
         ActorDAO.setActores(Arrays.asList(objectList));
     }
-    public static void setUsersListData() throws IOException {
+    public static void setUsersListData() throws IOException, SQLException {
         User[] objectList = setListData("http://138.197.181.131:5000/api/users",User[].class);
         UserDAO.setUsers(Arrays.asList(objectList));
     }
