@@ -42,8 +42,51 @@ public class Movie {
         return coverImage;
     }
 
-    public Movie(int id, String name, String summary, String releaseDate, String director, List<String> writers, List<String> genres, List<Integer> cast,
-                 float imdbRate, String duration, int ageLimit, String image, String coverImage) {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public void setImdbRate(float imdbRate) {
+        this.imdbRate = imdbRate;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public void setAgeLimit(int ageLimit) {
+        this.ageLimit = ageLimit;
+    }
+
+    public void setWriters(List<String> writers) {
+        this.writers = writers;
+    }
+
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setCoverImage(String coverImage) {
+        this.coverImage = coverImage;
+    }
+
+    public Movie() {
         this.id = id;
         this.name = name;
         this.summary = summary;

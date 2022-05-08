@@ -2,9 +2,11 @@ package org.example.CA1.Manager;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.example.CA1.DAO.ConnetctionPool;
 import org.example.CA1.DAO.MovieDAO;
 import org.example.CA1.Entity.Movie;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,20 +40,48 @@ public class MovieManager {
     }
 
     public static List<Movie> getMoviesByGenre(String genre) {
-        List<Movie> movies = MovieDAO.getMovies();
-        System.out.println(movies.size());
-        List<Movie> moviesList = new ArrayList<>();
-        for (int i = 0; i < movies.size(); i++) {
-            for (int j = 0; j < movies.get(i).getGenre().size(); j++) {
-                if (movies.get(i).getGenre().get(j).equals(genre)) {
-                    moviesList.add(movies.get(i));
-                }
+//        List<Movie> movies = MovieDAO.getMovies();
+//        System.out.println(movies.size());
+//        List<Movie> moviesList = new ArrayList<>();
+//        for (int i = 0; i < movies.size(); i++) {
+//            for (int j = 0; j < movies.get(i).getGenre().size(); j++) {
+//                if (movies.get(i).getGenre().get(j).equals(genre)) {
+//                    moviesList.add(movies.get(i));
+//                }
+//            }
+//        }
+//        return movieList;
+        try {
+            List<Movie> movies = new ArrayList<>();
+            Connection connection = ConnetctionPool.getConnection();
+            Statement statement;
+            statement = connection.createStatement();
+            String query = "SELECT * FROM movie m JOIN genres g ON m.id = g.movieId  WHERE g.genre=?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setString(1, genre);
+            ResultSet res = preparedStmt.executeQuery();
+            while (res.next()){
+                Movie movie = new Movie();
+                movie.setId(res.getInt(12));
+                movie.setName(res.getString(2));
+                movie.setSummary(res.getString(3));
+                movie.setReleaseDate(res.getString(4));
+                movie.setDirector(res.getString(5));
+                movie.setImdbRate(res.getFloat(6));
+                movie.setDuration(res.getString(7));
+                movie.setAgeLimit(res.getInt(8));
+                movie.setImage(res.getString(9));
+                movie.setCoverImage(res.getString(10));
+                movie.setRating(res.getFloat(11));
+                movies.add(movie);
             }
+            return movies;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return moviesList;
+        return null;
     }
-
-    public static List<Movie> getMovieByName(String movieName) {
+        public static List<Movie> getMovieByName(String movieName) {
         List<Movie> movies = MovieDAO.getMovies();
         List<Movie> temp = new ArrayList<>();
         for (int i = 0; i < movies.size(); i++) {

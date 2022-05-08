@@ -94,6 +94,23 @@ public class MovieDAO {
             preparedStmt.setString(10,movie.getMovieCoverImage());
             preparedStmt.setString(11,movie.getRating());
             preparedStmt.executeUpdate();
+            //setCast
+            query = " INSERT INTO casts(movieId,actorId)"
+                    + " values (?, ?)";
+            preparedStmt = connection.prepareStatement(query);
+            for(int i = 0; i<movie.getCast().size(); i++) {
+                preparedStmt.setInt(1, movie.getId());
+                preparedStmt.setInt(2, movie.getCast().get(i));
+                preparedStmt.executeUpdate();
+            }
+            query = " INSERT INTO genres(movieId,genres)"
+                    + " values (?, ?)";
+            preparedStmt = connection.prepareStatement(query);
+            for(int i = 0; i<movie.getGenre().size(); i++) {
+                preparedStmt.setInt(1, movie.getId());
+                preparedStmt.setString(2, movie.getGenre().get(i));
+                preparedStmt.executeUpdate();
+            }
         }
             connection.close();
         } catch (
@@ -163,7 +180,9 @@ public class MovieDAO {
         }
         return searcheMovie;
     }
-    //Todo front-end
+    public static void setCasts(){
+
+    }
     public static void updateRating(String enrolledID, String movieId, String rate) {
         Movie movie = MovieDAO.getMovieByID(Integer.valueOf(movieId));
         userID.add(enrolledID);
