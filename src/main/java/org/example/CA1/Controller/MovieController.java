@@ -82,15 +82,15 @@ public class MovieController {
     }
     @GetMapping("/movies/genre/{genre}")
     public List<Movie> getMoviesByGenre(@PathVariable String genre) {
-        return MovieManager.getMoviesByGenre(genre);
+        return MovieDAO.getMoviesByGenre(genre);
     }
     @GetMapping("/movies/name/{name}")
     public List<Movie> getMoviesByName(@PathVariable String name) {
-        return MovieManager.getMovieByName(name);
+        return MovieDAO.getMovieByName(name);
     }
     @GetMapping("/movies/date/{date}")
     public List<Movie> getMoviesByDate(@PathVariable String date) {
-        return MovieManager.getMovieByDate(date);
+        return MovieDAO.getMovieByDate(date);
     }
     @GetMapping("/movies")
     public List<Movie> getMovies() {
