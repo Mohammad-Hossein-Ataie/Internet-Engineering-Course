@@ -29,11 +29,19 @@ public class CommentDAO {
     }
 
     private static List<Comment> comments = new ArrayList<>();
-    public static void addComment(Comment comment){
+    public static void addComment(Comment comment) throws SQLException {
         setTime(comment);
-        Movie movie = MovieDAO.getMovieByID(comment.getMovieId());
-
-        usersComments.put(comment.getMovieId(),comment);
+        Connection connection = ConnetctionPool.getConnection();
+        Statement statement = connection.createStatement();
+        String query = " INSERT INTO comment (userEmail,movieId,text,id)"
+                + " values (?, ?, ?, ?)";
+        PreparedStatement preparedStmt = connection.prepareStatement(query);
+        preparedStmt = connection.prepareStatement(query);
+        preparedStmt.setString(1,comment.getUserEmail());
+        preparedStmt.setInt(2, comment.getMovieId());
+        preparedStmt.setString(3,comment.getText());
+        preparedStmt.setInt(4,comment.getCommentID());
+        preparedStmt.executeUpdate();
     }
     // set time     //LocalDateTime.now()
     public static void setTime(Comment comment){
@@ -77,10 +85,22 @@ public static void setComments(List<Comment> newComment) throws SQLException {
 }
 
     public static Comment getCommentByID(Integer id) {
-        for(int i = 0; i <comments.size();i++){
-            if(comments.get(i).getCommentID() == id){
-                return comments.get(i);
-            }
+        try {
+            List<Movie> movies = new ArrayList<>();
+            Connection connection = ConnetctionPool.getConnection();
+            Statement statement;
+            statement = connection.createStatement();
+            String query = "SELECT * FROM comment WHERE comment.id=?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            ResultSet res = preparedStmt.executeQuery();
+            Comment comment = new Comment();
+            comment.setUserId(res.getString(1));
+            comment.setMovieId(res.getInt(2));
+            comment.setText(res.getString(3));
+            comment.setCommentID(res.getInt(4));
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }

@@ -6,12 +6,13 @@ import org.example.CA1.DAO.UserDAO;
 import org.example.CA1.Entity.Comment;
 import org.example.CA1.Entity.User;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class CommentManager {
-    public static void addComment(Comment comment) {
+    public static void addComment(Comment comment) throws SQLException {
         CommentDAO.addComment(comment);
     }
 

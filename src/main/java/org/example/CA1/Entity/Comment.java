@@ -8,6 +8,10 @@ public class Comment {
     private String text;
     private int likes = 0;
 
+    public Comment() {
+
+    }
+
     public int getLikes() {
         return likes;
     }
