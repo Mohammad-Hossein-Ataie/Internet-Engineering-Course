@@ -8,6 +8,7 @@ import org.example.CA1.Error.*;
 import org.example.CA1.Manager.UserManager;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,31 +24,28 @@ public class UserController {
         }
     }
     @PostMapping("/movies/{movieId}/{email}")
-    public void addToWatchList(@PathVariable String email, @PathVariable Integer movieId) throws AgeLimitError, UserNotExist {
-        User user = UserDAO.getUserBymail(email);
+    public void addToWatchList(@PathVariable String email, @PathVariable Integer movieId) throws AgeLimitError, UserNotExist, SQLException {
+        User user = UserDAO.getUserByMail(email);
         Movie movie = MovieDAO.getMovieByID(movieId);
         if (UserManager.checkAge(user.getBirthDate(), movie.getAgeLimit())) {
-            UserManager.addToWatchList(user.getEmail(), movie.getId());
+            UserManager.addToWatchList(user, movie);
         } else {
             throw new AgeLimitError();
         }
     }
     @GetMapping("/watchlist/{email}")
-    public Object[] getWatchlist(@PathVariable String email) {
-        User user = UserDAO.getUserBymail(email);
-        Map<String, Integer> watchlist =  UserDAO.getWatchListUser();
-        List<Movie> userwatchlist = new ArrayList<>();
-        userwatchlist = user.getWatchList();
+    public Object[] getWatchlist(@PathVariable String email) throws SQLException {
+        User user = UserDAO.getUserByMail(email);
+        List<Movie> userwatchlist;
+        userwatchlist = UserDAO.getWatchList(user);
         return new Object[]{userwatchlist};
     }
     @DeleteMapping("/watchlist/{movieId}")
-    public void removeFromWatchList(@PathVariable Integer movieId) throws AgeLimitError{
-        User user = UserDAO.getUserBymail(UserDAO.getEnrolledID());
+    public void removeFromWatchList(@PathVariable Integer movieId) throws AgeLimitError, SQLException {
+        User user = UserDAO.getUserByMail(UserDAO.getEnrolledID());
         Movie movie = MovieDAO.getMovieByID(movieId);
             if (UserManager.checkAge(user.getBirthDate(), movie.getAgeLimit())) {
-                System.out.println(UserDAO.getWatchListUser());
-                UserManager.removeFromWatchList(user.getEmail(), movie.getId());
-                System.out.println(UserDAO.getWatchListUser());
+                UserManager.removeFromWatchList(movie.getId());
             } else {
                 throw new AgeLimitError();
             }

@@ -33,10 +33,10 @@ public class CommentDAO {
         ResultSet res = preparedStmt.executeQuery();
         while (res.next()){
             Comment comment = new Comment();
-            preparedStmt.setString(1,comment.getUserEmail());
-            preparedStmt.setInt(2, comment.getMovieId());
-            preparedStmt.setString(3,comment.getText());
-            preparedStmt.setInt(4,comment.getCommentID());
+            comment.setUserId(res.getString(1));
+            comment.setMovieId(res.getInt(2));
+            comment.setText(res.getString(3));
+            comment.setCommentID(res.getInt(4));
             preparedStmt.executeUpdate();
             comments.add(comment);
         }
@@ -54,14 +54,11 @@ public class CommentDAO {
                 + " values (?, ?, ?, ?)";
         PreparedStatement preparedStmt;
         preparedStmt = connection.prepareStatement(query);
-        ResultSet result = preparedStmt.executeQuery();
-        if(result.next()){
-            preparedStmt.setString(1,comment.getUserEmail());
-            preparedStmt.setInt(2, comment.getMovieId());
-            preparedStmt.setString(3,comment.getText());
-            preparedStmt.setInt(4,comment.getCommentID());
-            preparedStmt.executeUpdate();
-        }
+        preparedStmt.setString(1,comment.getUserEmail());
+        preparedStmt.setInt(2, comment.getMovieId());
+        preparedStmt.setString(3,comment.getText());
+        preparedStmt.setInt(4,comment.getCommentID());
+        preparedStmt.executeUpdate();
         statement.close();
         connection.close();
     }

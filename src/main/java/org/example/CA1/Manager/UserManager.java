@@ -1,8 +1,10 @@
 package org.example.CA1.Manager;
 import org.example.CA1.DAO.UserDAO;
 import org.example.CA1.Entity.Logedin;
+import org.example.CA1.Entity.Movie;
 import org.example.CA1.Entity.User;
 
+import java.sql.SQLException;
 import java.util.Date;
 
 public class UserManager {
@@ -24,12 +26,12 @@ public class UserManager {
         return true;
     }
 
-    public static void addToWatchList(String email, int id) {
-        UserDAO.addToWatchList(email,id);
+    public static void addToWatchList(User user, Movie movie) throws SQLException {
+        UserDAO.addToWatchList(user,movie);
     }
 
-    public static void removeFromWatchList(String email, int id) {
-        UserDAO.removeFromWatchList(email,id);
+    public static void removeFromWatchList(int id) throws SQLException {
+        UserDAO.removeFromWatchList(id);
     }
 
     public static boolean checkPassword(User user) {

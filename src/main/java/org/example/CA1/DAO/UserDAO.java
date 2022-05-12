@@ -13,13 +13,13 @@ public class UserDAO {
     public static String getEnrolledID() {
         return enrolledID;
     }
-    public static void setEnrolledID(String enrolledID) {
+    public static void setEnrolledID(String enrolledID) throws SQLException {
         UserDAO.enrolledID = enrolledID;
-        User.enrolledUsers.add(UserDAO.getUserBymail(enrolledID));
+        User.enrolledUsers.add(UserDAO.getUserByMail(enrolledID));
     }
 
     private static String enrolledID = "";
-    public static void addEnrolled(String enrolled){
+    public static void addEnrolled(String enrolled) throws SQLException {
          setEnrolledID(enrolled);
     }
     public static Map<String, User> getUsersMails() {
@@ -51,15 +51,39 @@ public class UserDAO {
         usersMails.put(user.getEmail(),user);
     }
 
-    public static void addToWatchList(String email, int id) {
-        Movie movie = MovieDAO.getMovieByID(id);
-        User user = UserDAO.getUserBymail(email);
-        user.setWatchList(movie);
-        watchListUser.put(email,id);
+    public static void addToWatchList(User user, Movie movie) throws SQLException {
+        Statement statement;
+        Connection connection = ConnetctionPool.getConnection();
+        statement = connection.createStatement();
+        String query = " INSERT INTO watchList (userEmail, movieId)"
+                + " values (?, ?)";
+        PreparedStatement preparedStmt = connection.prepareStatement(query);
+        preparedStmt.setString(1,user.getEmail());
+        preparedStmt.setInt(2,movie.getId());
+        preparedStmt.executeUpdate();
+        statement.close();
     }
 
-    public static User getUserBymail(String mail) {
-        return usersMails.get(mail);
+    public static User getUserByMail(String mail) throws SQLException {
+        Connection connection = ConnetctionPool.getConnection();
+        Statement statement;
+        statement = connection.createStatement();
+        String query = "SELECT * FROM user WHERE user.email=?";
+        PreparedStatement preparedStmt = connection.prepareStatement(query);
+        preparedStmt.setString(1, mail);
+        ResultSet res = preparedStmt.executeQuery();
+        User user = new User();
+        if(res.next()){
+            user.setEmail(res.getString(1));
+            user.setPassword(res.getString(2));
+            user.setNickname(res.getString(3));
+            user.setName(res.getString(4));
+            user.setBirthDate(res.getDate(5));
+        }
+        res.close();
+        statement.close();
+        connection.close();
+        return user;
     }
     public static boolean IsInMails(String mail) {
         for (int i = 0; i < UserDAO.getUsers().size(); i++) {
@@ -70,15 +94,15 @@ public class UserDAO {
         }
         return false;
     }
-    public static void removeFromWatchList(String email, int id) {
-        User user = UserDAO.getUserBymail(email);
-        List<Movie> watchlist = user.getWatchList();
-        for(int i = 0; i < watchlist.size(); i++){
-            if(id == (watchlist.get(i).getId())){
-                watchlist.remove(watchlist.get(i));
-            }
-        }
-        watchListUser.remove(email,id);
+    public static void removeFromWatchList(int id) throws SQLException {
+        Connection connection = ConnetctionPool.getConnection();
+        Statement statement = connection.createStatement();
+        String query = "DELETE FROM watchlist WHERE movieId = ?";
+        PreparedStatement preparedStmt = connection.prepareStatement(query);
+        preparedStmt.setInt(1,id);
+        preparedStmt.executeUpdate();
+        connection.close();
+        statement.close();
     }
     public static void setUsers(List<User> newUsers) throws SQLException {
         Statement statement;
@@ -108,6 +132,46 @@ public class UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static List<Movie> getWatchList(User user) throws SQLException {
+        List<Movie> movies = new ArrayList<>();
+        Connection connection = ConnetctionPool.getConnection();
+        Statement statement = connection.createStatement();
+        String query = "SELECT * FROM watchList WHERE userEmail = ? ";
+        PreparedStatement preparedStmt = connection.prepareStatement(query);
+        preparedStmt.setString(1, user.getEmail());
+        ResultSet res = preparedStmt.executeQuery();
+        List<Integer> movie_id = new ArrayList<>();
+        while (res.next()) {
+             movie_id.add(res.getInt(2));
+        }
+        statement.close();
+        res.close();
+        for(int i = 0; i<movie_id.size(); i++) {
+            query = "SELECT * FROM movie WHERE id = ?";
+            preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setInt(1, movie_id.get(i));
+            res = preparedStmt.executeQuery();
+            if (res.next()) {
+                Movie movie = new Movie();
+                movie.setId(res.getInt(1));
+                movie.setName(res.getString(2));
+                movie.setSummary(res.getString(3));
+                movie.setReleaseDate(res.getString(4));
+                movie.setDirector(res.getString(5));
+                movie.setImdbRate(res.getFloat(6));
+                movie.setDuration(res.getString(7));
+                movie.setAgeLimit(res.getInt(8));
+                movie.setImage(res.getString(9));
+                movie.setCoverImage(res.getString(10));
+                movie.setRating(res.getFloat(11));
+                movies.add(movie);
+            }
+            statement.close();
+        }
+        connection.close();
+        return movies;
     }
 //    public static void setUsers(List<User> newUsers) {
 //        users.addAll(newUsers);
