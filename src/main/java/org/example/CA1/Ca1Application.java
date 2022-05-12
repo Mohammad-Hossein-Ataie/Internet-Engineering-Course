@@ -16,11 +16,11 @@ import java.util.List;
 public class Ca1Application {
 
 	public static void main(String[] args) throws IOException, SQLException {
- 		GetData.setActorsListData();
-		GetData.setCommentsListData();
-		GetData.setMovieList();
-		GetData.setUsersListData();
-		GetData.setCommentIDS();
+// 		GetData.setActorsListData();
+//		GetData.setCommentsListData();
+//		GetData.setMovieList();
+//		GetData.setUsersListData();
+//		GetData.setCommentIDS();
 		SpringApplication.run(Ca1Application.class, args);
 	}
 

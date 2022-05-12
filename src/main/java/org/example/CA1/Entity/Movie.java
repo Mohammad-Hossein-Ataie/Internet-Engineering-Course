@@ -23,12 +23,11 @@ public class Movie {
     private String coverImage;
     public static List<Float> ratings = new ArrayList<>();
     public void setRating(float rating) {
-        ratings.clear();
         ratings.add(rating);
         for(int i = 0; i<ratings.size(); i++){
             rating += ratings.get(i);
         }
-        Float temp = rating/(ratings.size()+1);
+        Float temp = rating/(ratings.size());
         String str = String.format("%.1f", temp);
         this.rating = Float.parseFloat(str);
     }

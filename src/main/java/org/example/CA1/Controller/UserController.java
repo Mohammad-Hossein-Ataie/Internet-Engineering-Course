@@ -37,11 +37,6 @@ public class UserController {
         User user = UserDAO.getUserBymail(email);
         Map<String, Integer> watchlist =  UserDAO.getWatchListUser();
         List<Movie> userwatchlist = new ArrayList<>();
-//        for ( Map.Entry<String, Integer> entry : watchlist.entrySet()) {
-//            String key = entry.getKey();
-//            Integer value = entry.getValue();
-//            userwatchlist.add(MovieDAO.getMovieByID(value));
-//        }
         userwatchlist = user.getWatchList();
         return new Object[]{userwatchlist};
     }

@@ -2,7 +2,6 @@ package org.example.CA1.DAO;
 
 import org.example.CA1.Entity.Actor;
 import org.example.CA1.Entity.Movie;
-import org.example.CA1.Entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,10 +20,28 @@ public class ActorDAO {
     }
 
     public static Actor getActorByID(int id){
-        for(int i = 0; i < actors.size(); i++){
-            if(actors.get(i).getId() == id){
-                return actors.get(i);
+        try {
+            Connection connection = ConnetctionPool.getConnection();
+            Statement statement;
+            statement = connection.createStatement();
+            String query = "SELECT * FROM actor WHERE actor.id=?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            ResultSet res = preparedStmt.executeQuery();
+            Actor actor = new Actor();
+            if(res.next()){
+                actor.setId(res.getInt(1));
+                actor.setName(res.getString(2));
+                actor.setBirthDate(res.getString(3));
+                actor.setNationality(res.getString(4));
+                actor.setImage(res.getString(5));
             }
+            res.close();
+            statement.close();
+            connection.close();
+            return actor;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }
@@ -60,7 +77,6 @@ public static void setActors(List<Actor> newActors) throws SQLException {
             if(result.next()){
                 continue;
             }
-            statement.close();
             query = " INSERT INTO actor (id, name, birthDate, nationality, image)"
                     + " values (?, ?, ?, ?, ?)";
             preparedStmt = connection.prepareStatement(query);
@@ -71,9 +87,44 @@ public static void setActors(List<Actor> newActors) throws SQLException {
             preparedStmt.setString(5,actor.getActorImage());
             preparedStmt.executeUpdate();
         }
+        statement.close();
         connection.close();
     } catch (SQLException e) {
         e.printStackTrace();
     }
 }
+
+    public static List<Movie> getActsList(Integer id) {
+        try {
+            List<Movie> movies = new ArrayList<>();
+            Connection connection = ConnetctionPool.getConnection();
+            Statement statement = connection.createStatement();
+            String query = "SELECT * FROM movie m JOIN casts c ON m.id = c.movieId  WHERE c.actorId=?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            ResultSet res = preparedStmt.executeQuery();
+            while (res.next()) {
+                Movie movie = new Movie();
+                movie.setId(res.getInt(1));
+                movie.setName(res.getString(2));
+                movie.setSummary(res.getString(3));
+                movie.setReleaseDate(res.getString(4));
+                movie.setDirector(res.getString(5));
+                movie.setImdbRate(res.getFloat(6));
+                movie.setDuration(res.getString(7));
+                movie.setAgeLimit(res.getInt(8));
+                movie.setImage(res.getString(9));
+                movie.setCoverImage(res.getString(10));
+                movie.setRating(res.getFloat(11));
+                movies.add(movie);
+            }
+            res.close();
+            statement.close();
+            connection.close();
+            return movies;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

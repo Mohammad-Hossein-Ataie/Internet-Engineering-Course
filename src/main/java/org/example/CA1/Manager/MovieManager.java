@@ -31,7 +31,7 @@ public class MovieManager {
             MovieDAO.update(movie);
         MovieDAO.add(movie);
     }
-    public static List<Movie> getMoviesList() {
+    public static List<Movie> getMoviesList() throws SQLException {
         List<Movie> movies = MovieDAO.getMovies();
         return movies;
     }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,18 +19,9 @@ public class ActorController {
         ActorManager.addActor(actor);
     }
     @GetMapping("/actors/{id}")
-    public Object[] getMovieActed(@PathVariable Integer id){
+    public Object[] getMovieActed(@PathVariable Integer id) throws SQLException {
         List<Movie> actsList = new ArrayList<Movie>();
-        List<Movie> movies = MovieDAO.getMovies();
-        for (Movie result : movies) {
-            List<Integer> casts =  result.getCast();
-            for (Integer cast: casts) {
-                if(id.equals(cast))
-                {
-                    actsList.add(result);
-               }
-            }
-        }
+        actsList = ActorDAO.getActsList(id);
         Actor actor = ActorDAO.getActorByID(id);
         //Actor
         return new Object[]{actor, actsList};

@@ -39,21 +39,62 @@ public class MovieDAO {
     public static void setUserSearchedMovies(List<Movie> userMovies) {
         UserSearchedMovies = userMovies;
     }
-    public static List<Movie> sortMovies(int mode){
-        List<Movie> searchMovie = getUserSearchedMovies();
-        if(searchMovie.isEmpty()){
-            searchMovie = MovieDAO.getMovies();
-        }
-
+    public static List<Movie> sortMovies(int mode) throws SQLException {
         if (mode == 1){
             //sort by imdb
-            Collections.sort(searchMovie, Comparator.comparing(Movie::getImdbRate).reversed());
+            List<Movie> movies = new ArrayList<>();
+            Connection connection = ConnetctionPool.getConnection();
+            Statement statement = connection.createStatement();
+            String query = "SELECT * FROM movie ORDER BY imdbRate DESC LIMIT 12";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            ResultSet res = preparedStmt.executeQuery();
+            while (res.next()){
+                Movie movie = new Movie();
+                movie.setId(res.getInt(1));
+                movie.setName(res.getString(2));
+                movie.setSummary(res.getString(3));
+                movie.setReleaseDate(res.getString(4));
+                movie.setDirector(res.getString(5));
+                movie.setImdbRate(res.getFloat(6));
+                movie.setDuration(res.getString(7));
+                movie.setAgeLimit(res.getInt(8));
+                movie.setImage(res.getString(9));
+                movie.setCoverImage(res.getString(10));
+                movie.setRating(res.getFloat(11));
+                movies.add(movie);
+            }
+            statement.close();
+            connection.close();
+            return movies;
         }
         else if(mode == 2){
             //sort by date
-            Collections.sort(searchMovie, Comparator.comparing(Movie::getReleaseDate).reversed());
+            List<Movie> movies = new ArrayList<>();
+            Connection connection = ConnetctionPool.getConnection();
+            Statement statement = connection.createStatement();
+            String query = "SELECT * FROM movie ORDER BY releaseDate DESC LIMIT 12";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            ResultSet res = preparedStmt.executeQuery();
+            while (res.next()){
+                Movie movie = new Movie();
+                movie.setId(res.getInt(1));
+                movie.setName(res.getString(2));
+                movie.setSummary(res.getString(3));
+                movie.setReleaseDate(res.getString(4));
+                movie.setDirector(res.getString(5));
+                movie.setImdbRate(res.getFloat(6));
+                movie.setDuration(res.getString(7));
+                movie.setAgeLimit(res.getInt(8));
+                movie.setImage(res.getString(9));
+                movie.setCoverImage(res.getString(10));
+                movie.setRating(res.getFloat(11));
+                movies.add(movie);
+            }
+            statement.close();
+            connection.close();
+            return movies;
         }
-        return searchMovie;
+        return null;
     }
 //    public static void setRateMovie(String userID,int rate,int movieId){
 //        ArrayList userIDList = (ArrayList) getUserID();
@@ -79,6 +120,7 @@ public class MovieDAO {
                 continue;
             }
             statement.close();
+            result.close();
             query = " INSERT INTO movie (id, movie_name, summary, releaseDate, director,imdbRate,duration,ageLimit,image,coverImage,rating)"
                     + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             preparedStmt = connection.prepareStatement(query);
@@ -112,7 +154,8 @@ public class MovieDAO {
                 preparedStmt.executeUpdate();
             }
         }
-            connection.close();
+        statement.close();
+        connection.close();
         } catch (
     SQLException e) {
         e.printStackTrace();
@@ -157,20 +200,14 @@ public class MovieDAO {
         movieIds.put(movie.getId(),movie);
     }
 
-    public static List<Movie> getMovies() {
-        return movies;
-    }
-
-    public static Movie getMovieByID(Integer movieId) {
-        try {
-            List<Movie> movies = new ArrayList<>();
-            Connection connection = ConnetctionPool.getConnection();
-            Statement statement;
-            statement = connection.createStatement();
-            String query = "SELECT * FROM movie WHERE movie.id=?";
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
-            preparedStmt.setInt(1, movieId);
-            ResultSet res = preparedStmt.executeQuery();
+    public static List<Movie> getMovies() throws SQLException {
+        List<Movie> movies = new ArrayList<>();
+        Connection connection = ConnetctionPool.getConnection();
+        Statement statement = connection.createStatement();
+        String query = "SELECT * FROM movie ORDER BY id LIMIT 12";
+        PreparedStatement preparedStmt = connection.prepareStatement(query);
+        ResultSet res = preparedStmt.executeQuery();
+        while (res.next()){
             Movie movie = new Movie();
             movie.setId(res.getInt(1));
             movie.setName(res.getString(2));
@@ -183,6 +220,40 @@ public class MovieDAO {
             movie.setImage(res.getString(9));
             movie.setCoverImage(res.getString(10));
             movie.setRating(res.getFloat(11));
+            movies.add(movie);
+        }
+        statement.close();
+        connection.close();
+        return movies;
+    }
+
+    public static Movie getMovieByID(Integer movieId) {
+        try {
+            Connection connection = ConnetctionPool.getConnection();
+            Statement statement;
+            statement = connection.createStatement();
+            String query = "SELECT * FROM movie WHERE movie.id=?";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.setInt(1, movieId);
+            ResultSet res = preparedStmt.executeQuery();
+            Movie movie = new Movie();
+            if(res.next()){
+                movie.setId(res.getInt(1));
+                movie.setName(res.getString(2));
+                movie.setSummary(res.getString(3));
+                movie.setReleaseDate(res.getString(4));
+                movie.setDirector(res.getString(5));
+                movie.setImdbRate(res.getFloat(6));
+                movie.setDuration(res.getString(7));
+                movie.setAgeLimit(res.getInt(8));
+                movie.setImage(res.getString(9));
+                movie.setCoverImage(res.getString(10));
+                movie.setRating(res.getFloat(11));
+            }
+            res.close();
+            statement.close();
+            connection.close();
+            return movie;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -217,7 +288,7 @@ public class MovieDAO {
             Connection connection = ConnetctionPool.getConnection();
             Statement statement;
             statement = connection.createStatement();
-            String query = "SELECT * FROM movie m JOIN genres g ON m.id = g.movieId  WHERE g.genre=?";
+            String query = "SELECT * FROM movie m JOIN genres g ON m.id = g.movieId  WHERE g.genres=?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, genre);
             ResultSet res = preparedStmt.executeQuery();
@@ -236,6 +307,9 @@ public class MovieDAO {
                 movie.setRating(res.getFloat(11));
                 movies.add(movie);
             }
+            res.close();
+            statement.close();
+            connection.close();
             return movies;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -247,7 +321,7 @@ public class MovieDAO {
             List<Movie> movies = new ArrayList<>();
             Connection connection = ConnetctionPool.getConnection();
             Statement statement = connection.createStatement();
-            String query = "SELECT * FROM movie WHERE movie.movie_name LIKE ?";
+            String query = "SELECT * FROM movie WHERE movie.movie_name = '%' + ? + '%'";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, movieName);
             ResultSet res = preparedStmt.executeQuery();
@@ -266,6 +340,9 @@ public class MovieDAO {
                 movie.setRating(res.getFloat(11));
                 movies.add(movie);
             }
+            res.close();
+            statement.close();
+            connection.close();
             return movies;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -278,7 +355,7 @@ public class MovieDAO {
             List<Movie> movies = new ArrayList<>();
             Connection connection = ConnetctionPool.getConnection();
             Statement statement = connection.createStatement();
-            String query = "SELECT * FROM movie WHERE movie.releaseDate=?";
+            String query = "SELECT * FROM movie WHERE movie.releaseDate = '%' + ? + '%'";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, date);
             ResultSet res = preparedStmt.executeQuery();
@@ -297,6 +374,9 @@ public class MovieDAO {
                 movie.setRating(res.getFloat(11));
                 movies.add(movie);
             }
+            res.close();
+            statement.close();
+            connection.close();
             return movies;
         } catch (SQLException e) {
             e.printStackTrace();

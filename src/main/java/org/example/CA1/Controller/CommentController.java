@@ -14,32 +14,15 @@ import java.util.List;
 @RestController
 public class CommentController {
     @PostMapping("/movies/addComment")
-    public void addComment(@RequestBody Comment comment) throws UserNotExist, MovieNotExist, SQLException {
+    public void addComment(@RequestBody Comment comment) throws SQLException {
         //TODO usernot exist
-//        if (CommentManager.movieExist(comment)) {
-//            if(CommentManager.userExist(comment))
-//            {
-                CommentManager.addComment(comment);
-//            }
-//            else {
-//                throw new UserNotExist();
-//            }
-//        }
-//        else {
-//            throw new MovieNotExist();
-//        }
+        CommentManager.addComment(comment);
     }
     @GetMapping("/movies/{movieID}/comments")
-    public List<Comment> getComment(@PathVariable Integer movieID){
+    public List<Comment> getComment(@PathVariable Integer movieID) throws SQLException {
         List <Comment> temp;
-        List <Comment> res = new ArrayList<>();
-        temp = CommentDAO.getComments();
-        for(int i = 0; i< temp.size(); i++){
-            if(movieID.equals(temp.get(i).getMovieId())){
-                res.add(temp.get(i));
-            }
-        }
-        return res;
+        temp = CommentDAO.getComments(movieID);
+        return temp;
     }
 
     @PostMapping("/movies/{vote}/voteComment")

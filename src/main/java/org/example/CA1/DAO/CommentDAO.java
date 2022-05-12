@@ -1,6 +1,5 @@
 package org.example.CA1.DAO;
 
-import org.example.CA1.Entity.Actor;
 import org.example.CA1.Entity.Comment;
 import org.example.CA1.Entity.Movie;
 
@@ -24,7 +23,25 @@ public class CommentDAO {
     // addComment 1
     private static Map<Integer, Comment> usersComments = new HashMap<>();
 
-    public static List<Comment> getComments() {
+    public static List<Comment> getComments(Integer movieID) throws SQLException {
+        List<Comment> comments = new ArrayList<>();
+        Connection connection = ConnetctionPool.getConnection();
+        Statement statement = connection.createStatement();
+        String query = "SELECT * FROM comment WHERE comment.movieId = ?";
+        PreparedStatement preparedStmt = connection.prepareStatement(query);
+        preparedStmt.setInt(1, movieID);
+        ResultSet res = preparedStmt.executeQuery();
+        while (res.next()){
+            Comment comment = new Comment();
+            preparedStmt.setString(1,comment.getUserEmail());
+            preparedStmt.setInt(2, comment.getMovieId());
+            preparedStmt.setString(3,comment.getText());
+            preparedStmt.setInt(4,comment.getCommentID());
+            preparedStmt.executeUpdate();
+            comments.add(comment);
+        }
+        statement.close();
+        connection.close();
         return comments;
     }
 
@@ -35,13 +52,18 @@ public class CommentDAO {
         Statement statement = connection.createStatement();
         String query = " INSERT INTO comment (userEmail,movieId,text,id)"
                 + " values (?, ?, ?, ?)";
-        PreparedStatement preparedStmt = connection.prepareStatement(query);
+        PreparedStatement preparedStmt;
         preparedStmt = connection.prepareStatement(query);
-        preparedStmt.setString(1,comment.getUserEmail());
-        preparedStmt.setInt(2, comment.getMovieId());
-        preparedStmt.setString(3,comment.getText());
-        preparedStmt.setInt(4,comment.getCommentID());
-        preparedStmt.executeUpdate();
+        ResultSet result = preparedStmt.executeQuery();
+        if(result.next()){
+            preparedStmt.setString(1,comment.getUserEmail());
+            preparedStmt.setInt(2, comment.getMovieId());
+            preparedStmt.setString(3,comment.getText());
+            preparedStmt.setInt(4,comment.getCommentID());
+            preparedStmt.executeUpdate();
+        }
+        statement.close();
+        connection.close();
     }
     // set time     //LocalDateTime.now()
     public static void setTime(Comment comment){
@@ -62,6 +84,7 @@ public static void setComments(List<Comment> newComment) throws SQLException {
         Connection connection = ConnetctionPool.getConnection();
         statement = connection.createStatement();
         for(Comment comment:newComment) {
+            setTime(comment);
             String query = "SELECT * FROM Comment WHERE id=?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setInt(1,comment.getCommentID());

@@ -16,30 +16,10 @@ public class CommentManager {
         CommentDAO.addComment(comment);
     }
 
-    public static boolean movieExist(Comment comment) {
-        if (MovieDAO.findByID(comment.getMovieId()) != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    public static boolean userExist(Comment comment) {
-        Map<String, User> userMails = UserDAO.getUsersMails();
-        if (userMails.containsValue(comment.getUserEmail())) {
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
 
-    public static List<Comment> getByID(Integer id) {
-        List <Comment> comments = new ArrayList<>();
-        for(int i = 0; i < CommentDAO.getComments().size(); i++){
-            if(CommentDAO.getComments().get(i).getMovieId() == id){
-                comments.add(CommentDAO.getComments().get(i));
-            }
-        }
+    public static List<Comment> getByID(Integer id) throws SQLException {
+        List <Comment> comments;
+        comments = CommentDAO.getComments(id);
         return comments;
     }
 }

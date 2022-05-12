@@ -35,23 +35,13 @@ public class MovieController {
 //        return "movie added successfully";
     }
     @GetMapping("/movies/date")
-    public Object[] getSortByDate(){
-        List<Movie>  temp;
-        temp = MovieDAO.sortMovies(1);
-        List<Movie> res = new ArrayList<>();
-        for(int i = 0; i < 16; i++){
-            res.add(temp.get(i));
-        }
+    public Object[] getSortByDate() throws SQLException {
+        List<Movie>  res =  MovieDAO.sortMovies(1);
         return new Object[]{res};
     }
     @GetMapping("/movies/imdb")
-    public Object[] getSortByRate(){
-        List<Movie>  temp;
-        temp = MovieDAO.sortMovies(2);
-        List<Movie> res = new ArrayList<>();
-        for(int i = 0; i < 16; i++){
-            res.add(temp.get(i));
-        }
+    public Object[] getSortByRate() throws SQLException {
+        List<Movie>  res =  MovieDAO.sortMovies(2);
         return new Object[]{res};
     }
     @GetMapping("/movies/{id}")
@@ -71,13 +61,18 @@ public class MovieController {
             statement = connection.prepareStatement(query);
             statement.setInt(1, actorId);
             ResultSet result = statement.executeQuery();
-            actor.setId(result.getInt(1));
-            actor.setName(result.getString(2));
-            actor.setBirthDate(result.getString(3));
-            actor.setNationality(result.getString(4));
-            actor.setImage(result.getString(5));
+            if(result.next()) {
+                actor.setId(result.getInt(1));
+                actor.setName(result.getString(2));
+                actor.setBirthDate(result.getString(3));
+                actor.setNationality(result.getString(4));
+                actor.setImage(result.getString(5));
+            }
+            actors.add(actor);
         }
         List <Comment> comments = CommentManager.getByID(id);
+        statement.close();
+        connection.close();
         return new Object[]{temp, actors, comments};
     }
     @GetMapping("/movies/genre/{genre}")
@@ -93,11 +88,7 @@ public class MovieController {
         return MovieDAO.getMovieByDate(date);
     }
     @GetMapping("/movies")
-    public List<Movie> getMovies() {
-        List<Movie>  temp = new ArrayList<>();
-        for(int i = 0; i < 12; i++){
-            temp.add(MovieManager.getMoviesList().get(i));
-        }
-        return  temp;//returns json string
+    public List<Movie> getMovies() throws SQLException {
+        return MovieManager.getMoviesList();
     }
 }
