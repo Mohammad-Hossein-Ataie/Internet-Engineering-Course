@@ -80,6 +80,7 @@ public static void setComments(List<Comment> newComment) throws SQLException {
     try {
         Connection connection = ConnetctionPool.getConnection();
         statement = connection.createStatement();
+        int i = 0;
         for(Comment comment:newComment) {
             setTime(comment);
             String query = "SELECT * FROM Comment WHERE id=?";
@@ -90,13 +91,15 @@ public static void setComments(List<Comment> newComment) throws SQLException {
                 continue;
             }
             statement.close();
-            query = " INSERT INTO Comment (userEmail, movieId, text)"
-                    + " values (?, ?, ?)";
+            query = " INSERT INTO Comment (userEmail, movieId, text,id)"
+                    + " values (?, ?, ?,?)";
             preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, comment.getUserEmail());
             preparedStmt.setInt(2,comment.getMovieId());
             preparedStmt.setString(3,comment.getText());
+            preparedStmt.setString(4, String.valueOf(i));
             preparedStmt.executeUpdate();
+            i = i + 1;
         }
         connection.close();
     } catch (SQLException e) {
