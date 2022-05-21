@@ -3,6 +3,7 @@ import { FaUserCircle } from 'react-icons/fa';
 import { FiSearch } from 'react-icons/fi';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { DOMAIN } from '../../config/config';
+import logoImage from './../../assets/images/logo.png';
 
 class NavbarHome extends Component {
     state = {
@@ -61,7 +62,7 @@ class NavbarHome extends Component {
                     </Dropdown>
                 </div>
 
-                <img className="nav-brand" src="./../../assets/images/logo.png" alt="logo" />
+                <img className="nav-brand" src={logoImage} alt="logo" />
             </nav>
             // <div className="app-bar-header">
             //         <nav className="navbar navbar-expand-lg static-top d-flex justify-content-between app-bar-header">

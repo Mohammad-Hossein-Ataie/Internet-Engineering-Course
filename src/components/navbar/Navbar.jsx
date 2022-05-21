@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FaUserCircle } from 'react-icons/fa';
 import Dropdown from 'react-bootstrap/Dropdown';
 import { DOMAIN } from '../../config/config';
+import logoImage from './../../assets/images/logo.png';
 class Navbar extends Component {
     state = {
     }
@@ -29,7 +30,7 @@ class Navbar extends Component {
                     </Dropdown.Menu>
                 </Dropdown>
 
-                <img className="nav-brand" src="./../../assets/images/logo.png" alt="logo" />
+                <img className="nav-brand" src={logoImage} alt="logo" />
             </nav>
         );
     }

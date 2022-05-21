@@ -84,7 +84,8 @@ class Movie extends Component {
             actors: [],
             newComment: "",
             comments: [],
-            commentId: null,
+            commentId: 0,
+            userRate: 0
         }
     }
 
@@ -130,8 +131,17 @@ class Movie extends Component {
                     name: actor.name,
                     image: actor.actorImage
                 })),
+                comments: data[2].map(comment => ({
+                    id: comment.commentID,
+                    userName: comment.userEmail,
+                    text: comment.text,
+                    likes: comment.likes,
+                    dislikes: comment.dislikes,
+                    hasVotedLike: false,
+                    hasVotedDislike: false,
+                })),
                 isLoading: false,
-                commentId: this.state.comments.length
+                commentId: [2].length
             })
         });
     }
@@ -142,7 +152,9 @@ class Movie extends Component {
             userName: localStorage.getItem("user"),
             text: this.state.newComment,
             likes: 0,
-            dislikes: 0
+            dislikes: 0,
+            hasVotedLike: false,
+            hasVotedDislike: false,
         }
 
         if (this.state.newComment != "") {
@@ -176,11 +188,13 @@ class Movie extends Component {
         let comments = this.state.comments;
         comments.map((comment, i) => {
             if (comment.id == id) {
-                if (value == 1) {
+                if (value == 1 && !comment.hasVotedLike) {
                     comments[i].likes += 1;
+                    comments[i].hasVotedLike = true;
                 }
-                else {
+                else if (value == -1 && !comment.hasVotedDislike) {
                     comments[i].dislikes += 1;
+                    comments[i].hasVotedDislike = true;
                 }
             }
         })
@@ -188,6 +202,7 @@ class Movie extends Component {
     }
 
     handleRateChange = (value) => {
+        this.setState({ userRate: value })
         const url = DOMAIN + '/movies/rate';
         fetch(url, {
             method: 'post',
@@ -222,6 +237,7 @@ class Movie extends Component {
         });
     }
     render() {
+        console.log("vote comment", this.state.comments)
         if (this.state.isLoading) {
             return (<h1>loading</h1>)
         }
@@ -249,6 +265,7 @@ class Movie extends Component {
                                             emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                                             min={1}
                                             max={10}
+                                            value={this.state.userRate}
                                             onChange={e => this.handleRateChange(e.target.value)}
                                         />
                                     </Box>
