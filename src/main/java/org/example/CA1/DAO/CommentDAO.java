@@ -50,14 +50,13 @@ public class CommentDAO {
         setTime(comment);
         Connection connection = ConnetctionPool.getConnection();
         Statement statement = connection.createStatement();
-        String query = " INSERT INTO comment (userEmail,movieId,text,id)"
-                + " values (?, ?, ?, ?)";
+        String query = " INSERT INTO comment (userEmail,movieId,text)"
+                + " values (?, ?, ?)";
         PreparedStatement preparedStmt;
         preparedStmt = connection.prepareStatement(query);
         preparedStmt.setString(1,comment.getUserEmail());
         preparedStmt.setInt(2, comment.getMovieId());
         preparedStmt.setString(3,comment.getText());
-        preparedStmt.setInt(4,comment.getCommentID());
         preparedStmt.executeUpdate();
         statement.close();
         connection.close();
@@ -92,7 +91,7 @@ public static void setComments(List<Comment> newComment) throws SQLException {
             }
             statement.close();
             query = " INSERT INTO Comment (userEmail, movieId, text,id)"
-                    + " values (?, ?, ?,?)";
+                    + " values (?, ?, ?, ?)";
             preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, comment.getUserEmail());
             preparedStmt.setInt(2,comment.getMovieId());
