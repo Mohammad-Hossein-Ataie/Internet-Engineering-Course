@@ -25,7 +25,7 @@ public class AuthenticationController {
     @PostMapping("/callback/{code}")
     public String callback(
             @PathVariable String code
-    ) throws IOException, InterruptedException, SQLException {
+    ) throws Exception {
 
         String client_id = "ba82189574fb38061422";
         String client_secret = "f6c65b31837082c1f54490f6785d4fdcd05c5d34";
@@ -63,6 +63,7 @@ public class AuthenticationController {
                 .exchange("https://api.github.com/user", HttpMethod.GET, entity, Userlogin.class);
         Date birthDate = User.getBody().getCreated_at();
         SignUpController signUpController = new SignUpController();
+        LoginController loginController = new LoginController();
         User user = new User();
         user.setNickname(User.getBody().getLogin());
         user.setName(User.getBody().getName());
@@ -71,6 +72,8 @@ public class AuthenticationController {
         user.setBirthDate(birthDate);
         user.setPassword("null");
         signUpController.signup(user);
+        loginController.login(user);
+
         return null;
         //TODO : create update user
         //TODO : Generate JWT for user and return it

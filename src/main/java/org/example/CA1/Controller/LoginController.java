@@ -25,7 +25,7 @@ public class LoginController {
                 String query = "SELECT * FROM user where email = ? and password = ?";
                 PreparedStatement preparedStmt = connection.prepareStatement(query);
                 preparedStmt.setString(1, user.getEmail());
-                preparedStmt.setString(2, user.getPassword());
+                preparedStmt.setString(2, String.valueOf(user.getPassword().hashCode()));
                 ResultSet result = preparedStmt.executeQuery();
                 if(result.next()) {
                     UserDAO.addEnrolled(user.getEmail());

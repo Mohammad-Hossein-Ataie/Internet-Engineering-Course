@@ -122,7 +122,7 @@ public class UserDAO {
                         + " values (?, ?, ?, ?, ?)";
                 preparedStmt = connection.prepareStatement(query);
                 preparedStmt.setString(1, user.getEmail());
-                preparedStmt.setString(2, user.getPassword());
+                preparedStmt.setString(2, String.valueOf(user.getPassword().hashCode()));
                 preparedStmt.setString(3, user.getNickname());
                 preparedStmt.setString(4, user.getName());
                 preparedStmt.setDate(5,  new Date(user.getBirthDate().getTime()));

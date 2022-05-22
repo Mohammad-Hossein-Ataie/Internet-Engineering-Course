@@ -14,6 +14,9 @@ public class SignUpController {
         @PostMapping("/signup")
     public void signup(@RequestBody User user) throws SQLException {
         UserDAO.addEnrolled(user.getEmail());
+        String userPassword = user.getPassword();
+        String hashedPassword = String.valueOf(userPassword.hashCode());
+        user.setPassword(hashedPassword);
         UserDAO.addUser(user);
         List <User> users = new ArrayList<>();
         users.add(user);
