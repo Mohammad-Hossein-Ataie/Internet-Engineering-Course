@@ -36,7 +36,6 @@ public class CommentDAO {
             comment.setUserId(res.getString(1));
             comment.setMovieId(res.getInt(2));
             comment.setText(res.getString(3));
-            comment.setCommentID(res.getInt(4));
             preparedStmt.executeUpdate();
             comments.add(comment);
         }
@@ -90,13 +89,12 @@ public static void setComments(List<Comment> newComment) throws SQLException {
                 continue;
             }
             statement.close();
-            query = " INSERT INTO Comment (userEmail, movieId, text,id)"
-                    + " values (?, ?, ?, ?)";
+            query = " INSERT INTO Comment (userEmail, movieId, text)"
+                    + " values (?, ?, ?)";
             preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, comment.getUserEmail());
             preparedStmt.setInt(2,comment.getMovieId());
             preparedStmt.setString(3,comment.getText());
-            preparedStmt.setString(4, String.valueOf(i));
             preparedStmt.executeUpdate();
             i = i + 1;
         }

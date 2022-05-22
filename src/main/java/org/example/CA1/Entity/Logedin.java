@@ -2,6 +2,16 @@ package org.example.CA1.Entity;
 
 public class Logedin {
     private String username;
+
+    public Logedin(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public Logedin() {
+
+    }
+
     public String getUsername() {
         return username;
     }
