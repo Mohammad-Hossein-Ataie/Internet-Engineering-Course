@@ -45,8 +45,8 @@ public class MovieDAO {
             List<Movie> movies = new ArrayList<>();
             Connection connection = ConnetctionPool.getConnection();
             Statement statement = connection.createStatement();
-            String query = "SELECT * FROM movie ORDER BY imdbRate DESC LIMIT 12";
-            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            String query = "SELECT * FROM movie ORDER BY releaseDate DESC LIMIT 12";
+             PreparedStatement preparedStmt = connection.prepareStatement(query);
             ResultSet res = preparedStmt.executeQuery();
             while (res.next()){
                 Movie movie = new Movie();
@@ -72,7 +72,7 @@ public class MovieDAO {
             List<Movie> movies = new ArrayList<>();
             Connection connection = ConnetctionPool.getConnection();
             Statement statement = connection.createStatement();
-            String query = "SELECT * FROM movie ORDER BY releaseDate DESC LIMIT 12";
+            String query = "SELECT * FROM movie ORDER BY imdbRate DESC LIMIT 12";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             ResultSet res = preparedStmt.executeQuery();
             while (res.next()){
