@@ -54,20 +54,17 @@ public class UserDAO {
     public static void addToWatchList(User user, Movie movie) throws SQLException {
         Statement statement;
         Connection connection = ConnetctionPool.getConnection();
-        statement = connection.createStatement();
         String query = " INSERT INTO watchList (userEmail, movieId)"
                 + " values (?, ?)";
         PreparedStatement preparedStmt = connection.prepareStatement(query);
         preparedStmt.setString(1,user.getEmail());
         preparedStmt.setInt(2,movie.getId());
         preparedStmt.executeUpdate();
-        statement.close();
     }
 
     public static User getUserByMail(String mail) throws SQLException {
         Connection connection = ConnetctionPool.getConnection();
         Statement statement;
-        statement = connection.createStatement();
         String query = "SELECT * FROM user WHERE user.email=?";
         PreparedStatement preparedStmt = connection.prepareStatement(query);
         preparedStmt.setString(1, mail);
@@ -81,7 +78,6 @@ public class UserDAO {
             user.setBirthDate(res.getDate(5));
         }
         res.close();
-        statement.close();
         connection.close();
         return user;
     }
@@ -96,19 +92,16 @@ public class UserDAO {
     }
     public static void removeFromWatchList(int id) throws SQLException {
         Connection connection = ConnetctionPool.getConnection();
-        Statement statement = connection.createStatement();
         String query = "DELETE FROM watchlist WHERE movieId = ?";
         PreparedStatement preparedStmt = connection.prepareStatement(query);
         preparedStmt.setInt(1,id);
         preparedStmt.executeUpdate();
         connection.close();
-        statement.close();
     }
     public static void setUsers(List<User> newUsers) throws SQLException {
         Statement statement;
         try {
             Connection connection = ConnetctionPool.getConnection();
-            statement = connection.createStatement();
             for(User user:newUsers) {
                 String query = "SELECT * FROM user WHERE email=?";
                 PreparedStatement preparedStmt = connection.prepareStatement(query);
@@ -117,7 +110,6 @@ public class UserDAO {
                 if(result.next()){
                     continue;
                 }
-                statement.close();
                 query = " INSERT INTO user (email, password, nickname, name, birthDate)"
                         + " values (?, ?, ?, ?, ?)";
                 preparedStmt = connection.prepareStatement(query);
@@ -137,7 +129,6 @@ public class UserDAO {
     public static List<Movie> getWatchList(User user) throws SQLException {
         List<Movie> movies = new ArrayList<>();
         Connection connection = ConnetctionPool.getConnection();
-        Statement statement = connection.createStatement();
         String query = "SELECT * FROM watchList WHERE userEmail = ? ";
         PreparedStatement preparedStmt = connection.prepareStatement(query);
         preparedStmt.setString(1, user.getEmail());
@@ -146,7 +137,6 @@ public class UserDAO {
         while (res.next()) {
              movie_id.add(res.getInt(2));
         }
-        statement.close();
         res.close();
         for(int i = 0; i<movie_id.size(); i++) {
             query = "SELECT * FROM movie WHERE id = ?";
@@ -168,7 +158,6 @@ public class UserDAO {
                 movie.setRating(res.getFloat(11));
                 movies.add(movie);
             }
-            statement.close();
         }
         connection.close();
         return movies;

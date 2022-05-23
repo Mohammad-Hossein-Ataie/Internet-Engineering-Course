@@ -26,7 +26,6 @@ public class CommentDAO {
     public static List<Comment> getComments(Integer movieID) throws SQLException {
         List<Comment> comments = new ArrayList<>();
         Connection connection = ConnetctionPool.getConnection();
-        Statement statement = connection.createStatement();
         String query = "SELECT * FROM comment WHERE comment.movieId = ?";
         PreparedStatement preparedStmt = connection.prepareStatement(query);
         preparedStmt.setInt(1, movieID);
@@ -39,7 +38,6 @@ public class CommentDAO {
             preparedStmt.executeUpdate();
             comments.add(comment);
         }
-        statement.close();
         connection.close();
         return comments;
     }
@@ -48,7 +46,6 @@ public class CommentDAO {
     public static void addComment(Comment comment) throws SQLException {
         setTime(comment);
         Connection connection = ConnetctionPool.getConnection();
-        Statement statement = connection.createStatement();
         String query = " INSERT INTO comment (userEmail,movieId,text)"
                 + " values (?, ?, ?)";
         PreparedStatement preparedStmt;
@@ -57,7 +54,6 @@ public class CommentDAO {
         preparedStmt.setInt(2, comment.getMovieId());
         preparedStmt.setString(3,comment.getText());
         preparedStmt.executeUpdate();
-        statement.close();
         connection.close();
     }
     // set time     //LocalDateTime.now()
@@ -77,7 +73,6 @@ public static void setComments(List<Comment> newComment) throws SQLException {
     Statement statement;
     try {
         Connection connection = ConnetctionPool.getConnection();
-        statement = connection.createStatement();
         int i = 0;
         for(Comment comment:newComment) {
             setTime(comment);
@@ -88,7 +83,6 @@ public static void setComments(List<Comment> newComment) throws SQLException {
             if(result.next()){
                 continue;
             }
-            statement.close();
             query = " INSERT INTO Comment (userEmail, movieId, text)"
                     + " values (?, ?, ?)";
             preparedStmt = connection.prepareStatement(query);
@@ -108,8 +102,6 @@ public static void setComments(List<Comment> newComment) throws SQLException {
         try {
             List<Movie> movies = new ArrayList<>();
             Connection connection = ConnetctionPool.getConnection();
-            Statement statement;
-            statement = connection.createStatement();
             String query = "SELECT * FROM comment WHERE comment.id=?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setInt(1, id);

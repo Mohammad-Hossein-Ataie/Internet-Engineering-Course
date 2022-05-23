@@ -21,7 +21,6 @@ public class LoginController {
             Statement statement;
             try {
                 Connection connection = ConnetctionPool.getConnection();
-                statement = connection.createStatement();
                 String query = "SELECT * FROM user where email = ? and password = ?";
                 PreparedStatement preparedStmt = connection.prepareStatement(query);
                 preparedStmt.setString(1, user.getEmail());
@@ -34,7 +33,6 @@ public class LoginController {
                     throw new Exception("Not Registered!");
                 }
                 result.close();
-                statement.close();
                 connection.close();
             }catch (SQLException e) {
                 e.printStackTrace();

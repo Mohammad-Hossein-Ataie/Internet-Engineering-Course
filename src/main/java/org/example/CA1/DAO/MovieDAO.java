@@ -44,7 +44,6 @@ public class MovieDAO {
             //sort by imdb
             List<Movie> movies = new ArrayList<>();
             Connection connection = ConnetctionPool.getConnection();
-            Statement statement = connection.createStatement();
             String query = "SELECT * FROM movie ORDER BY releaseDate DESC LIMIT 12";
              PreparedStatement preparedStmt = connection.prepareStatement(query);
             ResultSet res = preparedStmt.executeQuery();
@@ -63,7 +62,6 @@ public class MovieDAO {
                 movie.setRating(res.getFloat(11));
                 movies.add(movie);
             }
-            statement.close();
             connection.close();
             return movies;
         }
@@ -71,7 +69,6 @@ public class MovieDAO {
             //sort by date
             List<Movie> movies = new ArrayList<>();
             Connection connection = ConnetctionPool.getConnection();
-            Statement statement = connection.createStatement();
             String query = "SELECT * FROM movie ORDER BY imdbRate DESC LIMIT 12";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             ResultSet res = preparedStmt.executeQuery();
@@ -90,7 +87,6 @@ public class MovieDAO {
                 movie.setRating(res.getFloat(11));
                 movies.add(movie);
             }
-            statement.close();
             connection.close();
             return movies;
         }
@@ -110,7 +106,6 @@ public class MovieDAO {
         Statement statement;
         try {
         Connection connection = ConnetctionPool.getConnection();
-        statement = connection.createStatement();
         for(Movie movie:newMovies) {
             String query = "SELECT * FROM movie WHERE id=?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
@@ -119,7 +114,6 @@ public class MovieDAO {
             if(result.next()){
                 continue;
             }
-            statement.close();
             result.close();
             query = " INSERT INTO movie (id, movie_name, summary, releaseDate, director,imdbRate,duration,ageLimit,image,coverImage,rating)"
                     + " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -154,7 +148,6 @@ public class MovieDAO {
                 preparedStmt.executeUpdate();
             }
         }
-        statement.close();
         connection.close();
         } catch (
     SQLException e) {
@@ -231,7 +224,6 @@ public class MovieDAO {
         try {
             Connection connection = ConnetctionPool.getConnection();
             Statement statement;
-            statement = connection.createStatement();
             String query = "SELECT * FROM movie WHERE movie.id=?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setInt(1, movieId);
@@ -251,7 +243,6 @@ public class MovieDAO {
                 movie.setRating(res.getFloat(11));
             }
             res.close();
-            statement.close();
             connection.close();
             return movie;
         } catch (SQLException e) {
@@ -287,7 +278,6 @@ public class MovieDAO {
             List<Movie> movies = new ArrayList<>();
             Connection connection = ConnetctionPool.getConnection();
             Statement statement;
-            statement = connection.createStatement();
             String query = "SELECT * FROM movie m JOIN genres g ON m.id = g.movieId  WHERE g.genres=?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, genre);
@@ -308,7 +298,6 @@ public class MovieDAO {
                 movies.add(movie);
             }
             res.close();
-            statement.close();
             connection.close();
             return movies;
         } catch (SQLException e) {
@@ -320,7 +309,6 @@ public class MovieDAO {
         try {
             List<Movie> movies = new ArrayList<>();
             Connection connection = ConnetctionPool.getConnection();
-            Statement statement = connection.createStatement();
             String query = "SELECT * FROM movie WHERE movie.movie_name = '%' + ? + '%'";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, movieName);
@@ -341,7 +329,6 @@ public class MovieDAO {
                 movies.add(movie);
             }
             res.close();
-            statement.close();
             connection.close();
             return movies;
         } catch (SQLException e) {
@@ -354,7 +341,6 @@ public class MovieDAO {
         try {
             List<Movie> movies = new ArrayList<>();
             Connection connection = ConnetctionPool.getConnection();
-            Statement statement = connection.createStatement();
             String query = "SELECT * FROM movie WHERE movie.releaseDate = '%' + ? + '%'";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setString(1, date);
@@ -375,7 +361,6 @@ public class MovieDAO {
                 movies.add(movie);
             }
             res.close();
-            statement.close();
             connection.close();
             return movies;
         } catch (SQLException e) {

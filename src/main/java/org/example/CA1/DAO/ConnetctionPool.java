@@ -2,9 +2,7 @@ package org.example.CA1.DAO;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.slf4j.impl.StaticMarkerBinder;
 
-import java.sql.SQLException;
-import java.sql.Connection;
-import java.sql.Statement;
+import java.sql.*;
 
 public class ConnetctionPool {
     private static final BasicDataSource ds = new BasicDataSource();
@@ -34,8 +32,9 @@ public class ConnetctionPool {
     private static void setEncoding() {
         try {
             Connection connection = getConnection();
-            Statement statement = connection.createStatement();
-            statement.execute("ALTER DataBASE IEMDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;");
+            String query = "ALTER DataBASE IEMDB CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;";
+            PreparedStatement preparedStmt = connection.prepareStatement(query);
+            preparedStmt.executeQuery();
         }
         catch (SQLException e){
             System.out.println(e.getMessage());

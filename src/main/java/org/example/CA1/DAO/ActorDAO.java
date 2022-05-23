@@ -22,8 +22,6 @@ public class ActorDAO {
     public static Actor getActorByID(int id){
         try {
             Connection connection = ConnetctionPool.getConnection();
-            Statement statement;
-            statement = connection.createStatement();
             String query = "SELECT * FROM actor WHERE actor.id=?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setInt(1, id);
@@ -37,7 +35,6 @@ public class ActorDAO {
                 actor.setImage(res.getString(5));
             }
             res.close();
-            statement.close();
             connection.close();
             return actor;
         } catch (SQLException e) {
@@ -68,7 +65,6 @@ public static void setActors(List<Actor> newActors) throws SQLException {
     Statement statement;
     try {
         Connection connection = ConnetctionPool.getConnection();
-        statement = connection.createStatement();
         for(Actor actor:newActors) {
             String query = "SELECT * FROM actor WHERE id=?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
@@ -87,7 +83,6 @@ public static void setActors(List<Actor> newActors) throws SQLException {
             preparedStmt.setString(5,actor.getActorImage());
             preparedStmt.executeUpdate();
         }
-        statement.close();
         connection.close();
     } catch (SQLException e) {
         e.printStackTrace();
@@ -98,7 +93,6 @@ public static void setActors(List<Actor> newActors) throws SQLException {
         try {
             List<Movie> movies = new ArrayList<>();
             Connection connection = ConnetctionPool.getConnection();
-            Statement statement = connection.createStatement();
             String query = "SELECT * FROM movie m JOIN casts c ON m.id = c.movieId  WHERE c.actorId=?";
             PreparedStatement preparedStmt = connection.prepareStatement(query);
             preparedStmt.setInt(1, id);
@@ -119,7 +113,6 @@ public static void setActors(List<Actor> newActors) throws SQLException {
                 movies.add(movie);
             }
             res.close();
-            statement.close();
             connection.close();
             return movies;
         } catch (SQLException e) {
