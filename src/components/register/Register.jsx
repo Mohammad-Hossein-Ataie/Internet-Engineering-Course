@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import { DOMAIN } from '../../config/config';
+import { FaGithub } from 'react-icons/fa';
 
 class Register extends Component {
     state = {
@@ -25,7 +27,6 @@ class Register extends Component {
                 "birthDate": this.state.birthday
             })
         }).then(res => {
-            console.log("res", res);
             if (res.status == 200) {
                 localStorage.setItem('user', this.state.email);
                 window.location.href = "/";
@@ -57,6 +58,10 @@ class Register extends Component {
 
     OnChangeBirthday = (e) => {
         this.setState({ birthday: e.target.value });
+    }
+
+    handleGithubLogin = () => {
+        window.location.href = 'https://github.com/login/oauth/authorize?client_id=ba82189574fb38061422&scope=user';
     }
     render() {
         return (
@@ -102,6 +107,13 @@ class Register extends Component {
                                     onChange={(e) => this.OnChangeBirthday(e)} />
                             </div>
                         </form>
+
+                        <div className='col-4 github-link'>
+                            <div className='text-light' onClick={() => this.handleGithubLogin()}>
+                                <FaGithub className='github-icon' />
+                                <span>با گیت هاب وارد شوید</span>
+                            </div>
+                        </div>
 
                         <button type="submit" className="btn login-btn" onClick={(e) => this.handleSignupClick(e)}>ثبت نام</button>
                     </div>

@@ -8,6 +8,23 @@
     transform: translate(-50%, -50%);
 }
 
-.form-control{
+.form-control {
     border: 1px solid rgba(78, 78, 80, 0.8) !important;
+}
+
+.github-link {
+    background-color: rgb(115, 115, 115);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.github-icon {
+    width: 20px !important;
+    height: 20px !important;
+    margin-left: 10px;
 }
