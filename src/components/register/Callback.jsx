@@ -28,19 +28,19 @@ class Callback extends Component {
 
         const token_url = `https://github.com/login/oauth/access_token?client_id=${this.state.client_id}&client_secret=${this.state.client_secret}&code=${this.state.code}&redirect_uri=${this.state.redirect_uri}`;
         const backend_url = DOMAIN + '/callback/' + this.state.code;
-        console.log('csllbackkk', backend_url)
         fetch(backend_url, {
             method: 'post',
             headers: { 'Content-Type': 'application/json' },
             body: {}
-        }).then(res => console.log('callback ress', res))
-        // dont clear !!!!!!!!!!!!!!!
-
-        // this.state.code != '' && fetch(token_url, {
-        //     method: 'post',
-        //     body: {}
-        // }).then(res => console.log('access token res', res));
-
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            if (data.token != null) {
+                localStorage.setItem('user-token', data.token);
+                localStorage.setItem('user', data.email);
+                window.location = '/';
+            }
+        });
 
     }
 

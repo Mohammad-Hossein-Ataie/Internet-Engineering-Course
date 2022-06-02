@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 
 class Logout extends Component {
-    state = {
-    }
-
-    componentDidMount() {
-        console.log("log")
-    }
 
     render() {
         return (

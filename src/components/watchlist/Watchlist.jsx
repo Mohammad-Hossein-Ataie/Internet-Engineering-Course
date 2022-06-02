@@ -82,7 +82,6 @@ class Watchlist extends Component {
             return res.json();
         }).then(data => {
 
-            console.log("data", data);
             if (data.length == 0) {
                 window.alert(EMPTY_WATCHLIST);
                 this.setState({ isLoading: false })
@@ -111,12 +110,10 @@ class Watchlist extends Component {
         let watchlists = this.state.watchlists.filter(item => item.id != id);
         this.setState({ watchlists });
         const url = DOMAIN + `${window.location.pathname}/${id}`;
-        console.log("url", url);
+
         fetch(url, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' }
-        }).then(res => {
-            console.log("res", res);
         });
         //this.getWatchlist();
     }

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { DOMAIN } from '../../config/config.js';
 import { INVALID_LOGIN } from '../../config/messages';
+import { FaGithub } from 'react-icons/fa';
+
 class Login extends Component {
     state = {
         email: '',
@@ -24,7 +26,6 @@ class Login extends Component {
                 "password": this.state.password,
             })
         }).then(res => {
-            console.log("res", res);
             if (res.status == 200) {
                 localStorage.setItem('user', this.state.email);
                 window.location.href = "/";
@@ -41,6 +42,10 @@ class Login extends Component {
 
     OnChangePassword = (e) => {
         this.setState({ password: e.target.value });
+    }
+
+    handleGithubLogin = () => {
+        window.location.href = 'https://github.com/login/oauth/authorize?client_id=ba82189574fb38061422&scope=user';
     }
 
     render() {
@@ -71,8 +76,16 @@ class Login extends Component {
                                 مرا بخاطر بسپار
                             </label>
                         </div>
+
                         <button type="submit" className="btn login-btn" onClick={(e) => this.handleLoginClick(e)}>ورود</button>
                     </form>
+
+                    <div className='github-link'>
+                        <div className='text-light' onClick={() => this.handleGithubLogin()}>
+                            <FaGithub className='github-icon' />
+                            <span>با گیت هاب وارد شوید</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="register-cover">

@@ -44,14 +44,12 @@ class Actors extends Component {
 
     getActor = () => {
         const url = DOMAIN + window.location.pathname;
-        console.log("url", url);
         fetch(url, {
             method: 'get',
             headers: { 'Content-Type': 'application/json' },
         }).then(res => {
             return (res.json())
         }).then(data => {
-            console.log("res", data);
             this.setState({
                 actor: {
                     id: data[0].id,

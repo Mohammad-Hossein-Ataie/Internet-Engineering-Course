@@ -9,7 +9,6 @@ class Navbar extends Component {
 
     handlLogoutClick = () => {
         localStorage.setItem("user", "");
-        console.log("user2", localStorage.getItem("user"));
         const url = DOMAIN + '/logout';
         fetch(url);
     }

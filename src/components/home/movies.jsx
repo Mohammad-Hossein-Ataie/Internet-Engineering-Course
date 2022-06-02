@@ -83,7 +83,6 @@ class Movies extends Component {
     }
 
     getMovies(url) {
-        console.log(" url....", url)
 
         fetch(url, {
             method: 'get',
@@ -91,7 +90,6 @@ class Movies extends Component {
         }).then(res => {
             return (res.json())
         }).then(data => {
-            console.log("data", data)
             this.setState({
                 movies: data.map(movie => ({
                     id: movie.id,
@@ -105,7 +103,6 @@ class Movies extends Component {
 
     handleSearchMovie = (e) => {
         const url = DOMAIN + `/movies/${e.key}/${e.val}`;
-        // console.log(" url....", url)
         this.getMovies(url);
     }
 
@@ -117,7 +114,6 @@ class Movies extends Component {
         }).then(res => {
             return (res.json())
         }).then(data => {
-            console.log("data", data)
             this.setState({
                 movies: data[0].map(movie => ({
                     id: movie.id,

@@ -32,8 +32,6 @@ class Register extends Component {
                 window.location.href = "/";
             }
         });
-
-        console.log("user", localStorage.getItem("user"));
     }
 
     componentDidMount() {

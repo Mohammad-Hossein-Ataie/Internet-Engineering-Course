@@ -107,7 +107,6 @@ class Movie extends Component {
         }).then(res => {
             return (res.json())
         }).then(data => {
-            console.log("get m", data)
             this.setState({
                 movie: {
                     id: data[0].id,
@@ -165,7 +164,7 @@ class Movie extends Component {
             });
 
             const url = DOMAIN + `/movies/addComment`;
-            console.log("addcm", url)
+
             fetch(url, {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
@@ -237,7 +236,6 @@ class Movie extends Component {
         });
     }
     render() {
-        console.log("vote comment", this.state.comments)
         if (this.state.isLoading) {
             return (<h1>loading</h1>)
         }
