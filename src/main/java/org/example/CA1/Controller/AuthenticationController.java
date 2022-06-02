@@ -1,7 +1,9 @@
 package org.example.CA1.Controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.CA1.DAO.UserDAO;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.jsonwebtoken.Jwts;
 import org.example.CA1.Entity.User;
 import org.example.CA1.Entity.Userlogin;
 import org.springframework.http.HttpEntity;
@@ -10,20 +12,22 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.sql.SQLException;
-import java.util.Arrays;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 
 @RestController
 public class AuthenticationController {
+    private static final long EXPIRATION_TIME = 86400000;
+    public static final String KEY = "Yn2kjibddFAWtnPJ2AFlL8WXmohJMCvigQggaEypa5E=";
     @PostMapping("/callback/{code}")
-    public String callback(
+    public JsonNode callback(
             @PathVariable String code
     ) throws Exception {
 
@@ -74,9 +78,26 @@ public class AuthenticationController {
         signUpController.signup(user);
         loginController.login(user);
 
-        return null;
-        //TODO : create update user
+        String jwt = createToken(user.getEmail());
+        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectNode resp = objectMapper.createObjectNode();
+        resp.put("token", jwt);
+        resp.put("email",user.getEmail());
+        System.out.println("__________________________");
+        System.out.println(resp);
+        return resp;
+        //TODO : Check if user exist
         //TODO : Generate JWT for user and return it
     }
-
+    private String createToken(String mail) {
+        SecretKey key = new SecretKeySpec(KEY.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
+        String token = Jwts.builder()
+                .setHeaderParam("typ","JWT")
+                .setSubject(mail)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis()+EXPIRATION_TIME))
+                .signWith(key)
+                .compact();
+        return token;
+    }
 }
