@@ -15,7 +15,7 @@ build:
   before_script:
   - docker login -u $REGISTERY_USERNAME -p $REGISTERY_PASSWORD quay.io
   script:
-  - docker build /backend/Dockerfile -t quay.io/mh_ataie1379/iemdb-backend:$CI_BUILD_REF
+  - docker build ./backend -t quay.io/mh_ataie1379/iemdb-backend:$CI_BUILD_REF
   - docker push quay.io/mh_ataie1379/iemdb-backend:$CI_BUILD_REF
   - docker rmi quay.io/mh_ataie1379/iemdb-backend:$CI_BUILD_REF || true
   after_script:
