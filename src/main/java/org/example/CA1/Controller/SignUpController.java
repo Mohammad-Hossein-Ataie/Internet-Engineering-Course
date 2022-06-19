@@ -12,8 +12,16 @@ import java.util.List;
 @RestController
 public class SignUpController {
         @PostMapping("/signup")
-    public void signup(@RequestBody User user) throws SQLException {
+    public void signup(@RequestBody User user) throws Exception {
         UserDAO.addEnrolled(user.getEmail());
+        for(int i = 0;i < UserDAO.getUsers().size();i++){
+            if(UserDAO.getUsers().get(i).getEmail().equals(user.getEmail())){
+                throw new Exception("User AlreadyExist!");
+            }
+            else{
+                continue;
+            }
+        }
         String userPassword = user.getPassword();
         String hashedPassword = String.valueOf(userPassword.hashCode());
         user.setPassword(hashedPassword);

@@ -103,6 +103,7 @@ public class UserDAO {
         try {
             Connection connection = ConnetctionPool.getConnection();
             for(User user:newUsers) {
+                users.add(user);
                 String query = "SELECT * FROM user WHERE email=?";
                 PreparedStatement preparedStmt = connection.prepareStatement(query);
                 preparedStmt.setString(1,user.getEmail());
