@@ -16,22 +16,28 @@ class Register extends Component {
         const url = DOMAIN + window.location.pathname;
 
         e.preventDefault();
-        fetch(url, {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "email": this.state.email,
-                "password": this.state.password,
-                "name": this.state.name,
-                "nickname": this.state.nickname,
-                "birthDate": this.state.birthday
-            })
-        }).then(res => {
-            if (res.status == 200) {
-                localStorage.setItem('user', this.state.email);
-                window.location.href = "/";
-            }
-        });
+        if (this.state.email.includes('@', '.')) {
+            fetch(url, {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    "email": this.state.email,
+                    "password": this.state.password,
+                    "name": this.state.name,
+                    "nickname": this.state.nickname,
+                    "birthDate": this.state.birthday
+                })
+            }).then(res => {
+                if (res.status == 200) {
+                    localStorage.setItem('user', this.state.email);
+                    window.location.href = "/";
+                }
+            });
+        }
+        else {
+            window.alert('فرمت ایمیل اشتباه است')
+        }
+
     }
 
     componentDidMount() {
