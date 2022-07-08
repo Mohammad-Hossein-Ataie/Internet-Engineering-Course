@@ -1,31 +1,36 @@
-version: '3.6'
+version: '3.3'
 services:
-  backend:
-    build:
-      context: backend
-    image: ie-backend
-    depends_on:
-      - mysqldb
+  # backend:
+  #   build:
+  #     context: backend
+  #   image: ie-backend
+  #   ports:
+  #     - "127.0.0.1:8080:8080"
+  #   depends_on:
+  #     - mysqldb
 
   mysqldb:
     image: mysql:8.0.29-debian
+    restart: always
     volumes:
       - ./mysqldb/create-tables.sql:/docker-entrypoint-initdb.d/create-tables.sql
       - ie-db:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=234
-      - MYSQL_USER=IEMDB
-      - MYSQL_PASSWORD=1234
+      MYSQL_ROOT_PASSWORD: "234"
+      MYSQL_USER: "IEMDB"
+      MYSQL_PASSWORD: "1234"
+      MYSQL_DATABASE: "IEMDB"
+    ports:
+      - 127.0.0.1:3306:3306
 
     
   frontend:
     build:
       context: frontend
-      target: development
+      # target: production
     image: ie-frontend
     ports:
-      - "127.0.0.1:3000:3000"
-    
+      - "127.0.0.1:3000:80"
+
 volumes:
   ie-db:
-
